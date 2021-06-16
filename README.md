@@ -1,5 +1,5 @@
-## Playtime paper-1.16.5 plugin ##
-The workspace contains two folders by default, where:
+## PlayTime paper-1.16.5 plugin ##
 ## Structure ##
+- `directories`: cmds; data;
 ## Commands ##
-- `playtime`: {username}
+- `playtime`: {username} [format]
