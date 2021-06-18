@@ -7,10 +7,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import co.aikar.timings.TimingHistory;
 /* typedef */
 /* PlayTimeCommand class
- * Description:
- * -> ;
+* Description:
+* -> ;
 */
 public class PlayTimeCommand implements CommandExecutor {
     /* codetor */
@@ -25,8 +26,9 @@ public class PlayTimeCommand implements CommandExecutor {
         @NotNull Command command,
         @NotNull String label,
         @NotNull String[] args
-    ) {
-        System.out.println(command.timings.toString());
+        ) {
+        // TimingHistory objTimeHistory;
+        //System.out.println(command.timings.toString());
         return true;
     }
 }
