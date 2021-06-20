@@ -1,0 +1,4 @@
+#main#
+name: mineguis
+main: nikochir.MineGuis
+version: ${project.version}

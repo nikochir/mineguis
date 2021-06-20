@@ -1,0 +1,46 @@
+#main#
+name: mineguis
+main: nikochir.MineGuis
+version: 1.0.0
+api-version: 1.16
+#work#
+load: STARTUP
+loadbefore: []
+database: false
+commands:
+  mineguis:
+    alias: ["gui"]
+    usage: /<command>
+    permission: minecode.*
+    permission-message: you do not have /<permission>
+    description:
+      open the main menu panel
+permissions:
+  minecode.*:
+    default: true
+    children:
+      #
+    description:
+      #
+  minecode.forbid:
+    default: true
+    children:
+      minecode.*: false
+    description:
+      #
+  minecode.access:
+    children:
+    default: false
+    children:
+      minecode.*: false
+      minecode.forbid: true
+    description:
+      #
+#info#
+prefix: mguis
+author: nikodim_cheer
+authors: [ nikodim_cheer ]
+website: "https://github.com/nikochir/minecode"
+description:
+  menu facilities, functionality via inventories and items;
+#end_of_file#

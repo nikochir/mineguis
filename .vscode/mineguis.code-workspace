@@ -1,0 +1,44 @@
+{
+	"folders": [
+		{
+			"name": "menuguis",
+			"path": "../",
+			"uri": "https://gitlab.com/jacksa/menumanager/-/tree/master/src/main/java/me/kolossa/menumanager"
+		}
+	],
+	"settings": {
+		/* vscode */
+		/* extensions */
+		/** drawio **/
+		"hediet.vscode-drawio.offline": true,
+		"hediet.vscode-drawio.theme": "dark",
+		"hediet.vscode-drawio.online-url": "https://embed.diagrams.net/",
+		"hediet.vscode-drawio.plugins": [],
+		"hediet.vscode-drawio.knownPlugins": [],
+		"hediet.vscode-drawio.customLibraries": [],
+		"hediet.vscode-drawio.customColorSchemes": [],
+		"hediet.vscode-drawio.customFonts": [ "Consolas" ],
+		/** vsicons **/
+		"vsicons.associations.files": [],
+		"vsicons.associations.directories": [
+			{ "icon": "resources", "extensions": ["rsc", "rscs"], "format": "FileFormat.svg", "disabled": false }
+		],
+		/** dashboard **/
+		"dashboard.openOnStartup": "always",
+		"dashboard.projectTileWidth": 350,
+		"dashboard.displayProjectPath": true,
+		"dashboard.showAddProjectButtonTile": false,
+		/** java **/
+		"java.home": "f:/cdev/jdk",
+		"java.configuration.maven.userSettings": "f:/cdev/mvn/conf/settings.xml",
+		"java.configuration.maven.globalSettings": "f:/cdev/mvn/conf/settings.xml",
+		/** maven **/
+		"maven.view": "hierarchical",
+		"maven.terminal.customEnv": [],
+		"maven.terminal.favorites": [],
+		"maven.terminal.useJavaHome": true,
+		"maven.executable.options": "",
+		"maven.executable.preferMavenWrapper": false,
+		"java.configuration.updateBuildConfiguration": "disabled",
+	}
+}
