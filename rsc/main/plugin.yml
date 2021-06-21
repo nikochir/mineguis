@@ -9,33 +9,37 @@ loadbefore: []
 database: false
 commands:
   mineguis:
-    alias: ["gui"]
+    alias: ["mgui"]
     usage: /<command>
-    permission: minecode.*
+    #permission: minecode.*
     permission-message: you do not have /<permission>
     description:
       open the main menu panel
 permissions:
-  minecode.*:
+  mineguis.user:
     default: true
     children:
       #
     description:
-      #
-  minecode.forbid:
-    default: true
-    children:
-      minecode.*: false
-    description:
-      #
-  minecode.access:
-    children:
+      gives access to simple mineguis commands
+  mineguis.oper:
     default: false
     children:
-      minecode.*: false
-      minecode.forbid: true
-    description:
       #
+    description:
+      gives access to advanced mineguis features
+  mineguis.over:
+    default: false
+    children:
+      #
+    description:
+      gives access to strong mineguis stuff
+#  mineguis.*:
+#    default: true
+#    children:
+#      #
+#    description:
+#      gives access to all mineguis facilities
 #info#
 prefix: mguis
 author: nikodim_cheer

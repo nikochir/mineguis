@@ -10,9 +10,7 @@ import org.bukkit.permissions.Permission;
 public class MineGuisPermit extends Permission {
     /* members */
     /* codetor */
-    public MineGuisPermit() {
-        super("access");
-    }
+    public MineGuisPermit() { super("mineguis.*"); }
     /* onevent */
 }
 /* end_of_file */

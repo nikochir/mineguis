@@ -22,22 +22,24 @@
   </properties>
   <!-- -->
   <build>
+    <!--directory>${project.basedir}/../bin</directory-->
+    <directory>${project.basedir}/../../server/local/plugins</directory>
     <finalName>${project.artifactId}-${project.version}</finalName>
-    <directory>${project.basedir}/bin</directory>
-    <sourceDirectory>{project.basedir}/src/main</sourceDirectory>
-    <outputDirectory>${project.build.directory}/main</outputDirectory>
-    <testSourceDirectory>{project.basedir}/src/test</testSourceDirectory>
-    <testOutputDirectory>${project.build.directory}/test</testOutputDirectory>
+    <sourceDirectory>${project.basedir}/../src/main</sourceDirectory>
+    <outputDirectory>${project.basedir}/../bin/main</outputDirectory>
+    <testSourceDirectory>${project.basedir}..//src/test</testSourceDirectory>
+    <testOutputDirectory>${project.basedir}/../bin/test</testOutputDirectory>
+    <scriptSourceDirectory>${project.basedir}/../src/main</scriptSourceDirectory>
 		<!-- objects are to be places in the .jar root (not compile, but use) -->
   	<resources>
       <resource>
-	      <directory>${project.basedir}/rsc/main</directory>
+	      <directory>${project.basedir}/../rsc/main</directory>
       	<filtering>true</filtering>
     	</resource>
   	</resources>
     <testResources>
       <testResource>
-        <directory>${project.basedir}/rcs/test</directory>
+        <directory>${project.basedir}/../rcs/test</directory>
       	<filtering>true</filtering>
       </testResource>
     </testResources>
