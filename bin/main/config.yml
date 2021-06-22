@@ -1,2 +1,7 @@
-#root#
-root_name: mineguis
+#nameof#
+nameof_main: mineguis
+nameof_pack: minepack
+nameof_olog: "[mineguis] "
+#sizeof#
+sizeof_main: 3
+sizeof_pack: 3

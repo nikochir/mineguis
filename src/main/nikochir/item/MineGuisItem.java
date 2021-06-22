@@ -1,30 +1,39 @@
 /* package */
 package nikochir.item;
 /* include */
-import nikochir.menu.*;
-/** javkit **/
+import nikochir.MineGuis;
+/** javkit - standard utilities **/
 import java.util.List;
 import java.util.ArrayList;
-/** bukkit **/
+/** bukkit - for events, and item stuff **/
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.Material;
-/* MineGuisItem class
- * description:
- * > base class for any gui panel/menu;
+/** nkyori - for text facilities **/
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+/*
+ * MineGuisItem class
+ * > Description:
+ * -> Base class for any gui panel/menu;
 */
 public abstract class MineGuisItem implements Listener {
     /* members */
     private ItemStack objItem;
     /* codetor */
-    public MineGuisItem(Material valType, String strName, ArrayList<String> strLore) {
+    public MineGuisItem(Material valType, String strName, String strLore) {
         objItem = new ItemStack(valType);
         ItemMeta objMeta = objItem.getItemMeta();
+        MineGuis.get().doLog("setting item name: " + strName);
         objMeta.setDisplayName(strName);
-        objMeta.setLore(strLore);
+        List<String> arrLore = new ArrayList<String>(); arrLore.add(strLore);
+        MineGuis.get().doLog("setting item lore: " + strLore);
+        objMeta.setLore(arrLore); /* this guy accepts only List<String> */
+        MineGuis.get().doLog("setting item meta...");
         objItem.setItemMeta(objMeta);
     }
     /* getters */

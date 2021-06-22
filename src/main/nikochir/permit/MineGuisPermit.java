@@ -3,9 +3,10 @@ package nikochir.permit;
 /* include */
 import org.bukkit.permissions.Permission;
 /* typedef */
-/* MineGuisPermission class
- * Description:
- * >;
+/*
+ * MineGuisPermission class
+ * > Description:
+ * -> ;
 */
 public class MineGuisPermit extends Permission {
     /* members */

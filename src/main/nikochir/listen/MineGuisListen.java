@@ -8,26 +8,19 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.entity.Player;
 /* typedef */
-/* MineGuisListener class
- * description:
- * >;
+/*
+ * MineGuisListener class
+ * > Description:
+ * -> ;
 */
 public class MineGuisListen implements Listener {
-    /* codetor */
-    /* getters */
-    /* setters */
-    /* vetters */
-    /* command */
+    /* onevent */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent objEvent) {
         if (objEvent.getWhoClicked() instanceof Player) {
             Player objPlayer = (Player) objEvent.getWhoClicked();
-            if (objEvent.getView().title().insertion().equalsIgnoreCase("mineguis")) {
-                objEvent.setCancelled(true);
-                System.out.println("mineguis is really powerful;");
-            }
-        } else {
-            /* */
+        } else { /* not player click */
+            return;
         }
     }
 }
