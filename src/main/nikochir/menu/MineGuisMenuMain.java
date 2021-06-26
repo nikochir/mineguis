@@ -6,8 +6,7 @@ import nikochir.MineGuis;
 import nikochir.menu.MineGuisMenu;
 import nikochir.item.MineGuisItem;
 /* typedef */
-/*
-* MineGuisMenuMain
+/* MineGuisMenuMain
 * > Description:
  * -> ;
  */

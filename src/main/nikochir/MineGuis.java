@@ -31,16 +31,16 @@ public class MineGuis extends JavaPlugin {
     private static MineGuis objInstance;
     private HashMap<Player, MineGuisUser> mapUsers;
     private HashMap<String, MineGuisMenu> mapMenus;
-    private HashMap<String, MineGuisBook> mapBooks;
+    private HashMap<String, MineGuisMenuBook> mapBooks;
     /* getters */
     public static MineGuis get() { return objInstance; }
-    public MineGuisMenu getUser()                { return this.getMenu(this.getConfigStr("nameof_main")); }
-    public MineGuisMenu getUser(String strTitle) { return mapMenus.get(strTitle); }
+    public MineGuisUser getUser()                { return this.getUser(this.getConfigStr("nameof_main")); }
+    public MineGuisUser getUser(String strTitle) { return mapUsers.get(strTitle); }
     public MineGuisMenu getMenu()                { return this.getMenu(this.getConfigStr("nameof_main")); }
     public MineGuisMenu getMenu(String strTitle) { return mapMenus.get(strTitle); }
-    public MineGuisBook getBook()                { return this.getBook(this.getConfigStr("nameof_main")); }
-    public MineGuisBook getBook(String strTitle) { return mapBooks.get(strTitle); }
-    public Player getPlayer(String strPlayer)    { return this.getServer().getPlayer(strPlayer); }
+    public MineGuisMenuBook getBook()                { return this.getBook(this.getConfigStr("nameof_main")); }
+    public MineGuisMenuBook getBook(String strTitle) { return mapBooks.get(strTitle); }
+    public Player getPlayer(String strPlayer)       { return this.getServer().getPlayer(strPlayer); }
     public Boolean getConfigBit(String strKey)      { return this.getConfig().getBoolean(strKey); }
     public Integer getConfigInt(String strKey)      { return this.getConfig().getInt(strKey); }
     public Double getConfigNum(String strKey)       { return this.getConfig().getDouble(strKey); }
@@ -65,9 +65,9 @@ public class MineGuis extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(objMenu, this);
         return objMenu;
     }
-    public MineGuisBook setBook(String strTitle, Integer numPages, Integer numLines) {
+    public MineGuisMenuBook setBook(String strTitle, Integer numPages, Integer numLines) {
         if (this.vetBook(strTitle)) { return null; }
-        MineGuisBook objBook = new MineGuisBook(strTitle, numPages, numLines);
+        MineGuisMenuBook objBook = new MineGuisMenuBook(strTitle, numPages, numLines);
         this.mapBooks.put(strTitle, objBook);
         return objBook;
     }
@@ -87,7 +87,7 @@ public class MineGuis extends JavaPlugin {
         objInstance = this;
         this.mapUsers = new HashMap<Player, MineGuisUser>();
         this.mapMenus = new HashMap<String, MineGuisMenu>();
-        this.mapBooks = new HashMap<String, MineGuisBook>();
+        this.mapBooks = new HashMap<String, MineGuisMenuBook>();
         /* work */
         /** conf **/
         this.getConfig().options().copyDefaults();
@@ -104,7 +104,7 @@ public class MineGuis extends JavaPlugin {
         objMenuLeft.setItem(8, new MineGuisItemQuit());
         objMenuRigt.setItem(7, new MineGuisItemMenu(objMenuMain));
         objMenuRigt.setItem(8, new MineGuisItemQuit());
-        MineGuisBook objBookMain = this.setBook(
+        MineGuisMenuBook objBookMain = this.setBook(
             this.getConfigStr("nameof_main"),
             this.getConfigInt("sizeof_main"),
             this.getConfigInt("sizeof_main")

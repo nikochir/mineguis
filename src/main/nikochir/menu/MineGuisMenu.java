@@ -20,8 +20,7 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-/*
- * MineGuisMenu class
+/* MineGuisMenu class
  * > Description:
  * -> base class for any gui panel/menu;
  * -> althought minecraft counts from 1,
@@ -58,15 +57,11 @@ public class MineGuisMenu implements Listener {
     public MineGuisItem getItem(int numRow, int numCol)     { return this.arrItems.get( ((numRow - 1) * 9 + numCol - 1) % this.getSizeInItems() ); }
     /* setters */
     public MineGuisMenu setItem(Integer numSlot, MineGuisItem objItem) {
-        // MineGuis.get().doLog("packing an item: " + objItem.getName());
-        // MineGuis.get().doLog("objPack: " + (objPack != null));
         this.objPack.setItem( (numSlot - 1) % this.getSizeInItems(), objItem.getItem() );
-        // MineGuis.get().doLog("setting an item: " + objItem.getName());
         this.arrItems.set( (numSlot - 1) % this.getSizeInItems(), objItem );
         return this;
     }
     public MineGuisMenu setItem(Integer numRow, Integer numCol, MineGuisItem objItem) {
-        // MineGuis.get().doLog("objPack: " + (objPack != null));
         this.objPack.setItem( ((numRow - 1) * 9 + numCol - 1) % this.getSizeInItems(), objItem.getItem() );
         this.arrItems.set( ((numRow - 1) * 9 + numCol - 1) % this.getSizeInItems(), objItem );
         return this;
@@ -85,39 +80,49 @@ public class MineGuisMenu implements Listener {
     /* actions */
     public Boolean doShow(Player objPlayer) {
         if (objPlayer == null) { return false; }
-        if (vetPack(objPlayer.getInventory()) == true) { /* this is already shown */ return false; }
+        //if (vetPack(objPlayer.getInventory()) == true) {
+        //    MineGuis.get().doLog("the inventory is already shown!");
+        //    return false;
+        //}
         objPlayer.openInventory(getPack());
         return true;
     }
     public Boolean doHide(Player objPlayer) {
         if (objPlayer == null) { return false; }
-        if (vetPack(objPlayer.getInventory()) == false) { /* this is not shown */ return false; }
+        //if (vetPack(objPlayer.getInventory()) == false) {
+        //    MineGuis.get().doLog("the inventory is already hidden!");
+        //    return false;
+        //}
         objPlayer.openInventory(getPack());
         return true;
     }
     /* handles */
     @EventHandler
     public void onClick(InventoryClickEvent objEvent) {
-        if (vetTitle(objEvent.getView().getTitle()) == true) {
-            /* we do not need to change this */
-            objEvent.setCancelled(true);
-            if (objEvent.getWhoClicked() instanceof Player) {
-                Player objPlayer = (Player) objEvent.getWhoClicked();
-                if (objEvent.getCurrentItem() == null) { return; }
-                ItemStack objItem = objEvent.getCurrentItem();
-                /* get meta data, make sure it exists */
-                if (objItem.hasItemMeta() == false) { return; }
-                ItemMeta objMeta = objItem.getItemMeta();
-                /* get the name, make sure it exists */
-                if (objMeta.hasDisplayName() == false) { return; }
-                String strName = objMeta.getDisplayName();
-                for (int itr = 1; itr <= getSizeInItems(); itr++) { /* check all items */
-                    MineGuisItem itrItem = getItem(itr);
-                    if (itrItem == null) { continue; }
-                    else if (itrItem.vetName(strName)) { itrItem.onClick(objEvent); }
-                }
-            } else { /* this is not a player */ }
-        } else { /* this is not "this" menu */ }
+        if (vetTitle(objEvent.getView().getTitle()) == false) {
+            //MineGuis.get().doLog("not that menu!");
+            return;
+        }
+        /* we do not need to change this inventory */
+        objEvent.setCancelled(true);
+        if ((objEvent.getWhoClicked() instanceof Player) == false) {
+            MineGuis.get().doLog("not a player!");
+            return;
+        }
+        Player objPlayer = (Player) objEvent.getWhoClicked();
+        if (objEvent.getCurrentItem() == null) { return; }
+        ItemStack objItem = objEvent.getCurrentItem();
+        /* get meta data, make sure it exists */
+        if (objItem.hasItemMeta() == false) { return; }
+        ItemMeta objMeta = objItem.getItemMeta();
+        /* get the name, make sure it exists */
+        if (objMeta.hasDisplayName() == false) { return; }
+        String strName = objMeta.getDisplayName();
+        for (int itr = 1; itr <= getSizeInItems(); itr++) { /* check all items */
+            MineGuisItem itrItem = getItem(itr);
+            if (itrItem == null) { continue; }
+            else if (itrItem.vetName(strName)) { itrItem.onClick(objEvent); }
+        }
     }
 }
 /* end_of_file */

@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 /* typedef */
-/*
- * MineGuisItemCell class
+/* MineGuisItemCell class
  * > Description;
  * -> Does nothing, just fills empty space;
 */
@@ -26,13 +25,12 @@ public class MineGuisItemCell extends MineGuisItem {
     /* handles */
     @EventHandler @Override
     public void onClick(InventoryClickEvent objEvent) {
-        if (objEvent.getWhoClicked() instanceof Player) {
-            Player objPlayer = (Player) objEvent.getWhoClicked();
-            //MineGuis.get().doLog("cell has been clicked!");
-            objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
-        } else { /* not player click */
+        if ((objEvent.getWhoClicked() instanceof Player) == false) {
+            MineGuis.get().doLog("this is not a player click!");
             return;
         }
+        Player objPlayer = (Player) objEvent.getWhoClicked();
+        objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
     }
 }
 /* end_of_file */

@@ -4,21 +4,20 @@ package nikochir.item;
 /* include */
 import nikochir.MineGuis;
 import nikochir.item.MineGuisItemPage;
-import nikochir.menu.MineGuisMenuPage;
+import nikochir.menu.MineGuisMenuBook;
 /* bukkit */
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 /* typedef */
-/*
-* MineGuisItemPageLeft
+/* MineGuisItemPageRight
 * > Description:
 * -> element for negative page switch;
 */
 public class MineGuisItemPageR extends MineGuisItemPage {
     /* members */
     /* codetor */
-    public MineGuisItemPageR(MineGuisMenuPage objPage) {
-        super(objPage, Material.BOOK, "Right", "Display the next page");
+    public MineGuisItemPageR(MineGuisMenuBook objBook) {
+        super(objBook, Material.BOOK, "Right", "Display the next page");
     }
     /* getters */
     /* setters */
@@ -26,7 +25,10 @@ public class MineGuisItemPageR extends MineGuisItemPage {
     /* actions */
     @Override
     public Boolean doSwitch(Player objPlayer) {
-        if (this.getPage().doSwitchNext(objPlayer)) { return false; }
+        if (this.getBook().doSwitchNext(objPlayer) == false) {
+            MineGuis.get().doLog("failed right book switch!");
+            return false;
+        }
         return true;
     }
     /* handles */

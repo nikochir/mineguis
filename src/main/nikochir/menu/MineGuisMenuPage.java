@@ -4,33 +4,34 @@ package nikochir.menu;
 /* include */
 import nikochir.MineGuis;
 import nikochir.menu.MineGuisMenu;
-import nikochir.menu.MineGuisBook;
+import nikochir.menu.MineGuisMenuBook;
 import nikochir.item.MineGuisItem;
+import nikochir.item.MineGuisItemQuit;
 import nikochir.item.MineGuisItemPage;
 import nikochir.item.MineGuisItemPageL;
 import nikochir.item.MineGuisItemPageR;
 /* bukkit */
 import org.bukkit.entity.Player;
 /* typedef */
-/*
- * MineGuiMenuPage
+/* MineGuisMenuPage
  * > Description:
- * -> represents an;
+ * -> represents a menu linked with a collection of menus;
  */
 public class MineGuisMenuPage extends MineGuisMenu {
     /* members */
-    private final MineGuisBook objBook;
+    private final MineGuisMenuBook objBook;
     private final Integer numNumb;
     /* codetor */
-    public MineGuisMenuPage(MineGuisBook objBook, Integer numNumb, Integer numRows) {
-        super( String.format("%s: %d/%d", objBook.getTitle(), numNumb, objBook.getSizeInPages() ), numRows);
+    public MineGuisMenuPage(MineGuisMenuBook objBook, Integer numNumb, Integer numRows) {
+        super(String.format("%s: %d/%d", objBook.getTitle(), numNumb, objBook.getSizeInPages() ), numRows);
         this.objBook = objBook;
         this.numNumb = numNumb;
-        this.setItem(this.getSizeInItems() - 2, new MineGuisItemPageL(this));
-        this.setItem(this.getSizeInItems(), new MineGuisItemPageR(this));
+        this.setItem(this.getSizeInItems() - 2, new MineGuisItemPageL(objBook));
+        this.setItem(this.getSizeInItems() - 1, new MineGuisItemQuit());
+        this.setItem(this.getSizeInItems() - 0, new MineGuisItemPageR(objBook));
     }
     /* getters */
-    public MineGuisBook getBook()     { return this.objBook; }
+    public MineGuisMenuBook getBook()     { return this.objBook; }
     public Integer getBookSize()          { return this.objBook.getSizeInPages(); }
     public Integer getNumb()              { return this.numNumb; }
     public Integer getNumbPrev()          { return (this.numNumb - 1) % this.getBookSize(); }

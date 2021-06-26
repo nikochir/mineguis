@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 /* typedef */
-/*
- * MineGuisItemQuit class
+/* MineGuisItemQuit class
  * > Description;
  * -> ;
 */
@@ -28,14 +27,13 @@ public class MineGuisItemQuit extends MineGuisItem {
     /* handles */
     @EventHandler @Override
     public void onClick(InventoryClickEvent objEvent) {
-        if (objEvent.getWhoClicked() instanceof Player) {
-            Player objPlayer = (Player) objEvent.getWhoClicked();
-            //MineGuis.get().doLog("quit has been executed!");
-            objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
-            objPlayer.closeInventory();
-        } else { /* not player click */
+        if ((objEvent.getWhoClicked() instanceof Player) == false) {
+            MineGuis.get().doLog("not a player click!");
             return;
         }
+        Player objPlayer = (Player) objEvent.getWhoClicked();
+        objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
+        objPlayer.closeInventory();
     }
 }
 /* end_of_file */

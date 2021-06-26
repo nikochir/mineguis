@@ -5,6 +5,7 @@ package nikochir.item;
 import nikochir.MineGuis;
 import nikochir.item.MineGuisItem;
 import nikochir.menu.MineGuisMenuPage;
+import nikochir.menu.MineGuisMenuBook;
 /* bukkit */
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -12,21 +13,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 /* typedef */
-/*
-* MineGuisItemPage
+/* MineGuisItemPage
 * > Description:
 * -> element for page switch;
 */
 public abstract class MineGuisItemPage extends MineGuisItem {
     /* members */
-    private MineGuisMenuPage objPage;
+    private final MineGuisMenuBook objBook;
     /* codetor */
-    public MineGuisItemPage(MineGuisMenuPage objPage, Material valType, String strName, String strLore) {
+    public MineGuisItemPage(MineGuisMenuBook objBook, Material valType, String strName, String strLore) {
         super(valType, strName, strLore);
-        this.objPage = objPage;
+        this.objBook = objBook;
     }
     /* getters */
-    public MineGuisMenuPage getPage() { return this.objPage; }
+    public MineGuisMenuBook getBook() { return this.objBook; }
     /* setters */
     /* vetters */
     /* actions */
@@ -34,11 +34,16 @@ public abstract class MineGuisItemPage extends MineGuisItem {
     /* handles */
     @EventHandler @Override
     public void onClick(InventoryClickEvent objEvent) {
-        if (objEvent.getWhoClicked() instanceof Player) {
-            Player objPlayer = (Player) objEvent.getWhoClicked();
-            objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
-            if (this.doSwitch(objPlayer) == false) { /* failed to switch! */ return; }
-        } else { /* not player click */ return; }
+        if ((objEvent.getWhoClicked() instanceof Player) == false) {
+            MineGuis.get().doLog("this is not a player click!");
+            return;
+        }
+        Player objPlayer = (Player) objEvent.getWhoClicked();
+        objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
+        if (this.doSwitch(objPlayer) == false) { 
+            MineGuis.get().doLog("failed book switch!");
+            return;
+        }
     }
 }
 /* end_of_file */

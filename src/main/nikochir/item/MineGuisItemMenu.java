@@ -14,8 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 /* typedef */
-/*
- * MineGuisItemMenu class
+/* MineGuisItemMenu class
  * > Description;
  * -> Switches to another menu;
  * -> Has it's own reference to another menu;
@@ -36,16 +35,16 @@ public class MineGuisItemMenu extends MineGuisItem {
     /* handles */
     @EventHandler @Override
     public void onClick(InventoryClickEvent objEvent) {
-        if (objEvent.getWhoClicked() instanceof Player) {
-            Player objPlayer = (Player) objEvent.getWhoClicked();
-            MineGuis.get().doLog("switch to " + getMenuTitle() + "has been executed!");
-            objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
-            objPlayer.closeInventory();
-            if (this.getMenu().doShow(objPlayer) == false) {
-                MineGuis.get().doLog("failed to show the menu!"); return;
-            }
-        } else { /* not player click */
+        if ((objEvent.getWhoClicked() instanceof Player) == false) {
+            MineGuis.get().doLog("this is not a player click!");
             return;
+        }
+        Player objPlayer = (Player) objEvent.getWhoClicked();
+        MineGuis.get().doLog("switch to " + getMenuTitle() + "has been executed!");
+        objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
+        objPlayer.closeInventory();
+        if (this.getMenu().doShow(objPlayer) == false) {
+            MineGuis.get().doLog("failed to show the menu!"); return;
         }
     }
 }
