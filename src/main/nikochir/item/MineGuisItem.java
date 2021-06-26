@@ -16,6 +16,7 @@ import org.bukkit.Material;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+/* typedef */
 /*
  * MineGuisItem class
  * > Description:
@@ -28,12 +29,12 @@ public abstract class MineGuisItem implements Listener {
     public MineGuisItem(Material valType, String strName, String strLore) {
         objItem = new ItemStack(valType);
         ItemMeta objMeta = objItem.getItemMeta();
-        MineGuis.get().doLog("setting item name: " + strName);
+        //MineGuis.get().doLog("setting item name: " + strName);
         objMeta.setDisplayName(strName);
         List<String> arrLore = new ArrayList<String>(); arrLore.add(strLore);
-        MineGuis.get().doLog("setting item lore: " + strLore);
+        //MineGuis.get().doLog("setting item lore: " + strLore);
         objMeta.setLore(arrLore); /* this guy accepts only List<String> */
-        MineGuis.get().doLog("setting item meta...");
+        //MineGuis.get().doLog("setting item meta...");
         objItem.setItemMeta(objMeta);
     }
     /* getters */
@@ -49,8 +50,8 @@ public abstract class MineGuisItem implements Listener {
     public Boolean vetType(Material valType)  { return getType().equals(valType); }
     public Boolean vetMeta(ItemMeta objMeta)  { return getMeta().equals(objMeta); }
     public Boolean vetItem(ItemStack objItem) { return getItem().equals(objItem); }
-    /* command */
-    /* onevent */
+    /* actions */
+    /* handles */
     @EventHandler
     public abstract void onClick(InventoryClickEvent objEvent);
 }

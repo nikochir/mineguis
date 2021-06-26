@@ -23,12 +23,12 @@ public class MineGuisItemCell extends MineGuisItem {
     public MineGuisItemCell() {
         super(Material.BLACK_STAINED_GLASS_PANE, "", "");
     }
-    /* onevent */
+    /* handles */
     @EventHandler @Override
     public void onClick(InventoryClickEvent objEvent) {
         if (objEvent.getWhoClicked() instanceof Player) {
             Player objPlayer = (Player) objEvent.getWhoClicked();
-            MineGuis.get().doLog("cell has been clicked!");
+            //MineGuis.get().doLog("cell has been clicked!");
             objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
         } else { /* not player click */
             return;

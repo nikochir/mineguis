@@ -25,12 +25,12 @@ public class MineGuisItemQuit extends MineGuisItem {
         //super(Material.ENDER_EYE, "Quit", "Close current menu");
         super(Material.CRIMSON_DOOR, "Quit", "Close current menu");
     }
-    /* onevent */
+    /* handles */
     @EventHandler @Override
     public void onClick(InventoryClickEvent objEvent) {
         if (objEvent.getWhoClicked() instanceof Player) {
             Player objPlayer = (Player) objEvent.getWhoClicked();
-            MineGuis.get().doLog("quit has been executed!");
+            //MineGuis.get().doLog("quit has been executed!");
             objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
             objPlayer.closeInventory();
         } else { /* not player click */

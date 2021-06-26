@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "inputs": [],
+    "launch": {
+		"configurations": [],
+		"compounds": []
+	},
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Attach",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "<debug port of the debuggee>"
+        },
+        {
+            "type": "java",
+            "name": "Attach to Remote Program",
+            "request": "attach",
+            "hostName": "<The host name or ip address of remote debuggee>",
+            "port": "<debug port of remote debuggee>"
+        },
+        {
+            "type": "java",
+            "name": "Launch Java Program",
+            "request": "launch",
+            "mainClass": ""
+        },
+        {
+            "type": "java",
+            "name": "Launch External Terminal",
+            "request": "launch",
+            "console": "externalTerminal",
+            "mainClass": ""
+        }
+    ],
+    "compounds": [
+        {
+            "name": "comp",
+            "configurations": [
+                {
+                    "name": "play",
+                    "folder": "minecode",
+                }
+            ],
+            "preLaunchTask": "",
+            "stopAll": false,
+            "presentation": {
+                "hidden": false,
+                "group": "",
+                "order": 1
+            }
+        }
+    ]
+}
+/* end_of_file */

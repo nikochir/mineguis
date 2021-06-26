@@ -10,7 +10,7 @@ database: false
 commands:
   mineguis:
     alias: ["mguis"]
-    usage: /<command> [menuname]
+    usage: /<command> [type] [name]
     #permission: minecode.*
     permission-message: you do not have /<permission>
     description:

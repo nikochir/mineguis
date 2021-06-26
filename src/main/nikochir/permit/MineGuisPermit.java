@@ -12,6 +12,6 @@ public class MineGuisPermit extends Permission {
     /* members */
     /* codetor */
     public MineGuisPermit() { super("mineguis.*"); }
-    /* onevent */
+    /* handles */
 }
 /* end_of_file */

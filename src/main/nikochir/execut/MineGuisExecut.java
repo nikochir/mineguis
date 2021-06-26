@@ -3,6 +3,7 @@ package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
 import nikochir.menu.MineGuisMenu;
+import nikochir.menu.MineGuisBook;
 /** javkit **/
 import java.util.ArrayList;
 /** bukkit - command interface **/
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * -> ;
 */
 public class MineGuisExecut implements CommandExecutor {
-    /* onevent */
+    /* handles */
     @Override
     public boolean onCommand(
         @NotNull CommandSender objSender,
@@ -33,18 +34,24 @@ public class MineGuisExecut implements CommandExecutor {
             MineGuis.get().doLog("default mineguis was called");
             return onCommand(objSender, objCommand, strLabel, strArgsNext);
         }
+        if ((objSender instanceof Player) == false) { return false; }
+        Player objPlayer = (Player) objSender;
         if (strArgs.length == 1) {
-            if (objSender instanceof Player) {
-                Player objPlayer = (Player) objSender;
-                //if (objPlayer.hasPermission("mineguis.user") == false) { return false; }
-                if (MineGuis.get().vetMenu(strArgs[0])) {
-                        MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer);
-                } else { /* menu is not found */
-                    return false;
-                }
-                    return true;
-            } else { /* not player call */
-                return false;
+            //if (objPlayer.hasPermission("mineguis.user") == false) { return false; }
+            if (MineGuis.get().vetMenu(strArgs[0]) == false) { /* menu is not found */ return false; }
+            if (MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer) == false) { return false; }
+            return true;
+        }
+        if (strArgs.length == 2) {
+            if (strArgs[0] == "menu") {
+                if (MineGuis.get().vetMenu(strArgs[1]) == false) { MineGuis.get().doLog("menu is not found"); return false; }
+                if (MineGuis.get().getMenu(strArgs[1]).doShow(objPlayer) == false) { MineGuis.get().doLog("menu is not shown"); return false; }
+                return true;
+            }
+            if (strArgs[0] == "book") {
+                if (MineGuis.get().vetBook(strArgs[1]) == false) { MineGuis.get().doLog("book is not found"); return false; }
+                if (MineGuis.get().getBook(strArgs[1]).doShow(objPlayer) == false) { MineGuis.get().doLog("book is not shown"); return false; }
+                return true;
             }
         }
         return false;

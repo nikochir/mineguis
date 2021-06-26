@@ -1,0 +1,82 @@
+{
+    /* vscode */
+    /** editor **/
+    "editor.autoSurround": "languageDefined",
+    "editor.autoClosingBrackets": "languageDefined",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 16,
+    "editor.fontFamily":
+        //"Consolas, 'Courier New', monospace"
+        //"MonoId-Regular"
+        //"SourceCodePro"
+        //"Consolas, Courier New, monospace, Inconsolata, MonoId, SourceCodePro"
+        //"VT323, Mozart NBP, Mayfair NBP, Silverfinster"
+        "Source Code Pro"
+    ,
+    /** terminal **/
+    "terminal.integrated.env.osx": {
+    },
+    "terminal.integrated.env.linux": {
+    },
+    "terminal.integrated.env.windows": {
+        "dcdev": "f:/cdev",
+    },
+    "terminal.integrated.environmentChangesIndicator": "on",
+    "terminal.integrated.environmentChangesRelaunch": true,
+    /** files **/
+    "files.associations": {
+        "*.java": "java",
+        "*.jav": "java"
+    },
+    /* extensions */
+    /** drawio **/
+    "hediet.vscode-drawio.offline": true,
+    "hediet.vscode-drawio.theme": "dark",
+    "hediet.vscode-drawio.online-url": "https://embed.diagrams.net/",
+    "hediet.vscode-drawio.plugins": [],
+    "hediet.vscode-drawio.knownPlugins": [],
+    "hediet.vscode-drawio.customLibraries": [],
+    "hediet.vscode-drawio.customColorSchemes": [],
+    "hediet.vscode-drawio.customFonts": [ "Consolas" ],
+    /** vsicons **/
+    "vsicons.associations.files": [],
+    "vsicons.associations.directories": [
+        { "icon": "resources", "extensions": ["rsc", "rscs"], "format": "FileFormat.svg", "disabled": false }
+    ],
+    /** dashboard **/
+    "dashboard.openOnStartup": "always",
+    "dashboard.projectTileWidth": 350,
+    "dashboard.displayProjectPath": true,
+    "dashboard.showAddProjectButtonTile": false,
+    /** java **/
+    "java.home": "f:/cdev/jdk",
+    "java.configuration.maven.userSettings": "f:/cdev/mvn/conf/settings.xml",
+    "java.configuration.maven.globalSettings": "f:/cdev/mvn/conf/settings.xml",
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "java.project.outputPath": "bin_jdk",
+    "java.project.sourcePaths": [ "src_jdk" ],
+    "java.project.exportJar.targetPath": "${workspaceFolder}/bin/${workspaceFolderBasename}.jar",
+    "java.templates.fileHeader": [
+        "/* [${user}]: ${year}/${month}/${day}; */",
+        "/* package */",
+        "package ${package_name};",
+        "/* include */",
+        "import ${package_name}.*;",
+        "/* typedef */",
+        "/* end_of_file */",
+    ],
+    "java.templates.typeComment": [
+        "/*",
+        " * ${type_name}",
+        " * > Description:",
+        " * -> ;",
+        "*/"
+    ],
+    /** maven **/
+    "maven.view": "hierarchical",
+    "maven.terminal.customEnv": [],
+    "maven.terminal.favorites": [],
+    "maven.terminal.useJavaHome": true,
+    "maven.executable.options": "",
+    "maven.executable.preferMavenWrapper": false,
+}

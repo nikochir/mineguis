@@ -33,7 +33,7 @@ public class MineGuisItemMenu extends MineGuisItem {
     /* getters */
     public String getMenuTitle()  { return this.strMenuTitle; }
     public MineGuisMenu getMenu() { return MineGuis.get().getMenu(this.getMenuTitle()); }
-    /* onevent */
+    /* handles */
     @EventHandler @Override
     public void onClick(InventoryClickEvent objEvent) {
         if (objEvent.getWhoClicked() instanceof Player) {

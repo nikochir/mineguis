@@ -1,7 +1,7 @@
 #nameof#
 nameof_main: ${project.name}
 nameof_pack: minepack
-nameof_olog: "[${project.name}] "
+nameof_log: "[${project.name}] "
 #sizeof#
 sizeof_main: 3
 sizeof_pack: 3
