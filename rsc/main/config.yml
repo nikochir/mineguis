@@ -3,5 +3,7 @@ nameof_main: ${project.name}
 nameof_pack: minepack
 nameof_log: "[${project.name}] "
 #sizeof#
-sizeof_main: 3
-sizeof_pack: 3
+sizeof_main: 3 # main menu lines
+sizeof_maxm: 6 # maximal menu lines
+sizeof_minm: 1 # minimal menu lines
+sizeof_usem: 3 # used by default menu lines

@@ -1,7 +1,7 @@
 /* package */
 package nikochir;
 /* include */
-import nikochir.MineGuisUser;
+import nikochir.*;
 import nikochir.menu.*;
 import nikochir.item.*;
 import nikochir.execut.*;
@@ -16,11 +16,10 @@ import java.util.HashSet;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.command.Command;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
-/** nkyori - text facilities **/
-import net.kyori.adventure.text.Component;
-/*
- * MineGuis class
+/* MineGuis class
  * > description:
  * -> initializer-terminator plugin singleton;
  * -> handles all menus;
@@ -34,13 +33,14 @@ public class MineGuis extends JavaPlugin {
     private HashMap<String, MineGuisMenuBook> mapBooks;
     /* getters */
     public static MineGuis get() { return objInstance; }
-    public MineGuisUser getUser()                { return this.getUser(this.getConfigStr("nameof_main")); }
-    public MineGuisUser getUser(String strTitle) { return mapUsers.get(strTitle); }
-    public MineGuisMenu getMenu()                { return this.getMenu(this.getConfigStr("nameof_main")); }
-    public MineGuisMenu getMenu(String strTitle) { return mapMenus.get(strTitle); }
-    public MineGuisMenuBook getBook()                { return this.getBook(this.getConfigStr("nameof_main")); }
-    public MineGuisMenuBook getBook(String strTitle) { return mapBooks.get(strTitle); }
-    public Player getPlayer(String strPlayer)       { return this.getServer().getPlayer(strPlayer); }
+    public MineGuisUser getUser()                      { return this.getUser(this.getConfigStr("nameof_main")); }
+    public MineGuisUser getUser(String strTitle)       { return mapUsers.get(strTitle); }
+    public MineGuisMenu getMenu()                      { return this.getMenu(this.getConfigStr("nameof_main")); }
+    public MineGuisMenu getMenu(String strTitle)       { return mapMenus.get(strTitle); }
+    public MineGuisMenuBook getBook()                  { return this.getBook(this.getConfigStr("nameof_main")); }
+    public MineGuisMenuBook getBook(String strTitle)   { return mapBooks.get(strTitle); }
+    public PluginCommand getCommand(String strCommand) { return this.getServer().getPluginCommand(strCommand); }
+    public Player getPlayer(String strPlayer)          { return this.getServer().getPlayer(strPlayer); }
     public Boolean getConfigBit(String strKey)      { return this.getConfig().getBoolean(strKey); }
     public Integer getConfigInt(String strKey)      { return this.getConfig().getInt(strKey); }
     public Double getConfigNum(String strKey)       { return this.getConfig().getDouble(strKey); }
@@ -94,9 +94,8 @@ public class MineGuis extends JavaPlugin {
         this.saveDefaultConfig();
         /** regs **/
         MineGuisMenu objMenuMain = this.setMenu(this.getConfigStr("nameof_main"), this.getConfigInt("sizeof_main"));
-        MineGuisMenu objMenuLeft = this.setMenu("left", 1);
-        MineGuisMenu objMenuRigt = this.setMenu("rigt", 1);
-        this.doLog("creating an item...");
+        MineGuisMenu objMenuLeft = this.setMenu("left", 10);
+        MineGuisMenu objMenuRigt = this.setMenu("rigt", 10);
         objMenuMain.setItem(1, 3, new MineGuisItemMenu(objMenuLeft));
         objMenuMain.setItem(1, 7, new MineGuisItemMenu(objMenuRigt));
         objMenuMain.setItem(3, 5, new MineGuisItemQuit());
@@ -109,8 +108,14 @@ public class MineGuis extends JavaPlugin {
             this.getConfigInt("sizeof_main"),
             this.getConfigInt("sizeof_main")
         );
+        objBookMain.getPage(1).setItem(1, 1, new MineGuisItemCall("menu", new String[]{ "left" }));
+        objBookMain.getPage(1).setItem(1, 2, new MineGuisItemCall("menu", new String[]{ "mineguis" }));
+        objBookMain.getPage(1).setItem(1, 3, new MineGuisItemCall("menu", new String[]{ "rigt" }));
+        objBookMain.getPage(2).setItem(1, 1, new MineGuisItemCall("book", new String[]{ "mineguis" }));
         /*** execut ***/
-        this.getServer().getPluginCommand("mineguis").setExecutor(new MineGuisExecut());
+        this.getCommand("mineguis").setExecutor(new MineGuisExecut());
+        this.getCommand("menu").setExecutor(new MineGuisExecutMenu());
+        this.getCommand("book").setExecutor(new MineGuisExecutBook());
         /*** listen ***/
         this.getServer().getPluginManager().registerEvents(new MineGuisListen(), this);
         /*** permit ***/

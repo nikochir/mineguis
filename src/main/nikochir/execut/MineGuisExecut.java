@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
@@ -29,7 +30,10 @@ public class MineGuisExecut implements CommandExecutor {
         @NotNull String strLabel,
         @NotNull String[] strArgs
     ) {
-        if ((objSender instanceof Player) == false) { return false; }
+        if ((objSender instanceof Player) == false) {
+            MineGuis.get().doLog("this is not a player command!");
+            return false;
+        }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) { /* default widgets */
             MineGuis.get().doLog("default mineguis was called");

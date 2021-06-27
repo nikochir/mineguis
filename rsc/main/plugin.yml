@@ -9,12 +9,26 @@ loadbefore: []
 database: false
 commands:
   mineguis:
-    alias: ["mguis"]
+    alias: ["mgui"]
     usage: /<command> [type] [name]
     #permission: minecode.*
     permission-message: you do not have /<permission>
     description:
-      open any menu panel
+      open any menu or book panel using the name
+  menu:
+    alias: ["mgui_menu"]
+    usage: /<command> [name]
+    #permission: minecode.*
+    permission-message: you do not have /<permission>
+    description:
+      open any menu panel using the name
+  book:
+    alias: ["mgui_book"]
+    usage: /<command> [name]
+    #permission: minecode.*
+    permission-message: you do not have /<permission>
+    description:
+      open any book panel using the name
 permissions:
   mineguis.user:
     default: true

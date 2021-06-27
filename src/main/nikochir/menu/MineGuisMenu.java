@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -36,6 +37,12 @@ public class MineGuisMenu implements Listener {
     private ArrayList<MineGuisItem> arrItems;
     /* codetor */
     public MineGuisMenu(String strTitle, Integer numRows) {
+        if (numRows < MineGuis.get().getConfigInt("sizeof_minm")) {
+            numRows = MineGuis.get().getConfigInt("sizeof_minm");
+        }
+        if (numRows > MineGuis.get().getConfigInt("sizeof_maxm")) {
+            numRows = MineGuis.get().getConfigInt("sizeof_maxm");
+        }
         this.strTitle = strTitle;
         this.objPack = Bukkit.createInventory(null, numRows * 9, Component.text(strTitle));
         this.arrItems = new ArrayList<MineGuisItem>(numRows * 9);
@@ -80,6 +87,9 @@ public class MineGuisMenu implements Listener {
     /* actions */
     public Boolean doShow(Player objPlayer) {
         if (objPlayer == null) { return false; }
+        if ((objPlayer.getOpenInventory() instanceof PlayerInventory) == true) {
+            objPlayer.closeInventory();
+        }
         //if (vetPack(objPlayer.getInventory()) == true) {
         //    MineGuis.get().doLog("the inventory is already shown!");
         //    return false;

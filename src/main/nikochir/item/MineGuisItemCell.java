@@ -20,10 +20,10 @@ public class MineGuisItemCell extends MineGuisItem {
     /* members */
     /* codetor */
     public MineGuisItemCell() {
-        super(Material.BLACK_STAINED_GLASS_PANE, "", "");
+        super(Material.BLACK_STAINED_GLASS_PANE, "void", "none");
     }
     /* handles */
-    @EventHandler @Override
+    @Override
     public void onClick(InventoryClickEvent objEvent) {
         if ((objEvent.getWhoClicked() instanceof Player) == false) {
             MineGuis.get().doLog("this is not a player click!");

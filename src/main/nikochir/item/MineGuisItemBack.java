@@ -13,8 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 /* typedef */
-/*
- * MineGuisItemBack class
+/* MineGuisItemBack class
  * > Description;
  * -> switch back to the previously viewed panel;
 */
@@ -37,7 +36,7 @@ public class MineGuisItemBack extends MineGuisItem {
     public MineGuisMenu getMenu()     { return this.objMenu; }
     public MineGuisItemBack getBack() { return this.objBack; }
     /* handles */
-    @EventHandler @Override
+    @Override
     public void onClick(InventoryClickEvent objEvent) {
         if (objEvent.getWhoClicked() instanceof Player) {
             Player objPlayer = (Player) objEvent.getWhoClicked();

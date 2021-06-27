@@ -21,8 +21,8 @@ public abstract class MineGuisItemPage extends MineGuisItem {
     /* members */
     private final MineGuisMenuBook objBook;
     /* codetor */
-    public MineGuisItemPage(MineGuisMenuBook objBook, Material valType, String strName, String strLore) {
-        super(valType, strName, strLore);
+    public MineGuisItemPage(MineGuisMenuBook objBook, Material valMaterial, String strName, String strLore) {
+        super(valMaterial, strName, strLore);
         this.objBook = objBook;
     }
     /* getters */
@@ -32,7 +32,8 @@ public abstract class MineGuisItemPage extends MineGuisItem {
     /* actions */
     public abstract Boolean doSwitch(Player objPlayer);
     /* handles */
-    @EventHandler @Override
+    
+    @Override
     public void onClick(InventoryClickEvent objEvent) {
         if ((objEvent.getWhoClicked() instanceof Player) == false) {
             MineGuis.get().doLog("this is not a player click!");

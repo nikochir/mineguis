@@ -13,8 +13,7 @@ import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.entity.Player;
 /* typedef */
-/*
-* MineGuisUser
+/* MineGuisUser class
 * > Description:
 * -> ;
 */

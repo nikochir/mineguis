@@ -13,8 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.entity.Player;
 /* typedef */
-/*
- * MineGuisListener class
+/* MineGuisListener class
  * > Description:
  * -> ;
 */
@@ -22,11 +21,11 @@ public class MineGuisListen implements Listener {
     /* handles */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent objEvent) {
-        if (objEvent.getWhoClicked() instanceof Player) {
-            Player objPlayer = (Player) objEvent.getWhoClicked();
-        } else { /* not player click */
+        if ((objEvent.getWhoClicked() instanceof Player) == false) {
+            MineGuis.get().doLog("not player click!");
             return;
         }
+        Player objPlayer = (Player) objEvent.getWhoClicked();
     }
     @EventHandler
     public void onInventoryShow(InventoryOpenEvent objEvent) {

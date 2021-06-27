@@ -8,7 +8,7 @@ import nikochir.item.MineGuisItem;
 /* typedef */
 /* MineGuisMenuMain
 * > Description:
- * -> ;
+ * -> same as a simple menu but uses main configurations;
  */
 public class MineGuisMenuMain extends MineGuisMenu {
     /* members */

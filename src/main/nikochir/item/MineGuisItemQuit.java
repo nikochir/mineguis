@@ -25,7 +25,7 @@ public class MineGuisItemQuit extends MineGuisItem {
         super(Material.CRIMSON_DOOR, "Quit", "Close current menu");
     }
     /* handles */
-    @EventHandler @Override
+    @Override
     public void onClick(InventoryClickEvent objEvent) {
         if ((objEvent.getWhoClicked() instanceof Player) == false) {
             MineGuis.get().doLog("not a player click!");
