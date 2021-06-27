@@ -7,3 +7,47 @@ sizeof_main: 3 # main menu lines
 sizeof_maxm: 6 # maximal menu lines
 sizeof_minm: 1 # minimal menu lines
 sizeof_usem: 3 # used by default menu lines
+#listof#
+listof_menus:
+  - menu00:
+    - name: "menu00"
+    - size: 3
+    - data:
+      - item11:
+        - posy: 1
+        - posx: 1
+        - type: "menu"
+        - data: "mineguis"
+      - item21:
+        - posy: 1
+        - posx: 2
+        - type: "menu"
+        - data: "left"
+      - item31:
+        - posy: 1
+        - posx: 3
+        - type: "menu"
+        - data: "rigt"
+listof_books:
+  - book00:
+    - name: "book000"
+    - size: 3
+    - data:
+      - item111:
+        - page: 1
+        - posy: 1
+        - posx: 1
+        - type: "menu"
+        - data: "mineguis"
+      - item112:
+        - page: 1
+        - posy: 1
+        - posx: 2
+        - type: "menu"
+        - data: "left"
+      - item113:
+        - page: 1
+        - posy: 1
+        - posx: 3
+        - type: "menu"
+        - data: "rigt"

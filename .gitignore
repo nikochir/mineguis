@@ -1,5 +1,6 @@
 #directories#
-*target/
+bin/
+data/vdeo/
 #binary#
 *.class
 #logging#

@@ -28,13 +28,14 @@ import org.bukkit.entity.Player;
 public class MineGuis extends JavaPlugin {
     /* members */
     private static MineGuis objInstance;
-    private HashMap<Player, MineGuisUser> mapUsers;
+    private HashMap<String, MineGuisUser> mapUsers;
     private HashMap<String, MineGuisMenu> mapMenus;
     private HashMap<String, MineGuisMenuBook> mapBooks;
     /* getters */
     public static MineGuis get() { return objInstance; }
     public MineGuisUser getUser()                      { return this.getUser(this.getConfigStr("nameof_main")); }
-    public MineGuisUser getUser(String strTitle)       { return mapUsers.get(strTitle); }
+    public MineGuisUser getUser(String strPlayer)      { return mapUsers.get(strPlayer); }
+    public MineGuisUser getUser(Player objPlayer)      { return mapUsers.get(objPlayer.getName()); }
     public MineGuisMenu getMenu()                      { return this.getMenu(this.getConfigStr("nameof_main")); }
     public MineGuisMenu getMenu(String strTitle)       { return mapMenus.get(strTitle); }
     public MineGuisMenuBook getBook()                  { return this.getBook(this.getConfigStr("nameof_main")); }
@@ -47,45 +48,79 @@ public class MineGuis extends JavaPlugin {
     public String getConfigStr(String strKey)       { return this.getConfig().getString(strKey); }
     public List<String> getConfigArr(String strKey) { return this.getConfig().getStringList(strKey); }
     /* setters */
-    public MineGuisUser setUser(Player objPlayer) {
-        if (objPlayer != null) {
-            if (this.vetUser(objPlayer)) { return null; }
-            MineGuisUser objUser = new MineGuisUser(objPlayer);
-            this.mapUsers.put(objPlayer, objUser);
-            return objUser;
-        } else {
-            this.mapUsers.remove(objPlayer);
-            return null;
+    public Boolean addUser(MineGuisUser objUser) {
+        if (objUser == null) {
+            this.doLog("the user is null!");
+            return false;
         }
+        if (this.vetUser(objUser.getName()) == true) {
+            this.doLog("this user is already added!");
+            return false;
+        }
+        this.doLog("user has been added: " + objUser.getName());
+        this.mapUsers.put(objUser.getName(), objUser);
+        return true;
     }
-    public MineGuisMenu setMenu(String strTitle, Integer numRows) {
-        if (this.vetMenu(strTitle)) { return null; }
-        MineGuisMenu objMenu = new MineGuisMenu(strTitle, numRows);
-        this.mapMenus.put(strTitle, objMenu);
+    public Boolean addUser(Player objPlayer) { return addUser(new MineGuisUser(objPlayer)); }
+    public Boolean addUser(String strPlayer) { return addUser(new MineGuisUser(strPlayer)); }
+    public Boolean rmvUser(MineGuisUser objUser) {
+        if (this.vetUser(objUser.getPlayer()) == false) {
+            this.doLog("this user is already removed!");
+            return false;
+        }
+        this.mapUsers.remove(objUser.getPlayer());
+        return true;
+    }
+    public Boolean rmvUser(Player objPlayer) { return rmvUser(getUser(objPlayer)); }
+    public Boolean rmvUser(String strPlayer) { return rmvUser(getUser(strPlayer)); }
+    public Boolean addMenu(MineGuisMenu objMenu) {
+        if (this.vetMenu(objMenu.getTitle()) == true) {
+            this.doLog("this menu is already added!");
+            return false;
+        }
+        this.mapMenus.put(objMenu.getTitle(), objMenu);
         this.getServer().getPluginManager().registerEvents(objMenu, this);
-        return objMenu;
+        return true;
     }
-    public MineGuisMenuBook setBook(String strTitle, Integer numPages, Integer numLines) {
-        if (this.vetBook(strTitle)) { return null; }
-        MineGuisMenuBook objBook = new MineGuisMenuBook(strTitle, numPages, numLines);
-        this.mapBooks.put(strTitle, objBook);
-        return objBook;
+    public Boolean rmvMenu(MineGuisMenu objMenu) {
+        if (this.vetMenu(objMenu.getTitle()) == false) {
+            this.doLog("this menu is already removed!");
+            return false;
+        }
+        this.mapMenus.remove(objMenu.getTitle());
+        return true;
     }
+    public Boolean addBook(MineGuisMenuBook objBook) {
+        if (this.vetBook(objBook.getTitle()) == true) { return false; }
+        this.mapBooks.put(objBook.getTitle(), objBook);
+        return true;
+    }
+    public Boolean rmvBook(MineGuisMenuBook objBook) {
+        if (this.vetMenu(objBook.getTitle()) == false) {
+            this.doLog("this menu is already removed!");
+            return false;
+        }
+        this.mapBooks.remove(objBook.getTitle());
+        return true;
+    }
+    //public Boolean setConfigBit(String strKey, Boolean bitVal)      { this.getConfig().setBoolean(strKey, bitVal); return true; }
+    //public Boolean setConfigInt(String strKey, Integer intVal)      { this.getConfig().setInteger(strKey, intVal); return true; }
+    //public Boolean setConfigNum(String strKey, Double numVal)       { this.getConfig().setDouble(strKey, numVal); return true; }
+    //public Boolean setConfigStr(String strKey, String strVal)       { this.getConfig().setString(strKey, strVal); return true; }
+    //public Boolean setConfigArr(String strKey, List<String> arrVal) { this.getConfig().setStringList(strKey, arrVal); return true; }
     /* vetters */
-    public Boolean vetUser(Player objUser) { return mapUsers.containsKey(objUser); }
-    public Boolean vetUser(String strUser) { return mapUsers.containsKey(this.getPlayer(strUser)); }
+    public Boolean vetUser(Player objUser) { return mapUsers.containsKey(objUser.getName()); }
+    public Boolean vetUser(String strUser) { return mapUsers.containsKey(strUser); }
     public Boolean vetMenu(String strName) { return mapMenus.containsKey(strName); }
     public Boolean vetBook(String strName) { return mapBooks.containsKey(strName); }
     /* actions */
-    public void doLog(String strLog) {
-        System.out.println(this.getConfigStr("nameof_log") + strLog);
-    }
+    public void doLog(String strLog) { System.out.println(this.getConfigStr("nameof_log") + strLog); }
     /* handles */
     @Override
     public void onEnable() {
         /* init */
         objInstance = this;
-        this.mapUsers = new HashMap<Player, MineGuisUser>();
+        this.mapUsers = new HashMap<String, MineGuisUser>();
         this.mapMenus = new HashMap<String, MineGuisMenu>();
         this.mapBooks = new HashMap<String, MineGuisMenuBook>();
         /* work */
@@ -93,17 +128,17 @@ public class MineGuis extends JavaPlugin {
         this.getConfig().options().copyDefaults();
         this.saveDefaultConfig();
         /** regs **/
-        MineGuisMenu objMenuMain = this.setMenu(this.getConfigStr("nameof_main"), this.getConfigInt("sizeof_main"));
-        MineGuisMenu objMenuLeft = this.setMenu("left", 10);
-        MineGuisMenu objMenuRigt = this.setMenu("rigt", 10);
-        objMenuMain.setItem(1, 3, new MineGuisItemMenu(objMenuLeft));
-        objMenuMain.setItem(1, 7, new MineGuisItemMenu(objMenuRigt));
+        MineGuisMenu objMenuMain = new MineGuisMenu(this.getConfigStr("nameof_main"), this.getConfigInt("sizeof_main"));
+        MineGuisMenu objMenuLeft = new MineGuisMenu("left", 10);
+        MineGuisMenu objMenuRigt = new MineGuisMenu("rigt", 10);
+        objMenuMain.setItem(1, 3, new MineGuisItemMenu(objMenuMain, objMenuLeft));
+        objMenuMain.setItem(1, 7, new MineGuisItemMenu(objMenuMain, objMenuRigt));
         objMenuMain.setItem(3, 5, new MineGuisItemQuit());
-        objMenuLeft.setItem(7, new MineGuisItemMenu(objMenuMain));
+        objMenuLeft.setItem(7, new MineGuisItemMenu(objMenuLeft, objMenuMain));
         objMenuLeft.setItem(8, new MineGuisItemQuit());
-        objMenuRigt.setItem(7, new MineGuisItemMenu(objMenuMain));
+        objMenuRigt.setItem(7, new MineGuisItemMenu(objMenuRigt, objMenuMain));
         objMenuRigt.setItem(8, new MineGuisItemQuit());
-        MineGuisMenuBook objBookMain = this.setBook(
+        MineGuisMenuBook objBookMain = new MineGuisMenuBook(
             this.getConfigStr("nameof_main"),
             this.getConfigInt("sizeof_main"),
             this.getConfigInt("sizeof_main")
@@ -112,6 +147,11 @@ public class MineGuis extends JavaPlugin {
         objBookMain.getPage(1).setItem(1, 2, new MineGuisItemCall("menu", new String[]{ "mineguis" }));
         objBookMain.getPage(1).setItem(1, 3, new MineGuisItemCall("menu", new String[]{ "rigt" }));
         objBookMain.getPage(2).setItem(1, 1, new MineGuisItemCall("book", new String[]{ "mineguis" }));
+        List<String> arrConfig;
+        arrConfig = this.getConfigArr("listof_menu");
+        for (int itr = 0; itr < arrConfig.size(); itr++) { this.doLog(arrConfig.get(itr)); }
+        arrConfig = this.getConfigArr("listof_book");
+        for (int itr = 0; itr < arrConfig.size(); itr++) { this.doLog(arrConfig.get(itr)); }
         /*** execut ***/
         this.getCommand("mineguis").setExecutor(new MineGuisExecut());
         this.getCommand("menu").setExecutor(new MineGuisExecutMenu());

@@ -3,6 +3,7 @@ package nikochir.item;
 /* include */
 import nikochir.MineGuis;
 import nikochir.item.MineGuisItem;
+import nikochir.item.MineGuisItemBack;
 import nikochir.menu.MineGuisMenu;
 /** javkit **/
 import java.util.List;
@@ -21,17 +22,26 @@ import org.bukkit.Sound;
 */
 public class MineGuisItemMenu extends MineGuisItem {
     /* members */
-    private String strMenuTitle;
+    private MineGuisMenu objCurr;
+    private MineGuisMenu objNext;
     /* codetor */
-    public MineGuisItemMenu() { this(MineGuis.get().getConfigStr("nameof_main")); }
-    public MineGuisItemMenu(MineGuisMenu objMenu) { this(objMenu.getTitle()); }
-    public MineGuisItemMenu(String strMenuTitle) {
-        super(Material.FILLED_MAP, strMenuTitle, "switch to the " + strMenuTitle + " menu");
-        this.strMenuTitle = strMenuTitle;
+    public MineGuisItemMenu(MineGuisMenu objCurr, MineGuisMenu objNext) {
+        super(Material.COMPASS, objNext.getTitle(),
+            String.format("switch from %s to %s", objCurr.getTitle(), objNext.getTitle())
+        );
+        this.objCurr = objCurr;
+        this.objNext = objNext;
+    }
+    public MineGuisItemMenu(String strCurr, String strNext) {
+        this(MineGuis.get().getMenu(strCurr), MineGuis.get().getMenu(strNext));
     }
     /* getters */
-    public String getMenuTitle()  { return this.strMenuTitle; }
-    public MineGuisMenu getMenu() { return MineGuis.get().getMenu(this.getMenuTitle()); }
+    public String getCurrTitle()  { return this.objCurr.getTitle(); }
+    public MineGuisMenu getCurr() { return this.objCurr; }
+    public String getNextTitle()  { return this.objNext.getTitle(); }
+    public MineGuisMenu getNext() { return this.objNext; }
+    /* setters */
+    /* vetters */
     /* handles */
     @Override
     public void onClick(InventoryClickEvent objEvent) {
@@ -40,11 +50,14 @@ public class MineGuisItemMenu extends MineGuisItem {
             return;
         }
         Player objPlayer = (Player) objEvent.getWhoClicked();
-        MineGuis.get().doLog("switch to " + getMenuTitle() + "has been executed!");
         objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
-        objPlayer.closeInventory();
-        if (this.getMenu().doShow(objPlayer) == false) {
-            MineGuis.get().doLog("failed to show the menu!"); return;
+        if (this.getCurr().doHide(objPlayer) == false) {
+            MineGuis.get().doLog("failed to hide the menu!");
+            return;
+        }
+        if (this.getNext().doShow(objPlayer) == false) {
+            MineGuis.get().doLog("failed to show the menu!");
+            return;
         }
     }
 }

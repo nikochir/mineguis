@@ -2,7 +2,11 @@
 package nikochir.menu;
 /* include */
 import nikochir.MineGuis;
-import nikochir.item.*;
+import nikochir.item.MineGuisItem;
+import nikochir.item.MineGuisItemBack;
+import nikochir.item.MineGuisItemMenu;
+import nikochir.item.MineGuisItemCell;
+import nikochir.item.MineGuisItemCall;
 /** javkit **/
 import java.util.List;
 import java.util.ArrayList;
@@ -51,6 +55,8 @@ public class MineGuisMenu implements Listener {
             this.arrItems.add(objItem);
             this.objPack.setItem((itr) % (numRows * 9), objItem.getItem());
         }
+        this.setItem(getSizeInLines(), 1, new MineGuisItemBack());
+        MineGuis.get().addMenu(this);
     }
     /* getters */
     public String       getTitle()       { return this.strTitle; }
@@ -103,7 +109,18 @@ public class MineGuisMenu implements Listener {
         //    MineGuis.get().doLog("the inventory is already hidden!");
         //    return false;
         //}
-        objPlayer.openInventory(getPack());
+        objPlayer.closeInventory();
+        return true;
+    }
+    public Boolean doBack(Player objPlayer) {
+        if (this.doHide(objPlayer) == false) {
+            MineGuis.get().doLog("cannot switch the menu back! null argument exception!");
+            return false;
+        }
+        if (MineGuis.get().getUser(objPlayer).getMenuLast().doShow(objPlayer) == false) {
+            MineGuis.get().doLog("cannot switch the menu back! back menu failed at \"show\"!");
+            return false;
+        }
         return true;
     }
     /* handles */

@@ -20,38 +20,43 @@ import org.bukkit.entity.Player;
 public class MineGuisUser {
     /* members */
     private PermissionAttachment objPermitAttachment;
-    private Stack<MineGuisMenu> arrMenuHistory;
+    private MineGuisMenu objMenuCurr;
+    private MineGuisMenu objMenuLast;
     /* codetor */
     public MineGuisUser(Player objPlayer) {
         this.objPermitAttachment = new PermissionAttachment(MineGuis.get(), objPlayer);
-        this.arrMenuHistory = new Stack<MineGuisMenu>();
+        this.objMenuCurr = null;
+        this.objMenuLast = null;
     }
+    public MineGuisUser(String strPlayer) { this(MineGuis.get().getPlayer(strPlayer)); }
     /* getters */
+    public String getName()   { return getPlayer().getName(); }
     public Player getPlayer() { return (Player) this.objPermitAttachment.getPermissible(); }
-    public MineGuisMenu getMenu() { return arrMenuHistory.peek(); }
+    public MineGuisMenu getMenuCurr() { return objMenuCurr; }
+    public MineGuisMenu getMenuLast() { return objMenuLast; }
     /* setters */
     public MineGuisUser setPermit(String strPermit, Boolean bitPermit) {
         this.objPermitAttachment.setPermission(strPermit, bitPermit);
         return this;
     }
-    public MineGuisUser addMenu(MineGuisMenu objMenu) {
-        objMenu.doShow(this.getPlayer());
-        if (getMenu() != objMenu) { this.arrMenuHistory.push(objMenu); }
+    public MineGuisUser setMenuCurr(MineGuisMenu objMenu) {
+        if (this.objMenuCurr == objMenu) { return this; }
+        this.objMenuLast = this.objMenuCurr;
+        this.objMenuCurr = objMenu;
         return this;
     }
-    public MineGuisUser rmvMenu(MineGuisMenu objMenu) {
-        objMenu.doHide(this.getPlayer());
-        if (getMenu() == objMenu) { this.arrMenuHistory.pop(); }
+    public MineGuisUser setMenuLast(MineGuisMenu objMenu) {
+        if (this.objMenuLast == objMenu) { return this; }
+        this.objMenuLast = objMenu;
         return this;
     }
     /* vetters */
-    public Boolean vetPermit(String strPermit) { return this.objPermitAttachment.getPermissions().get(strPermit); }
-    public Boolean vetMenu()                     { return getMenu() != null; }
-    public Boolean vetMenu(MineGuisMenu objMenu) { return getMenu() == objMenu; }
+    public Boolean vetPermit(String strPermit)       { return this.objPermitAttachment.getPermissions().get(strPermit); }
+    public Boolean vetMenuCurr()                     { return getMenuCurr() != null; }
+    public Boolean vetMenuCurr(MineGuisMenu objMenu) { return getMenuCurr() == objMenu; }
+    public Boolean vetMenuLast()                     { return getMenuLast() != null; }
+    public Boolean vetMenuLast(MineGuisMenu objMenu) { return getMenuLast() == objMenu; }
     /* actions */
-    public MineGuisUser doClearHistory() {
-        arrMenuHistory.clear();
-        return this;
-    }
+    /* handles */
 }
 /* end_of_file */

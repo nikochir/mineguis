@@ -33,8 +33,8 @@ public class MineGuisMenuBook {
         for (int itr = 0; itr < numPages; itr++) { arrPages.add(null); }
         for (int itr = 1; itr <= numPages; itr++) {
             MineGuisMenuPage objPage = new MineGuisMenuPage(this, itr, numLines);
+            MineGuis.get().addMenu(objPage);
             arrPages.set(itr - 1, objPage);
-            MineGuis.get().getServer().getPluginManager().registerEvents(objPage, MineGuis.get());
         }
     }
     /* getters */

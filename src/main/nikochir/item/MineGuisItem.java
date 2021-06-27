@@ -43,6 +43,16 @@ public abstract class MineGuisItem implements Listener {
         objMeta.setLore(arrLore); /* this guy accepts only List<String> */
         objItem.setItemMeta(objMeta);
     }
+    public MineGuisItem(Material valMaterial, String strName, String strLoreFirst, String strLoreRest[]) {
+        objItem = new ItemStack(valMaterial);
+        ItemMeta objMeta = objItem.getItemMeta();
+        objMeta.setDisplayName(strName);
+        List<String> arrLore = new ArrayList<String>();
+        arrLore.add(strLoreFirst);
+        for (int itr = 0; itr < strLoreRest.length; itr++) { arrLore.add(strLoreRest[itr]); }
+        objMeta.setLore(arrLore); /* this guy accepts only List<String> */
+        objItem.setItemMeta(objMeta);
+    }
     /* getters */
     public ItemStack    getItem() { return objItem; }
     public Material     getType() { return objItem.getType(); }
