@@ -7,6 +7,9 @@ sizeof_main: 3 # main menu lines
 sizeof_maxm: 6 # maximal menu lines
 sizeof_minm: 1 # minimal menu lines
 sizeof_usem: 3 # used by default menu lines
+sizeof_maxb: 10 # maximal book pages
+sizeof_minb: 1 # minimal book pages
+sizeof_useb: 3 # used by default book pages
 #listof#
 listof_menus:
   - menu00:

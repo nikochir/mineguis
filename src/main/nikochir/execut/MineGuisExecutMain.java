@@ -6,24 +6,21 @@ import nikochir.unit.MineGuisUnit;
 import nikochir.unit.MineGuisUser;
 import nikochir.unit.MineGuisItem;
 import nikochir.unit.MineGuisMenu;
-import nikochir.unit.MineGuisBook;
-/** javkit **/
-import java.util.ArrayList;
+import nikochir.execut.MineGuisExecut;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutor class
+/* MineGuisExecutorMain class
  * > Description:
  * -> ;
 */
-public class MineGuisExecut implements CommandExecutor {
+public class MineGuisExecutMain implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -37,16 +34,31 @@ public class MineGuisExecut implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
-        if (strArgs.length == 0) {
-            MineGuis.get().doLog("not enough arguments!");
+        MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
+        if (objUser == null) {
+            MineGuis.get().doLog("failed to find the user!");
             return false;
-        } else if (strArgs.length == 1) {
-            return true;
-        } else if (strArgs.length == 2) {
+        }
+        if (strArgs.length == 0) {
+            MineGuisMenu objMenu = MineGuis.get().getMenuMain();
+            if (objMenu == null) {
+                MineGuis.get().doLog("failed to find the menu!");
+                return false;
+            }
+            if (objUser.vetMenuCurr() == true) {
+                if (objUser.getMenuCurr().doHide(objUser) == false) {
+                    MineGuis.get().doLog("failed to hide the menu!");
+                    return false;
+                }
+            }
+            if (objMenu.doShow(objUser) == false) {
+                MineGuis.get().doLog("failed to show the menu!");
+                return false;
+            }
             return true;
         } else {
-            MineGuis.get().doLog("too many arguments!");
-            return false;
+            MineGuis.get().doLog("invalid argument count!");
+            return true;
         }
     }
 }

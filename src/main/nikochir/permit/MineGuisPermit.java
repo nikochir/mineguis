@@ -13,4 +13,4 @@ public class MineGuisPermit extends Permission {
     public MineGuisPermit() { super("mineguis.*"); }
     /* handles */
 }
-/* end_of_file */
+/* endfile */

@@ -81,7 +81,7 @@
     <!-- -->
     <repository>
       <id>nikochir</id>
-      <url>https://github.com/nikochir/minecode</url>
+      <url>https://github.com/nikochir/mineguis</url>
     </repository>
     <!-- -->
     <repository>
@@ -118,4 +118,4 @@
     </snapshotRepository>
   </distributionManagement>
 </project>
-<!-- end_of_file -->
+<!-- endfile -->

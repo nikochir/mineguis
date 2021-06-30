@@ -35,7 +35,7 @@
    | Default: ${user.home}/.m2/repository
   <localRepository>/path/to/local/repo</localRepository>
   -->
-  <localRepository>${maven.home}/bin/repo</localRepository>
+  <localRepository>maven/bin</localRepository>
 
   <!-- interactiveMode
    | This will determine whether maven prompts you when it needs input. If set to false,
@@ -246,4 +246,4 @@
   </activeProfiles>
   -->
 </settings>
-<!-- end_of_file -->
+<!-- endfile -->

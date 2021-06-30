@@ -1,12 +1,10 @@
-/* [nikochir]: 2021/05/05; */
 /* package */
-package nikochir;
+package nikochir.unit;
 /* include */
 import nikochir.MineGuis;
-import nikochir.menu.*;
-import nikochir.item.*;
-/* javkit */
-import java.util.Stack;
+import nikochir.unit.MineGuisUnit;
+import nikochir.unit.MineGuisItem;
+import nikochir.unit.MineGuisMenu;
 /* bukkit */
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.Permissible;
@@ -17,18 +15,19 @@ import org.bukkit.entity.Player;
 * > Description:
 * -> ;
 */
-public class MineGuisUser {
+public class MineGuisUser extends MineGuisUnit {
     /* members */
     private PermissionAttachment objPermitAttachment;
     private MineGuisMenu objMenuCurr;
     private MineGuisMenu objMenuLast;
     /* codetor */
     public MineGuisUser(Player objPlayer) {
+        super(objPlayer.getUniqueId().toString());
         this.objPermitAttachment = new PermissionAttachment(MineGuis.get(), objPlayer);
         this.objMenuCurr = null;
         this.objMenuLast = null;
     }
-    public MineGuisUser(String strPlayer) { this(MineGuis.get().getPlayer(strPlayer)); }
+    //public MineGuisUser(String strPlayer) { this(MineGuis.get().getPlayer(strPlayer)); }
     /* getters */
     public String getName()   { return getPlayer().getName(); }
     public Player getPlayer() { return (Player) this.objPermitAttachment.getPermissible(); }
@@ -41,7 +40,7 @@ public class MineGuisUser {
     }
     public MineGuisUser setMenuCurr(MineGuisMenu objMenu) {
         if (this.objMenuCurr == objMenu) { return this; }
-        this.objMenuLast = this.objMenuCurr;
+        if (this.objMenuCurr != null) { this.objMenuLast = this.objMenuCurr; }
         this.objMenuCurr = objMenu;
         return this;
     }
@@ -59,4 +58,4 @@ public class MineGuisUser {
     /* actions */
     /* handles */
 }
-/* end_of_file */
+/* endfile */

@@ -15,20 +15,34 @@ commands:
     permission-message: you do not have /<permission>
     description:
       open any menu or book panel using the name
-  menu:
+  mguimain:
+    alias: ["mgui_main"]
+    usage: /<command>
+    #permission: minecode.*
+    permission-message: you do not have /<permission>
+    description:
+      open main menu
+  mguimenu:
     alias: ["mgui_menu"]
     usage: /<command> [name]
     #permission: minecode.*
     permission-message: you do not have /<permission>
     description:
       open any menu panel using the name
-  book:
+  mguibook:
     alias: ["mgui_book"]
     usage: /<command> [name]
     #permission: minecode.*
     permission-message: you do not have /<permission>
     description:
       open any book panel using the name
+  mguiback:
+    alias: ["mgui_back"]
+    usage: /<command>
+    #permission: minecode.*
+    permission-message: you do not have /<permission>
+    description:
+      open the last viewed menu
 permissions:
   mineguis.user:
     default: true
@@ -56,4 +70,4 @@ authors: [ nikodim_cheer ]
 website: "https://github.com/nikochir/mineguis"
 description:
   menu facilities, functionality via inventories and items;
-#end_of_file#
+#endfile#

@@ -2,21 +2,22 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.menu.MineGuisMenu;
-import nikochir.menu.MineGuisMenuBook;
-/** javkit **/
-import java.util.ArrayList;
+import nikochir.unit.MineGuisUnit;
+import nikochir.unit.MineGuisUser;
+import nikochir.unit.MineGuisItem;
+import nikochir.unit.MineGuisMenu;
+import nikochir.unit.MineGuisBook;
+import nikochir.execut.MineGuisExecut;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/*
- * MineGuisExecutor class
+/* MineGuisExecutorBook class
  * > Description:
  * -> ;
 */
@@ -34,31 +35,35 @@ public class MineGuisExecutBook implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
-        if (strArgs.length == 0) { /* default widgets */
-            MineGuis.get().doLog("default mineguis was called");
-            String strBook = MineGuis.get().getConfig().getString("nameof_main");
-            if (MineGuis.get().vetBook(strBook) == false) {
+        MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
+        if (objUser == null) {
+            MineGuis.get().doLog("failed to find the user!");
+            return false;
+        }
+        if (strArgs.length == 0) {
+            MineGuis.get().doLog("book name is not specified!");
+            return false;
+        } else if (strArgs.length == 1) {
+            MineGuisBook objBook = MineGuis.get().getBook(strArgs[1]);
+            if (objBook == null) {
                 MineGuis.get().doLog("failed to find the book!");
                 return false;
             }
-            if (MineGuis.get().getBook(strBook).doShow(objPlayer) == false) {
+            if (objUser.vetMenuCurr() == true) {
+                if (objUser.getMenuCurr().doHide(objUser.getPlayer()) == false) {
+                    MineGuis.get().doLog("failed to hide the menu!");
+                    return false;
+                }
+            }
+            if (objBook.doShow(objUser.getPlayer()) == false) {
                 MineGuis.get().doLog("failed to show the book!");
                 return false;
             }
             return true;
+        } else {
+            MineGuis.get().doLog("invalid argument count!");
+            return false;
         }
-        if (strArgs.length == 1) {
-            if (MineGuis.get().vetBook(strArgs[0]) == false) {
-                MineGuis.get().doLog("book is not found!");
-                return false;
-            }
-            if (MineGuis.get().getBook(strArgs[0]).doShow(objPlayer) == false) {
-                MineGuis.get().doLog("book is not shown!");
-                return false;
-            }
-            return true;
-        }
-        return false;
     }
 }
-/* end_of_file */
+/* endfile */

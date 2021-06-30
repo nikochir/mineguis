@@ -2,11 +2,11 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.menu.MineGuisMenu;
-import nikochir.menu.MineGuisMenuBook;
+import nikochir.unit.MineGuisUnit;
+import nikochir.unit.MineGuisUser;
+import nikochir.unit.MineGuisItem;
+import nikochir.unit.MineGuisMenu;
 import nikochir.execut.MineGuisExecut;
-/** javkit **/
-import java.util.ArrayList;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,8 +16,7 @@ import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/*
- * MineGuisExecutor class
+/* MineGuisExecutorMenu class
  * > Description:
  * -> ;
 */
@@ -35,31 +34,34 @@ public class MineGuisExecutMenu implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
-        if (strArgs.length == 0) { /* default widgets */
-            MineGuis.get().doLog("default mineguis was called");
-            String strMenu = MineGuis.get().getConfig().getString("nameof_main");
-            if (MineGuis.get().vetMenu(strMenu) == false) {
+        MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
+        if (objUser == null) {
+            MineGuis.get().doLog("failed to find the user!");
+            return false;
+        }
+        if (strArgs.length == 0) {
+            return MineGuis.get().getCommand("mguimain").execute(objSender, strLabel, strArgs);
+        } else if (strArgs.length == 1) {
+            MineGuisMenu objMenu = MineGuis.get().getMenu(strArgs[0]);
+            if (objMenu == null) {
                 MineGuis.get().doLog("failed to find the menu!");
                 return false;
             }
-            if (MineGuis.get().getMenu(strMenu).doShow(objPlayer) == false) {
+            if (objUser.vetMenuCurr() == true) {
+                if (objUser.getMenuCurr().doHide(objUser) == false) {
+                    MineGuis.get().doLog("failed to hide the menu!");
+                    return false;
+                }
+            }
+            if (objMenu.doShow(objUser) == false) {
                 MineGuis.get().doLog("failed to show the menu!");
                 return false;
             }
             return true;
+        } else {
+            MineGuis.get().doLog("invalid argument count!");
+            return false;
         }
-        if (strArgs.length == 1) {
-            if (MineGuis.get().vetMenu(strArgs[0]) == false) {
-                MineGuis.get().doLog("menu is not found!");
-                return false;
-            }
-            if (MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer) == false) {
-                MineGuis.get().doLog("menu is not shown!");
-                return false;
-            }
-            return true;
-        }
-        return false;
     }
 }
-/* end_of_file */
+/* endfile */

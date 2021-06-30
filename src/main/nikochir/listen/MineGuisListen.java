@@ -2,10 +2,13 @@
 package nikochir.listen;
 /* include */
 import nikochir.MineGuis;
-import nikochir.MineGuisUser;
-import nikochir.item.MineGuisItem;
-import nikochir.menu.MineGuisMenu;
+import nikochir.unit.MineGuisUnit;
+import nikochir.unit.MineGuisUser;
+import nikochir.unit.MineGuisItem;
+import nikochir.unit.MineGuisMenu;
+import nikochir.unit.MineGuisBook;
 import nikochir.execut.MineGuisExecut;
+import nikochir.permit.MineGuisPermit;
 /** bukkit **/
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
@@ -30,56 +33,66 @@ public class MineGuisListen implements Listener {
             return;
         }
         Player objPlayer = (Player) objEvent.getWhoClicked();
-    }
-    @EventHandler
-    public void onInventoryShow(InventoryOpenEvent objEvent) {
-        if (MineGuis.get().vetUser(objEvent.getPlayer().getName()) == false) {
-            MineGuis.get().doLog(String.format("user is not found! name: %s;",objEvent.getPlayer().getName()));
-            return;
-        }
-        MineGuisUser objUser = MineGuis.get().getUser(objEvent.getPlayer().getName());
-        if (MineGuis.get().vetMenu(objEvent.getView().getTitle()) == false) {
+        if (MineGuis.get().<MineGuisUser>vetUnit(objEvent.getView().getTitle()) == false) {
             MineGuis.get().doLog("menu is not found!");
             return;
         }
-        MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
+        MineGuisUser objUser = MineGuis.get().<MineGuisUser>getUnit(objPlayer.getUniqueId().toString());
+        if (MineGuis.get().<MineGuisMenu>vetUnit(objEvent.getView().getTitle()) == false) {
+            MineGuis.get().doLog("menu is not found!");
+            return;
+        }
+        MineGuisMenu objMenu = MineGuis.get().<MineGuisMenu>getUnit(objEvent.getView().getTitle());
+        objEvent.setCancelled(true);
+    }
+    @EventHandler
+    public void onInventoryShow(InventoryOpenEvent objEvent) {
+        if (MineGuis.get().<MineGuisUser>vetUnit(objEvent.getPlayer().getUniqueId().toString()) == false) {
+            MineGuis.get().doLog("user is not found!");
+            return;
+        }
+        MineGuisUser objUser = MineGuis.get().<MineGuisUser>getUnit(objEvent.getPlayer().getUniqueId().toString());
+        if (MineGuis.get().<MineGuisMenu>vetUnit(objEvent.getView().getTitle()) == false) {
+            MineGuis.get().doLog("menu is not found!");
+            return;
+        }
+        MineGuisMenu objMenu = MineGuis.get().<MineGuisMenu>getUnit(objEvent.getView().getTitle());
         objUser.setMenuCurr(objMenu);
     }
     @EventHandler
     public void onInventoryHide(InventoryCloseEvent objEvent) {
-        if (MineGuis.get().vetUser(objEvent.getPlayer().getName()) == false) {
-            MineGuis.get().doLog(String.format("user is not found! name: %s;",objEvent.getPlayer().getName()));
+        if (MineGuis.get().<MineGuisUser>vetUnit(objEvent.getPlayer().getUniqueId().toString()) == false) {
+            MineGuis.get().doLog("user is not found!");
             return;
         }
         MineGuisUser objUser = MineGuis.get().getUser(objEvent.getPlayer().getName());
-        if (MineGuis.get().vetMenu(objEvent.getView().getTitle()) == false) {
+        if (MineGuis.get().<MineGuisMenu>vetUnit(objEvent.getView().getTitle()) == false) {
             MineGuis.get().doLog("menu is not found!");
             return;
         }
         MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
-        //objUser.setMenuCurr(null);
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent objEvent) {
-        if (MineGuis.get().addUser(objEvent.getPlayer().getName()) == false) {
+        if (MineGuis.get().<MineGuisUser>addUnit(new MineGuisUser(objEvent.getPlayer())) == false) {
             MineGuis.get().doLog("failed to insert a player!");
             return;
         }
     }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent objEvent) {
-        if (MineGuis.get().rmvUser(objEvent.getPlayer().getName()) == false) {
+        if (MineGuis.get().<MineGuisUser>rmvUnit(objEvent.getPlayer().getUniqueId().toString()) == false) {
             MineGuis.get().doLog("failed to remove a player!");
             return;
         }
     }
     @EventHandler
     public void onPlayerWork(PlayerInteractEvent objEvent) {
-        if (MineGuis.get().vetUser(objEvent.getPlayer().getName()) == false) {
+        if (MineGuis.get().vetUnit(objEvent.getPlayer().getUniqueId().toString()) == false) {
             MineGuis.get().doLog("failed to find a player!");
             return;
         }
         //
     }
 }
-/* end_of_file */
+/* endfile */
