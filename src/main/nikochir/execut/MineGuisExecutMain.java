@@ -35,10 +35,6 @@ public class MineGuisExecutMain implements CommandExecutor {
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (MineGuis.get().vetMenu(strArgs[0]) == false) {
-                MineGuis.get().doLog("failed to find the menu!");
-                return false;
-            }
             MineGuisMenu objMenu = MineGuis.get().getMenuMain();
             if (objMenu.doShow(objPlayer) == false) {
                 MineGuis.get().doLog("failed to show the menu!");

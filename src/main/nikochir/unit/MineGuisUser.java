@@ -31,55 +31,39 @@ public class MineGuisUser extends MineGuisUnit {
     /* getters */
     public String getName()   { return getPlayer().getName(); }
     public Player getPlayer() { return (Player) this.objPermitAttachment.getPermissible(); }
-    public MineGuisMenu getMenuCurr() { return objMenuCurr; }
-    public MineGuisMenu getMenuLast() { return objMenuLast; }
+    public MineGuisMenu getMenu() { return this.objMenuCurr; }
     /* setters */
     public Boolean setPermit(String strPermit, Boolean bitPermit) {
         this.objPermitAttachment.setPermission(strPermit, bitPermit);
         return true;
     }
-    public Boolean setMenuCurr(MineGuisMenu objMenu) {
-        if (this.vetMenuCurr(objMenu) == true) { return false; }
-        if (this.setMenuLast(this.getMenuCurr()) == false ) {
-            MineGuis.get().doLog("failed to set last menu! setMenuCurr(objMenu);");
-            return false;
-        }
+    public Boolean setMenu(MineGuisMenu objMenu) {
+        this.objMenuLast = this.objMenuCurr;
         this.objMenuCurr = objMenu;
         return true;
     }
-    public Boolean setMenuLast(MineGuisMenu objMenu) {
-        if (this.vetMenuLast(objMenu)) { return false; }
-        if (this.vetMenuCurr(objMenu) && (objMenu != null)) {
-            if (this.doMenuHide(objMenu) == false) {
-                MineGuis.get().doLog("failed to hide the menu! setMenuLast(objMenu)");
-                return false;
-            }
-        }
-        this.objMenuLast = objMenu;
-        return true;
-    }
     /* vetters */
-    public Boolean vetPermit(String strPermit)       { return this.objPermitAttachment.getPermissions().get(strPermit); }
-    public Boolean vetMenuCurr()                     { return getMenuCurr() != null; }
-    public Boolean vetMenuCurr(MineGuisMenu objMenu) { return getMenuCurr() == objMenu; }
-    public Boolean vetMenuLast()                     { return getMenuLast() != null; }
-    public Boolean vetMenuLast(MineGuisMenu objMenu) { return getMenuLast() == objMenu; }
+    public Boolean vetPermit(String strPermit)   { return this.objPermitAttachment.getPermissions().get(strPermit); }
+    public Boolean vetMenu()                     { return this.getMenu() != null; }
+    public Boolean vetMenu(MineGuisMenu objMenu) { return this.getMenu() == objMenu; }
     /* actions */
     public Boolean doMenuShow(MineGuisMenu objMenu) {
         if (objMenu == null) {
             MineGuis.get().doLog("objMenu is null! doMenuShow(objMenu);");
             return false;
         }
-        if (this.vetMenuCurr(objMenu)) {
+        if (this.vetMenu(objMenu)) {
             MineGuis.get().doLog("objMenu is current! doMenuShow(objMenu);");
             return false;
         }
+        if (this.vetMenu()) {
+            if (this.getMenu().doHide(this.getPlayer()) == false) {
+                MineGuis.get().doLog("failed menu hide! doMenuShow(objMenu);");
+                return false;
+            }
+        }
         if (objMenu.doShow(this.getPlayer()) == false) {
             MineGuis.get().doLog("failed menu show! doMenuShow(objMenu);");
-            return false;
-        }
-        if (this.setMenuCurr(objMenu) == false) {
-            MineGuis.get().doLog("failed to set the current menu! doMenuShow(objMenu);");
             return false;
         }
         return true;
@@ -89,7 +73,7 @@ public class MineGuisUser extends MineGuisUnit {
             MineGuis.get().doLog("objMenu is null! doMenuShow(objMenu);");
             return false;
         }
-        if (this.vetMenuCurr(objMenu) == false) {
+        if (this.vetMenu(objMenu) == false) {
             MineGuis.get().doLog("objMenu is not current! doMenuShow(objMenu);");
             return false;
         }
@@ -97,13 +81,19 @@ public class MineGuisUser extends MineGuisUnit {
             MineGuis.get().doLog("failed menu hide! doMenuHide(objMenu);");
             return false;
         }
-        if (this.setMenuCurr(null) == false) {
-            MineGuis.get().doLog("failed to reset the current menu! doMenuHide(objMenu);");
+        return true;
+    }
+    public Boolean doMenuBack() {
+        if (this.objMenuLast == null) {
+            MineGuis.get().doLog("the last menu is null! doMenuBack();");
+            return false;
+        }
+        if (doMenuShow(this.objMenuLast) == false) {
+            MineGuis.get().doLog("failed to show the last menu! doMenuBack();");
             return false;
         }
         return true;
     }
-    public Boolean doMenuBack() { return doMenuShow(this.getMenuLast()); }
     /* handles */
 }
 /* endfile */

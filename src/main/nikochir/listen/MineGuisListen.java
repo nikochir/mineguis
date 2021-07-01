@@ -42,7 +42,8 @@ public class MineGuisListen implements Listener {
             MineGuis.get().doLog("the menu is not found! onInventoryClick(objEvent);");
             return;
         }
-        MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
+        /*MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
+        we do no need this, only check if it exists */
         // respond in some way;
         objEvent.setCancelled(true);
         objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
@@ -77,7 +78,14 @@ public class MineGuisListen implements Listener {
             return;
         }
         MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
-        objUser.setMenuCurr(objMenu);
+        if (objUser.vetMenu(objMenu) == true) {
+            MineGuis.get().doLog("this is already current menu! onInventoryShow(objEvent);");
+            return;
+        }
+        if (objUser.setMenu(objMenu) == false) {
+            MineGuis.get().doLog("failed to set the current menu! onInventoryShow(objEvent);");
+            return;
+        }
     }
     @EventHandler
     public void onInventoryHide(InventoryCloseEvent objEvent) {
@@ -91,8 +99,14 @@ public class MineGuisListen implements Listener {
             return;
         }
         MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
-        //objUser.setMenuLast(objMenu);
-        objUser.setMenuCurr(null);
+        if (objUser.vetMenu(objMenu) == false) {
+            MineGuis.get().doLog("this is not the current menu! onInventoryHide(objEvent);");
+            return;
+        }
+        /*if (objUser.setMenu(null) == false) {
+            MineGuis.get().doLog("failed to set the current menu! onInventoryHide(objEvent);");
+            return;
+        }*/
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent objEvent) {
