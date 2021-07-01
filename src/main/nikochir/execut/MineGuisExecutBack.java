@@ -36,12 +36,17 @@ public class MineGuisExecutBack implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
-        MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
-        if (objUser == null) {
-            MineGuis.get().doLog("failed to find the user!");
-            return false;
-        }
         if (strArgs.length == 0) {
+            if (MineGuis.get().vetUser(objPlayer) == false) {
+                MineGuis.get().doLog("failed to find the user!");
+                return false;
+            }
+            MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
+            if (objUser.vetMenuLast() == false) {
+                objSender.sendMessage("back menu is not set;");
+                return true;
+            }
+            if (objUser.doMenuBack() == false) { return false; }
             return true;
         } else {
             MineGuis.get().doLog("invalid argument count!");

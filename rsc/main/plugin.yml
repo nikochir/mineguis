@@ -15,6 +15,13 @@ commands:
     permission-message: you do not have /<permission>
     description:
       open any menu or book panel using the name
+  mguivoid:
+    alias: ["mgui_void"]
+    usage: /<command>
+    #permission: minecode.*
+    permission-message: you do not have /<permission>
+    description:
+      just click on a dummy item
   mguimain:
     alias: ["mgui_main"]
     usage: /<command>

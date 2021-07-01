@@ -3,10 +3,12 @@ package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
 import nikochir.unit.MineGuisUnit;
-import nikochir.unit.MineGuisUser;
-import nikochir.unit.MineGuisItem;
 import nikochir.unit.MineGuisMenu;
+import nikochir.unit.MineGuisUser;
+import nikochir.unit.MineGuisBook;
 import nikochir.execut.MineGuisExecut;
+/** javkit **/
+import java.util.ArrayList;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,11 +18,11 @@ import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutorMain class
+/* MineGuisExecutorBack class
  * > Description:
  * -> ;
 */
-public class MineGuisExecutMain implements CommandExecutor {
+public class MineGuisExecutVoid implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -29,24 +31,13 @@ public class MineGuisExecutMain implements CommandExecutor {
         @NotNull String strLabel,
         @NotNull String[] strArgs
     ) {
-        if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLog("this is not a player call!");
-            return false;
-        }
-        Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (MineGuis.get().vetMenu(strArgs[0]) == false) {
-                MineGuis.get().doLog("failed to find the menu!");
-                return false;
-            }
-            MineGuisMenu objMenu = MineGuis.get().getMenuMain();
-            if (objMenu.doShow(objPlayer) == false) {
-                MineGuis.get().doLog("failed to show the menu!");
-                return false;
-            }
+            return true;
+        } else if (strArgs.length == 1) {
+            MineGuis.get().doLog("some argument was passed in the void!");
             return true;
         } else {
-            MineGuis.get().doLog("invalid argument count!");
+            MineGuis.get().doLog("some arguments were passed in the void!");
             return true;
         }
     }

@@ -34,20 +34,29 @@ public class MineGuisUser extends MineGuisUnit {
     public MineGuisMenu getMenuCurr() { return objMenuCurr; }
     public MineGuisMenu getMenuLast() { return objMenuLast; }
     /* setters */
-    public MineGuisUser setPermit(String strPermit, Boolean bitPermit) {
+    public Boolean setPermit(String strPermit, Boolean bitPermit) {
         this.objPermitAttachment.setPermission(strPermit, bitPermit);
-        return this;
+        return true;
     }
-    public MineGuisUser setMenuCurr(MineGuisMenu objMenu) {
-        if (this.objMenuCurr == objMenu) { return this; }
-        if (this.objMenuCurr != null) { this.objMenuLast = this.objMenuCurr; }
+    public Boolean setMenuCurr(MineGuisMenu objMenu) {
+        if (this.vetMenuCurr(objMenu) == true) { return false; }
+        if (this.setMenuLast(this.getMenuCurr()) == false ) {
+            MineGuis.get().doLog("failed to set last menu! setMenuCurr(objMenu);");
+            return false;
+        }
         this.objMenuCurr = objMenu;
-        return this;
+        return true;
     }
-    public MineGuisUser setMenuLast(MineGuisMenu objMenu) {
-        if (this.objMenuLast == objMenu) { return this; }
+    public Boolean setMenuLast(MineGuisMenu objMenu) {
+        if (this.vetMenuLast(objMenu)) { return false; }
+        if (this.vetMenuCurr(objMenu) && (objMenu != null)) {
+            if (this.doMenuHide(objMenu) == false) {
+                MineGuis.get().doLog("failed to hide the menu! setMenuLast(objMenu)");
+                return false;
+            }
+        }
         this.objMenuLast = objMenu;
-        return this;
+        return true;
     }
     /* vetters */
     public Boolean vetPermit(String strPermit)       { return this.objPermitAttachment.getPermissions().get(strPermit); }
@@ -56,6 +65,45 @@ public class MineGuisUser extends MineGuisUnit {
     public Boolean vetMenuLast()                     { return getMenuLast() != null; }
     public Boolean vetMenuLast(MineGuisMenu objMenu) { return getMenuLast() == objMenu; }
     /* actions */
+    public Boolean doMenuShow(MineGuisMenu objMenu) {
+        if (objMenu == null) {
+            MineGuis.get().doLog("objMenu is null! doMenuShow(objMenu);");
+            return false;
+        }
+        if (this.vetMenuCurr(objMenu)) {
+            MineGuis.get().doLog("objMenu is current! doMenuShow(objMenu);");
+            return false;
+        }
+        if (objMenu.doShow(this.getPlayer()) == false) {
+            MineGuis.get().doLog("failed menu show! doMenuShow(objMenu);");
+            return false;
+        }
+        if (this.setMenuCurr(objMenu) == false) {
+            MineGuis.get().doLog("failed to set the current menu! doMenuShow(objMenu);");
+            return false;
+        }
+        return true;
+    }
+    public Boolean doMenuHide(MineGuisMenu objMenu) {
+        if (objMenu == null) {
+            MineGuis.get().doLog("objMenu is null! doMenuShow(objMenu);");
+            return false;
+        }
+        if (this.vetMenuCurr(objMenu) == false) {
+            MineGuis.get().doLog("objMenu is not current! doMenuShow(objMenu);");
+            return false;
+        }
+        if (objMenu.doHide(this.getPlayer()) == false) {
+            MineGuis.get().doLog("failed menu hide! doMenuHide(objMenu);");
+            return false;
+        }
+        if (this.setMenuCurr(null) == false) {
+            MineGuis.get().doLog("failed to reset the current menu! doMenuHide(objMenu);");
+            return false;
+        }
+        return true;
+    }
+    public Boolean doMenuBack() { return doMenuShow(this.getMenuLast()); }
     /* handles */
 }
 /* endfile */

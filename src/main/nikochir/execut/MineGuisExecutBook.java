@@ -19,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutorBook class
  * > Description:
- * -> ;
+ * -> set of menu objects;
+ * -> every menu is a page;
+ * -> automatically sets enumerated names for all pages;
 */
 public class MineGuisExecutBook implements CommandExecutor {
     /* handles */
@@ -41,22 +43,18 @@ public class MineGuisExecutBook implements CommandExecutor {
             return false;
         }
         if (strArgs.length == 0) {
-            MineGuis.get().doLog("book name is not specified!");
-            return false;
-        } else if (strArgs.length == 1) {
-            MineGuisBook objBook = MineGuis.get().getBook(strArgs[1]);
-            if (objBook == null) {
-                MineGuis.get().doLog("failed to find the book!");
+            if (MineGuis.get().getBookMain().doShow(objPlayer) == false) {
+                MineGuis.get().doLog("failed to show the main book! MineGuisExecutBook;");
                 return false;
             }
-            if (objUser.vetMenuCurr() == true) {
-                if (objUser.getMenuCurr().doHide(objUser.getPlayer()) == false) {
-                    MineGuis.get().doLog("failed to hide the menu!");
-                    return false;
-                }
+            return true;
+        } else if (strArgs.length == 1) {
+            if (MineGuis.get().vetBook(strArgs[0]) == false) {
+                MineGuis.get().doLog("the book is not found! MineGuisExecutBook;");
+                return false;
             }
-            if (objBook.doShow(objUser.getPlayer()) == false) {
-                MineGuis.get().doLog("failed to show the book!");
+            if (MineGuis.get().getBook(strArgs[0]).doShow(objPlayer) == false) {
+                MineGuis.get().doLog("the book is not shown! MineGuisExecutBook;");
                 return false;
             }
             return true;

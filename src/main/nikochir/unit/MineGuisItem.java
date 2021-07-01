@@ -21,44 +21,47 @@ import net.kyori.adventure.text.Component;
  * > Description:
  * -> represents an item in the menu;
  * -> stores command execution data;
- * -> ;
+ * -> the sign is the item name;
+ * --> ItemStack.getI18NDisplayName() is invalid;
+ * --> use ItemMeta.getDisplayName() instead - this is what we see;
 */
 public class MineGuisItem extends MineGuisUnit {
     /* members */
     private final String strCommand;
     private final ItemStack objItem;
     /* codetor */
-    public MineGuisItem(String strCommand, ItemStack objItem) {
-        super(objItem.getI18NDisplayName());
-        this.strCommand = strCommand;
-        this.objItem = objItem;
-    }
-    public MineGuisItem(String strCommand, String strItemName, String strItemLore, Material valItemType) {
-        super(strItemName);
-        this.strCommand = strCommand;
-        this.objItem = new ItemStack(valItemType);
+    public MineGuisItem(String strName, String strLore, Material valType, String strCmd) {
+        super(strName);
+        this.strCommand = strCmd;
+        this.objItem = new ItemStack(valType);
         ItemMeta objMeta = this.objItem.getItemMeta();
-        objMeta.displayName(Component.text(strItemName));
-        List<Component> arrLore = new ArrayList<Component>(1); arrLore.add(Component.text(strItemLore));
-        objMeta.lore(arrLore);
+        objMeta.displayName(Component.text(strName));
+        if (strLore != "") {
+            List<Component> arrLore = new ArrayList<Component>(1);
+            arrLore.add(Component.text(strLore));
+            objMeta.lore(arrLore);
+        }
         this.objItem.setItemMeta(objMeta);
     }
+    public MineGuisItem(String strName, String strLore, String strCmd)   { this(strName, strLore, Material.COMMAND_BLOCK, strCmd); }
+    public MineGuisItem(String strName, Material valType, String strCmd) { this(strName, "",      valType,                strCmd); }
+    public MineGuisItem(String strName, String strCmd)                   { this(strName, "",      Material.COMMAND_BLOCK, strCmd); }
     /* getters */
     public String getCommand() { return this.strCommand; }
     public ItemStack getItem() { return this.objItem; }
     /* setters */
     /* vetters */
     public Boolean vetCommand(String strCommand)  { return this.getCommand().equals(strCommand); }
-    public Boolean vetItem(ItemStack objItem)        { return this.getItem().equals(objItem); }
-    public Boolean vetItem(MineGuisItem objItem)     { return this.vetItem(objItem.getItem()); }
+    public Boolean vetItem(ItemStack objItem)     { return this.getItem().equals(objItem); }
+    public Boolean vetItem(MineGuisItem objItem)  { return this.vetItem(objItem.getItem()); }
     /* actions */
     public Boolean doExecute(Player objPlayer) {
         if (objPlayer == null) {
-            MineGuis.get().doLog("null argument is passed!");
+            MineGuis.get().doLog("null argument is passed! doExecute(objPlayer);");
             return false;
         }
-        if (objPlayer.performCommand(this.strCommand) == false) {
-            MineGuis.get().doLog("failed to execute the command!");
+        if (objPlayer.performCommand(this.getCommand()) == false) {
+            MineGuis.get().doLog("failed to execute the command! doExecute(objPlayer);");
             return false;
         }
         return true;

@@ -54,3 +54,5 @@ listof_books:
         - posx: 3
         - type: "menu"
         - data: "rigt"
+#mesg#
+mesg_dbug: "hello world"

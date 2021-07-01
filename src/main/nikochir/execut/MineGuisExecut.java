@@ -38,12 +38,84 @@ public class MineGuisExecut implements CommandExecutor {
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            MineGuis.get().doLog("not enough arguments!");
-            return false;
+            if (MineGuis.get().getMenuMain().doShow(objPlayer) == false) {
+                MineGuis.get().doLog("failed to show the main menu!");
+                return false;
+            }
+            return true;
         } else if (strArgs.length == 1) {
-            return true;
+            if (strArgs[0].isEmpty()) {
+                MineGuis.get().doLog("invalid argument!");
+                return false;
+            } else if (strArgs[0].equalsIgnoreCase("menu")) {
+                if (MineGuis.get().getMenuMain().doShow(objPlayer) == false) {
+                    MineGuis.get().doLog("failed to show the main menu!");
+                    return false;
+                }
+                return true;
+            } else if (strArgs[0].equalsIgnoreCase("book")) {
+                if (MineGuis.get().getBookMain().doShow(objPlayer) == false) {
+                    MineGuis.get().doLog("failed to show the main book!");
+                    return false;
+                }
+                return true;
+            } else if (strArgs[0].equalsIgnoreCase("debug")) {
+                MineGuis.get().doLog("debug command is called!");
+                objPlayer.sendMessage("you have just called debug command;");
+                objPlayer.sendMessage(MineGuis.get().getConfigStr("mesg_dbug"));
+                return true;
+            } else {
+                if (MineGuis.get().vetMenu(strArgs[0]) == false) {
+                    MineGuis.get().doLog("failed to find the menu!");
+                    return false;
+                }
+                if (MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer) == false) {
+                    MineGuis.get().doLog("failed to show the main book!");
+                    return false;
+                }
+                return true;
+            }
         } else if (strArgs.length == 2) {
-            return true;
+            if (strArgs[0].isEmpty()) {
+                MineGuis.get().doLog("invalid arguments!");
+                return false;
+            } else if (strArgs[0].equalsIgnoreCase("menu")) {
+                if (MineGuis.get().vetMenu(strArgs[1]) == false) {
+                    MineGuis.get().doLog("failed to find the menu!");
+                    return false;
+                }
+                if (MineGuis.get().getMenu(strArgs[1]).doShow(objPlayer) == false) {
+                    MineGuis.get().doLog("failed to show the menu!");
+                    return false;
+                }
+                return true;
+            } else if (strArgs[0].equalsIgnoreCase("book")) {
+                if (strArgs[1].isEmpty()) {
+                    MineGuis.get().doLog("invalid arguments!");
+                    return false;
+                } else {
+                    if (MineGuis.get().vetBook(strArgs[1]) == false) {
+                        MineGuis.get().doLog("failed to find the book!");
+                        return false;
+                    } else {
+                        if (MineGuis.get().getBook(strArgs[1]).doShow(objPlayer) == false) {
+                            MineGuis.get().doLog("failed to show the book!");
+                            return false;
+                        }
+                        return true;
+                    }
+                }
+            } else {
+                if (MineGuis.get().vetMenu(strArgs[0]) == false) {
+                    MineGuis.get().doLog("failed to find the menu!");
+                    return false;
+                }
+                if (MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer) == false) {
+                    MineGuis.get().doLog("failed to show the main book!");
+                    return false;
+                }
+                return true;
+            }
         } else {
             MineGuis.get().doLog("too many arguments!");
             return false;

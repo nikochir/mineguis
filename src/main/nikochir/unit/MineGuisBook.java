@@ -39,19 +39,23 @@ public class MineGuisBook extends MineGuisUnit {
         }
         this.tabPages = new ArrayList<MineGuisMenu>(numSizeInPages);
         Integer numSizeInSlots = numSizeOfPages * 9;
-        for (int itrNumPage = 0; itrNumPage < numSizeInPages; itrNumPage++) {
-            String itrStrPage = String.format("%s|%d/%d|", strTitle, itrNumPage - 0, numSizeInPages);
+        for (int itrNumPage = 1; itrNumPage <= numSizeInPages; itrNumPage++) {
+            String itrStrPage = String.format("%s|%d/%d|", strTitle, itrNumPage, numSizeInPages);
             MineGuisMenu itrObjPage = new MineGuisMenu(itrStrPage, numSizeOfPages);
-            String itrStrPagePrev = String.format("mguimenu %s|%d/%d|", strTitle, itrNumPage - 1, numSizeInPages);
-            String itrStrPageNext = String.format("%s|%d/%d|", strTitle, itrNumPage + 1, numSizeInPages);
-            MineGuisItem itrObjItemPrev = new MineGuisItem(itrStrPagePrev, "left", "switch to the previous page", Material.COMPASS);
-            MineGuisItem itrObjItemNext = new MineGuisItem(itrStrPageNext, "right", "switch to the following page", Material.COMPASS);
+            String itrStrPagePrev = String.format("%s|%d/%d|", strTitle, itrNumPage > 1 ? itrNumPage - 1 : numSizeInPages, numSizeInPages);
+            String itrStrPageNext = String.format("%s|%d/%d|", strTitle, itrNumPage < numSizeInPages ? itrNumPage + 1 : 1, numSizeInPages);
+            MineGuisItem itrObjItemPrev = new MineGuisItem(itrStrPagePrev, "previous page", Material.COMPASS, "mguimenu " + itrStrPagePrev);
+            MineGuisItem itrObjItemNext = new MineGuisItem(itrStrPageNext, "following page", Material.COMPASS, "mguimenu " + itrStrPageNext);
             MineGuisItem itrObjItemBack = MineGuis.get().getItem("back");
             itrObjPage.setItem(itrObjItemPrev, numSizeInSlots - 3);
             itrObjPage.setItem(itrObjItemBack, numSizeInSlots - 2);
             itrObjPage.setItem(itrObjItemNext, numSizeInSlots - 1);
             this.tabPages.add(itrObjPage);
+            MineGuis.get().addMenu(itrObjPage);
+            MineGuis.get().addItem(itrObjItemPrev);
+            MineGuis.get().addItem(itrObjItemNext);
         }
+        this.numCurr = 1;
     }
     public MineGuisBook(String strTitle, Integer numSizeInPages) { this(strTitle, numSizeInPages, 6); }
     /* getters */
