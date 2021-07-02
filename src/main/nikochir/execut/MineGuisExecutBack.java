@@ -32,13 +32,13 @@ public class MineGuisExecutBack implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLog("this is not a player call!");
+            MineGuis.get().doLogO("this is not a player call!");
             return false;
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
             if (MineGuis.get().vetUser(objPlayer) == false) {
-                MineGuis.get().doLog("failed to find the user!");
+                MineGuis.get().doLogO("failed to find the user!");
                 return false;
             }
             MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
@@ -48,7 +48,7 @@ public class MineGuisExecutBack implements CommandExecutor {
             }
             return true;
         } else {
-            MineGuis.get().doLog("invalid argument count!");
+            MineGuis.get().doLogO("invalid argument count!");
             return false;
         }
     }

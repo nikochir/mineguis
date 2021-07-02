@@ -33,33 +33,33 @@ public class MineGuisExecutBook implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLog("this is not a player call!");
+            MineGuis.get().doLogO("this is not a player call!");
             return false;
         }
         Player objPlayer = (Player) objSender;
         MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
         if (objUser == null) {
-            MineGuis.get().doLog("failed to find the user!");
+            MineGuis.get().doLogO("failed to find the user!");
             return false;
         }
         if (strArgs.length == 0) {
             if (MineGuis.get().getBookMain().doShow(objPlayer) == false) {
-                MineGuis.get().doLog("failed to show the main book! MineGuisExecutBook;");
+                MineGuis.get().doLogO("failed to show the main book! MineGuisExecutBook;");
                 return false;
             }
             return true;
         } else if (strArgs.length == 1) {
             if (MineGuis.get().vetBook(strArgs[0]) == false) {
-                MineGuis.get().doLog("the book is not found! MineGuisExecutBook;");
+                MineGuis.get().doLogO("the book is not found! MineGuisExecutBook;");
                 return false;
             }
             if (MineGuis.get().getBook(strArgs[0]).doShow(objPlayer) == false) {
-                MineGuis.get().doLog("the book is not shown! MineGuisExecutBook;");
+                MineGuis.get().doLogO("the book is not shown! MineGuisExecutBook;");
                 return false;
             }
             return true;
         } else {
-            MineGuis.get().doLog("invalid argument count!");
+            MineGuis.get().doLogO("invalid argument count!");
             return false;
         }
     }

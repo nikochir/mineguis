@@ -17,6 +17,10 @@ import org.bukkit.Material;
 /* MineGuisBook class
  * > Description:
  * -> counts pages [from 1 to the_number_of_pages];
+ * -> coordinates are considered from greater to lesser:
+ * --> [z, y, x] is used because this is how we use counting systems;
+ * --> page is z, row is y, column is x;
+ * --> 100 = z, 10 = y, x = 1;
 */
 public class MineGuisBook extends MineGuisUnit {
     /* members */
@@ -28,13 +32,13 @@ public class MineGuisBook extends MineGuisUnit {
         Integer numPagesMin = MineGuis.get().getConfigInt("sizeof_minb");
         Integer numPagesMax = MineGuis.get().getConfigInt("sizeof_maxb");
         if (numSizeInPages <= 0) {
-            MineGuis.get().doLog("invalid number of pages!");
+            MineGuis.get().doLogO("invalid number of pages!");
             return;
         } else if (numSizeInPages < numPagesMin) {
-            MineGuis.get().doLog("too few pages!");
+            MineGuis.get().doLogO("too few pages!");
             numSizeInPages = numPagesMin;
         } else if (numSizeInPages > numPagesMax) {
-            MineGuis.get().doLog("too many pages!");
+            MineGuis.get().doLogO("too many pages!");
             numSizeInPages = numPagesMax;
         }
         this.tabPages = new ArrayList<MineGuisMenu>(numSizeInPages);
@@ -51,9 +55,9 @@ public class MineGuisBook extends MineGuisUnit {
             itrObjPage.setItem(itrObjItemBack, numSizeInSlots - 2);
             itrObjPage.setItem(itrObjItemNext, numSizeInSlots - 1);
             this.tabPages.add(itrObjPage);
-            MineGuis.get().addMenu(itrObjPage);
-            MineGuis.get().addItem(itrObjItemPrev);
-            MineGuis.get().addItem(itrObjItemNext);
+            if (MineGuis.get().vetMenu(itrObjPage) == false) { MineGuis.get().addMenu(itrObjPage); }
+            if (MineGuis.get().vetItem(itrObjItemPrev) == false) { MineGuis.get().addItem(itrObjItemPrev); }
+            if (MineGuis.get().vetItem(itrObjItemNext) == false) { MineGuis.get().addItem(itrObjItemNext); }
         }
         this.numCurr = 1;
     }
@@ -66,21 +70,30 @@ public class MineGuisBook extends MineGuisUnit {
     public Integer getSizeOfSlots()   { return this.tabPages.get(0).getSizeOfSlots(); }
     public Integer getSizeInSlots()   { return this.getSizeInPages() * this.getSizeOfPages() * this.getSizeOfLines(); }
     public Integer getNumbCurr()      { return numCurr; }
-    public MineGuisMenu getPageCurr() { return this.tabPages.get(numCurr - 1); }
+    public MineGuisMenu getPage()     { return this.tabPages.get(numCurr - 1); }
     public MineGuisMenu getPage(Integer numPage) { return this.tabPages.get(numPage - 1); }
     /* setters */
     public Boolean setNumbCurr(Integer numPage) {
         if (vetSize(numPage) == false) {
-            MineGuis.get().doLog("cannot access this page! setNumbCurr(numPage)");
+            MineGuis.get().doLogO("cannot access this page! setNumbCurr(numPage)");
         }
         this.numCurr = numPage;
         return true;
     }
+    public Boolean setItem(MineGuisItem objItem, Integer numSlot) {
+        return this.getPage().setItem(objItem, numSlot);
+    }
+    public Boolean setItem(MineGuisItem objItem, Integer numY, Integer numX) {
+        return this.getPage().setItem(objItem, numY, numX);
+    }
+    public Boolean setItem(MineGuisItem objItem, Integer numP, Integer numY, Integer numX) {
+        return this.getPage(numP).setItem(objItem, numY, numX);
+    }
     /* vetters */
     public Boolean vetSize(Integer numNumb) { return this.getSizeInPages() >= numNumb; }
     /* actions */
-    public Boolean doShow(Player objPlayer) { return getPageCurr().doShow(objPlayer); }
-    public Boolean doHide(Player objPlayer) { return getPageCurr().doHide(objPlayer); }
+    public Boolean doShow(Player objPlayer) { return getPage().doShow(objPlayer); }
+    public Boolean doHide(Player objPlayer) { return getPage().doHide(objPlayer); }
     /* handles */
 }
 /* endfile */

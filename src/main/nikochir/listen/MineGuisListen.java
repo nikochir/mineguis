@@ -34,12 +34,12 @@ public class MineGuisListen implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent objEvent) {
         if ((objEvent.getWhoClicked() instanceof Player) == false) {
-            MineGuis.get().doLog("not player click!");
+            MineGuis.get().doLogO("not player click!");
             return;
         }
         Player objPlayer = (Player) objEvent.getWhoClicked();
         if (MineGuis.get().vetMenu(objEvent.getView().getTitle()) == false) {
-            MineGuis.get().doLog("the menu is not found! onInventoryClick(objEvent);");
+            MineGuis.get().doLogO("the menu is not found! onInventoryClick(objEvent);");
             return;
         }
         /*MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
@@ -51,60 +51,60 @@ public class MineGuisListen implements Listener {
         ItemStack objStack = objEvent.getCurrentItem();
         if (objStack == null) { return; }
         if (MineGuis.get().vetItem(objStack) == false) {
-            MineGuis.get().doLog(
+            MineGuis.get().doLogO(
                 "the item is not registered! onInventoryClick(objEvent); "
                 + objStack.getItemMeta().getDisplayName()
             );
             return;
         }
-        if (MineGuis.get().getItem(objStack).doExecute(objPlayer) == false) {
-            MineGuis.get().doLog("failed to execute the item command! onIntentoryClick(objEvent);");
+        if (MineGuis.get().getItem(objStack).doExec(objPlayer) == false) {
+            MineGuis.get().doLogO("failed to execute the item command! onIntentoryClick(objEvent);");
             return;
         }
         /*if (objMenu.doPass(objPlayer, objStack) == false) {
-            MineGuis.get().doLog("failed menu pass! onInventoryClick(objEvent);");
+            MineGuis.get().doLogO("failed menu pass! onInventoryClick(objEvent);");
             return;
         } we already have all items, no need to pass it in the menu */
     }
     @EventHandler
     public void onInventoryShow(InventoryOpenEvent objEvent) {
         if (MineGuis.get().vetUser(objEvent.getPlayer().getUniqueId().toString()) == false) {
-            MineGuis.get().doLog("user is not found! onInventoryShow(objEvent);");
+            MineGuis.get().doLogO("user is not found! onInventoryShow(objEvent);");
             return;
         }
         MineGuisUser objUser = MineGuis.get().getUser(objEvent.getPlayer().getUniqueId().toString());
         if (MineGuis.get().vetMenu(objEvent.getView().getTitle()) == false) {
-            //MineGuis.get().doLog("menu is not found! onInventoryHide(objEvent);");
+            //MineGuis.get().doLogO("menu is not found! onInventoryHide(objEvent);");
             return;
         }
         MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
         if (objUser.vetMenu(objMenu) == true) {
-            MineGuis.get().doLog("this is already current menu! onInventoryShow(objEvent);");
+            MineGuis.get().doLogO("this is already current menu! onInventoryShow(objEvent);");
             return;
         }
         if (objUser.setMenu(objMenu) == false) {
-            MineGuis.get().doLog("failed to set the current menu! onInventoryShow(objEvent);");
+            MineGuis.get().doLogO("failed to set the current menu! onInventoryShow(objEvent);");
             return;
         }
     }
     @EventHandler
     public void onInventoryHide(InventoryCloseEvent objEvent) {
         if (MineGuis.get().vetUser(objEvent.getPlayer()) == false) {
-            MineGuis.get().doLog("user is not found! onInventoryHide(objEvent);");
+            MineGuis.get().doLogO("user is not found! onInventoryHide(objEvent);");
             return;
         }
         MineGuisUser objUser = MineGuis.get().getUser(objEvent.getPlayer());
         if (MineGuis.get().vetMenu(objEvent.getView().getTitle()) == false) {
-            //MineGuis.get().doLog("menu is not found! onInventoryHide(objEvent);");
+            //MineGuis.get().doLogO("menu is not found! onInventoryHide(objEvent);");
             return;
         }
         MineGuisMenu objMenu = MineGuis.get().getMenu(objEvent.getView().getTitle());
         if (objUser.vetMenu(objMenu) == false) {
-            MineGuis.get().doLog("this is not the current menu! onInventoryHide(objEvent);");
+            MineGuis.get().doLogO("this is not the current menu! onInventoryHide(objEvent);");
             return;
         }
         /*if (objUser.setMenu(null) == false) {
-            MineGuis.get().doLog("failed to set the current menu! onInventoryHide(objEvent);");
+            MineGuis.get().doLogO("failed to set the current menu! onInventoryHide(objEvent);");
             return;
         }*/
     }
@@ -112,7 +112,7 @@ public class MineGuisListen implements Listener {
     public void onPlayerJoin(PlayerJoinEvent objEvent) {
         MineGuisUser objUser = new MineGuisUser(objEvent.getPlayer());
         if (MineGuis.get().addUser(objUser) == false) {
-            MineGuis.get().doLog("failed to create the user!");
+            MineGuis.get().doLogO("failed to create the user!");
             return;
         }
     }
@@ -120,14 +120,14 @@ public class MineGuisListen implements Listener {
     public void onPlayerQuit(PlayerQuitEvent objEvent) {
         MineGuisUser objUser = MineGuis.get().getUser(objEvent.getPlayer());
         if (MineGuis.get().rmvUser(objUser) == false) {
-            MineGuis.get().doLog("failed to delete the user!");
+            MineGuis.get().doLogO("failed to delete the user!");
             return;
         }
     }
     @EventHandler
     public void onPlayerWork(PlayerInteractEvent objEvent) {
         if (MineGuis.get().vetUser(objEvent.getPlayer()) == false) {
-            MineGuis.get().doLog("failed to find the user!");
+            MineGuis.get().doLogO("failed to find the user!");
             return;
         }
         MineGuisUser objUser = MineGuis.get().getUser(objEvent.getPlayer());

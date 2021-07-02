@@ -34,10 +34,10 @@ public class MineGuisExecutVoid implements CommandExecutor {
         if (strArgs.length == 0) {
             return true;
         } else if (strArgs.length == 1) {
-            MineGuis.get().doLog("some argument was passed in the void!");
+            MineGuis.get().doLogO("some argument was passed in the void!");
             return true;
         } else {
-            MineGuis.get().doLog("some arguments were passed in the void!");
+            MineGuis.get().doLogO("some arguments were passed in the void!");
             return true;
         }
     }

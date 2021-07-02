@@ -5,6 +5,7 @@ import nikochir.MineGuis;
 import nikochir.unit.MineGuisUnit;
 import nikochir.unit.MineGuisItem;
 import nikochir.unit.MineGuisMenu;
+import nikochir.unit.MineGuisBook;
 /* bukkit */
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.Permissible;
@@ -12,8 +13,9 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.entity.Player;
 /* typedef */
 /* MineGuisUser class
-* > Description:
-* -> ;
+ * > Description:
+ * -> stores permission data;
+ * -> keeps track on the current and the last menus;
 */
 public class MineGuisUser extends MineGuisUnit {
     /* members */
@@ -49,47 +51,47 @@ public class MineGuisUser extends MineGuisUnit {
     /* actions */
     public Boolean doMenuShow(MineGuisMenu objMenu) {
         if (objMenu == null) {
-            MineGuis.get().doLog("objMenu is null! doMenuShow(objMenu);");
+            MineGuis.get().doLogO("objMenu is null! doMenuShow(objMenu);");
             return false;
         }
         if (this.vetMenu(objMenu)) {
-            MineGuis.get().doLog("objMenu is current! doMenuShow(objMenu);");
+            MineGuis.get().doLogO("objMenu is current! doMenuShow(objMenu);");
             return false;
         }
         if (this.vetMenu()) {
             if (this.getMenu().doHide(this.getPlayer()) == false) {
-                MineGuis.get().doLog("failed menu hide! doMenuShow(objMenu);");
+                MineGuis.get().doLogO("failed menu hide! doMenuShow(objMenu);");
                 return false;
             }
         }
         if (objMenu.doShow(this.getPlayer()) == false) {
-            MineGuis.get().doLog("failed menu show! doMenuShow(objMenu);");
+            MineGuis.get().doLogO("failed menu show! doMenuShow(objMenu);");
             return false;
         }
         return true;
     }
     public Boolean doMenuHide(MineGuisMenu objMenu) {
         if (objMenu == null) {
-            MineGuis.get().doLog("objMenu is null! doMenuShow(objMenu);");
+            MineGuis.get().doLogO("objMenu is null! doMenuShow(objMenu);");
             return false;
         }
         if (this.vetMenu(objMenu) == false) {
-            MineGuis.get().doLog("objMenu is not current! doMenuShow(objMenu);");
+            MineGuis.get().doLogO("objMenu is not current! doMenuShow(objMenu);");
             return false;
         }
         if (objMenu.doHide(this.getPlayer()) == false) {
-            MineGuis.get().doLog("failed menu hide! doMenuHide(objMenu);");
+            MineGuis.get().doLogO("failed menu hide! doMenuHide(objMenu);");
             return false;
         }
         return true;
     }
     public Boolean doMenuBack() {
         if (this.objMenuLast == null) {
-            MineGuis.get().doLog("the last menu is null! doMenuBack();");
+            MineGuis.get().doLogO("the last menu is null! doMenuBack();");
             return false;
         }
         if (doMenuShow(this.objMenuLast) == false) {
-            MineGuis.get().doLog("failed to show the last menu! doMenuBack();");
+            MineGuis.get().doLogO("failed to show the last menu! doMenuBack();");
             return false;
         }
         return true;

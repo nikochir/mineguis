@@ -30,19 +30,19 @@ public class MineGuisExecutMain implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLog("this is not a player call!");
+            MineGuis.get().doLogO("this is not a player call!");
             return false;
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
             MineGuisMenu objMenu = MineGuis.get().getMenuMain();
             if (objMenu.doShow(objPlayer) == false) {
-                MineGuis.get().doLog("failed to show the menu!");
+                MineGuis.get().doLogO("failed to show the menu!");
                 return false;
             }
             return true;
         } else {
-            MineGuis.get().doLog("invalid argument count!");
+            MineGuis.get().doLogO("invalid argument count!");
             return true;
         }
     }

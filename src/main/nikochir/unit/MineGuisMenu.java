@@ -17,8 +17,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 /* typedef */
 /* MineGuisMenu class
-* > Description:
-* -> counts cells [from 1 to 9];
+ * > Description:
+ * -> counts cells [from 1 to 9];
+ * -> coordinates are considered from greater to lesser:
+ * --> [z, y, x] is used because this is how we use counting systems;
+ * --> page is z, row is y, column is x;
+ * --> 100 = z, 10 = y, x = 1;
 */
 public class MineGuisMenu extends MineGuisUnit {
     /* members */
@@ -30,20 +34,22 @@ public class MineGuisMenu extends MineGuisUnit {
         Integer numLinesMin = MineGuis.get().getConfigInt("sizeof_minm");
         Integer numLinesMax = MineGuis.get().getConfigInt("sizeof_maxm");
         if (numSizeInLines <= 0) {
-            MineGuis.get().doLog("invalid number of lines!");
+            MineGuis.get().doLogO("invalid number of lines!");
             return;
         } else if (numSizeInLines < numLinesMin) {
-            MineGuis.get().doLog("too few lines!");
+            MineGuis.get().doLogO("too few lines!");
             numSizeInLines = numLinesMin;
         } else if (numSizeInLines > numLinesMax) {
-            MineGuis.get().doLog("too many lines!");
+            MineGuis.get().doLogO("too many lines!");
             numSizeInLines = numLinesMax;
         }
         this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, getSign());
         this.tabItems = new ArrayList<MineGuisItem>(numSizeInLines * 9);
-        for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
-            this.tabItems.add(MineGuis.get().getItem("void"));
-            this.objPack.setItem(itr, this.tabItems.get(itr).getItem());
+        if (MineGuis.get().vetItem("void")) {
+            for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
+                this.tabItems.add(MineGuis.get().getItem("void"));
+                this.objPack.setItem(itr, this.tabItems.get(itr).getItem());
+            }
         }
     }
     /* getters */
@@ -63,7 +69,7 @@ public class MineGuisMenu extends MineGuisUnit {
     /* setters */
     public Boolean setItem(MineGuisItem objItem, int numSlot) {
         if (objItem == null) {
-            MineGuis.get().doLog("null argument! setItem(null, numSlot);");
+            MineGuis.get().doLogO("null argument! setItem(null, numSlot);");
             return false;
         }
         this.tabItems.set((numSlot - 1) % getSizeInSlots(), objItem);
@@ -79,11 +85,11 @@ public class MineGuisMenu extends MineGuisUnit {
     /* actions */
     public Boolean doShow(Player objPlayer) {
         if (objPlayer == null) {
-            MineGuis.get().doLog("null argument! doShow(null);");
+            MineGuis.get().doLogO("null argument! doShow(null);");
             return false;
         }
         /*if ((objPlayer.getInventory() instanceof PlayerInventory) == true) {
-            MineGuis.get().doLog("the inventory is already shown!");
+            MineGuis.get().doLogO("the inventory is already shown!");
             return false;
         }*/
         objPlayer.openInventory(this.objPack);
@@ -91,11 +97,11 @@ public class MineGuisMenu extends MineGuisUnit {
     }
     public Boolean doHide(Player objPlayer) {
         if (objPlayer == null) {
-            MineGuis.get().doLog("null argument! doHide(null);");
+            MineGuis.get().doLogO("null argument! doHide(null);");
             return false;
         }
         /*if ((objPlayer.getInventory() instanceof PlayerInventory) == false) {
-            MineGuis.get().doLog("the inventory is already hidden!");
+            MineGuis.get().doLogO("the inventory is already hidden!");
             return false;
         }*/
         objPlayer.closeInventory();
@@ -103,16 +109,16 @@ public class MineGuisMenu extends MineGuisUnit {
     }
     public Boolean doPass(Player objPlayer, ItemStack objStack) { /* pass the item across the entire pack */
         if (objPlayer == null || objStack == null) {
-            MineGuis.get().doLog("null argument is passed! doPass(objPlayer, objStack);");
+            MineGuis.get().doLogO("null argument is passed! doPass(objPlayer, objStack);");
             return false;
         }
         MineGuisItem objItem = this.getItem(objStack);
         if (objItem == null) {
-            MineGuis.get().doLog("the item is not found in this inventory! doPass(objPlayer, objStack);");
+            MineGuis.get().doLogO("the item is not found in this inventory! doPass(objPlayer, objStack);");
             return false;
         } 
-        if (objItem.doExecute(objPlayer) == false) {
-            MineGuis.get().doLog("failed item execute! doPass(objPlayer, objStack);");
+        if (objItem.doExec(objPlayer) == false) {
+            MineGuis.get().doLogO("failed item execute! doPass(objPlayer, objStack);");
             return false;
         }
         return true;

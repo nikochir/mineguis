@@ -1,7 +1,71 @@
+#format#
+##sign##
+###for_user=player_uid
+###for_item=display_name
+###for_menu=display_name
+###for_book=display_name
+##item##
+# item<number[00;99]>:
+#   info:
+#     sign: <"display name">
+#     lore: <"display lore">
+#     icon: "<material_type>"
+#   data:
+#     exec: "<command_to_execute>"
+##menu##
+# menu<number[00;99]>:
+#   info:
+#     sign: <"display name">
+#     size: <number[1;6]>
+#   data:
+#     item<xy>:
+#       sign: <"item display name">
+#       posy: <number[1;6]>
+#       posx: <number[1;9]>
+##book##
+# book<number[00;99]>:
+#   info:
+#     sign: <"display name">
+#     size: [<number[1;as_many_as_you_have]>, <number[1;6]>]
+#   data:
+#     item<pyx>:
+#       posp: <number[1;as_many_as_you_have]>
+#       posy: <number[1;6]>
+#       posx: <number[1;9]>
+#sample#
+##item##
+# item00:
+#   info:
+#     sign: "main menu"
+#     lore: "go to the main menu"
+#     icon: COMPASS
+#   data:
+#     exec: mguimain
+##menu##
+# menu00:
+#   info:
+#     sign: "main"
+#     size: 6
+#   data:
+#     item12:
+#       sign: "back"
+#       posy: 1
+#       posx: 2
+##book##
+# book00:
+#   info:
+#     sign: "main"
+#     size: 10
+#   data:
+#     item123:
+#       sign: "back"
+#       posp: 1
+#       posy: 2
+#       posx: 3
 #nameof#
 nameof_main: ${project.name}
 nameof_pack: minepack
-nameof_log: "[${project.name}] "
+nameof_logo: "[${project.name}] "
 #sizeof#
 sizeof_main: 3 # main menu lines
 sizeof_maxm: 6 # maximal menu lines
@@ -11,48 +75,165 @@ sizeof_maxb: 10 # maximal book pages
 sizeof_minb: 1 # minimal book pages
 sizeof_useb: 3 # used by default book pages
 #listof#
-listof_menus:
-  - menu00:
-    - name: "menu00"
-    - size: 3
-    - data:
-      - item11:
-        - posy: 1
-        - posx: 1
-        - type: "menu"
-        - data: "mineguis"
-      - item21:
-        - posy: 1
-        - posx: 2
-        - type: "menu"
-        - data: "left"
-      - item31:
-        - posy: 1
-        - posx: 3
-        - type: "menu"
-        - data: "rigt"
-listof_books:
-  - book00:
-    - name: "book000"
-    - size: 3
-    - data:
-      - item111:
-        - page: 1
-        - posy: 1
-        - posx: 1
-        - type: "menu"
-        - data: "mineguis"
-      - item112:
-        - page: 1
-        - posy: 1
-        - posx: 2
-        - type: "menu"
-        - data: "left"
-      - item113:
-        - page: 1
-        - posy: 1
-        - posx: 3
-        - type: "menu"
-        - data: "rigt"
+listof_item:
+  item00:
+    info:
+      sign: "test menu"
+      lore: "open the test menu"
+      icon: "PAPER"
+    data:
+      exec: "mineguis menu test"
+  item01:
+    info:
+      sign: "test book"
+      lore: "open the test book"
+      icon: "BOOK"
+    data:
+      exec: "mineguis book test"
+  item02:
+    info:
+      sign: "let there be night!"
+      lore: "set time to night"
+      icon: "JACK_O_LANTERN"
+    data:
+      exec: "time set night"
+listof_menu:
+  menu00:
+    info:
+      sign: "test"
+      size: 1
+    data:
+      item11:
+        sign: "test book"
+        posy: 1
+        posx: 1
+      item12:
+        sign: "let there be night!"
+        posy: 1
+        posx: 2
+      item13:
+        sign: "void"
+        posy: 1
+        posx: 3
+      item14:
+        sign: "void"
+        posy: 1
+        posx: 4
+      item15:
+        sign: "void"
+        posy: 1
+        posx: 5
+      item16:
+        sign: "void"
+        posy: 1
+        posx: 6
+      item17:
+        sign: "void"
+        posy: 1
+        posx: 7
+      item18:
+        sign: "void"
+        posy: 1
+        posx: 8
+      item19:
+        sign: "void"
+        posy: 1
+        posx: 9
+listof_book:
+  book00:
+    info:
+      sign: "test"
+      size: [2,1]
+    data:
+      item111:
+        sign: "test menu"
+        posp: 1
+        posy: 1
+        posx: 1
+      item112:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 2
+      item113:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 3
+      item114:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 4
+      item115:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 5
+      item116:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 6
+      item117:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 7
+      item118:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 8
+      item119:
+        sign: "void"
+        posp: 1
+        posy: 1
+        posx: 9
+      item211:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 1
+      item212:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 2
+      item213:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 3
+      item214:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 4
+      item215:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 5
+      item216:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 6
+      item217:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 7
+      item218:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 8
+      item219:
+        sign: "void"
+        posp: 2
+        posy: 1
+        posx: 9
 #mesg#
 mesg_dbug: "hello world"
