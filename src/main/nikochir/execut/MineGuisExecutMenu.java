@@ -2,11 +2,8 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisUnit;
-import nikochir.unit.MineGuisUser;
 import nikochir.unit.MineGuisItem;
 import nikochir.unit.MineGuisMenu;
-import nikochir.execut.MineGuisExecut;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutorMenu class
  * > Description:
- * -> ;
+ * -> find a global menu and open that;
 */
 public class MineGuisExecutMenu implements CommandExecutor {
     /* handles */
@@ -34,15 +31,6 @@ public class MineGuisExecutMenu implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
-        if (MineGuis.get().vetUser(objPlayer) == false) {
-            MineGuis.get().doLogO("failed to find the user!");
-            return false;
-        }
-        MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
-        if (objUser == null) {
-            MineGuis.get().doLogO("failed to find the user!");
-            return false;
-        }
         if (strArgs.length == 0) {
             if (MineGuis.get().getMenuMain().doShow(objPlayer) == false) {
                 MineGuis.get().doLogO("failed to show the main menu! MineGuisExecutMenu;");

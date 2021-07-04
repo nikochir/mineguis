@@ -16,6 +16,9 @@ import org.bukkit.Material;
 /* typedef */
 /* MineGuisBook class
  * > Description:
+ * -> set of menu objects;
+ * -> every menu is a page;
+ * -> automatically sets enumerated names for all pages;
  * -> counts pages [from 1 to the_number_of_pages];
  * -> coordinates are considered from greater to lesser:
  * --> [z, y, x] is used because this is how we use counting systems;
@@ -91,6 +94,7 @@ public class MineGuisBook extends MineGuisUnit {
     }
     /* vetters */
     public Boolean vetSize(Integer numNumb) { return this.getSizeInPages() >= numNumb; }
+    public Boolean vetPage(Integer numPage) { return this.getSizeInPages() >= numPage; }
     /* actions */
     public Boolean doShow(Player objPlayer) { return getPage().doShow(objPlayer); }
     public Boolean doHide(Player objPlayer) { return getPage().doHide(objPlayer); }

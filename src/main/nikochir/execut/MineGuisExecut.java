@@ -61,8 +61,8 @@ public class MineGuisExecut implements CommandExecutor {
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("debug")) {
                 MineGuis.get().doLogO("debug command is called!");
-                objPlayer.sendMessage("you have just called debug command;");
-                objPlayer.sendMessage(MineGuis.get().getConfigStr("mesg_dbug"));
+                objSender.sendMessage("you have just called debug command;");
+                objSender.sendMessage(MineGuis.get().getConfigStr("mesg_dbug"));
                 return true;
             } else {
                 if (MineGuis.get().vetMenu(strArgs[0]) == false) {

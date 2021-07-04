@@ -2,13 +2,7 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisUnit;
-import nikochir.unit.MineGuisMenu;
-import nikochir.unit.MineGuisUser;
-import nikochir.unit.MineGuisBook;
-import nikochir.execut.MineGuisExecut;
 /** javkit **/
-import java.util.ArrayList;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,9 +12,9 @@ import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutorBack class
+/* MineGuisExecutorVoid class
  * > Description:
- * -> ;
+ * -> just a dummy placeholder for items without a command;
 */
 public class MineGuisExecutVoid implements CommandExecutor {
     /* handles */

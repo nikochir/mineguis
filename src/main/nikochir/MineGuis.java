@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Collection;
 /** bukkit - plugin, config, events **/
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -49,7 +50,7 @@ public class MineGuis extends JavaPlugin {
     public MineGuisUser getUser(Player objPlayer)      { return this.getUser(objPlayer.getUniqueId().toString()); }
     public MineGuisUser getUser(HumanEntity objEntity) { return this.getUser(objEntity.getUniqueId().toString()); }
     public MineGuisItem getItem(String strSign)        { return this.tabItems.get(strSign); }
-    public MineGuisItem getItem(ItemStack objItem)     { return this.tabItems.get(objItem.getItemMeta().getDisplayName()); }
+    public MineGuisItem getItem(ItemStack objStack)    { return this.tabItems.get(objStack.getItemMeta().getDisplayName()); }
     public MineGuisItem getItem(ItemMeta objMeta)      { return this.tabItems.get(objMeta.getDisplayName()); }
     public MineGuisItem getItemMain()                  { return this.getItem(this.getConfigStr("nameof_main")); }
     public MineGuisMenu getMenu(String strSign)        { return this.tabMenus.get(strSign); }
@@ -145,24 +146,31 @@ public class MineGuis extends JavaPlugin {
     public void doLogO(String strFormat, Object ... objArgs) {
         System.out.printf(String.format("%s:%s\n", this.getConfigStr("nameof_logo"), strFormat), objArgs);
     }
-    public Boolean doInitExecuts() {
+    private Boolean doInitExecuts() {
         this.getCommand("mineguis").setExecutor(new MineGuisExecut());
         this.getCommand("mguimain").setExecutor(new MineGuisExecutMain());
+        this.getCommand("mguiitem").setExecutor(new MineGuisExecutItem());
+        this.getCommand("mguiitemctor").setExecutor(new MineGuisExecutItemCtor());
+        this.getCommand("mguiitemdtor").setExecutor(new MineGuisExecutItemDtor());
         this.getCommand("mguimenu").setExecutor(new MineGuisExecutMenu());
+        this.getCommand("mguimenuctor").setExecutor(new MineGuisExecutMenuCtor());
+        this.getCommand("mguimenudtor").setExecutor(new MineGuisExecutMenuDtor());
         this.getCommand("mguibook").setExecutor(new MineGuisExecutBook());
+        this.getCommand("mguibookctor").setExecutor(new MineGuisExecutBookCtor());
+        this.getCommand("mguibookdtor").setExecutor(new MineGuisExecutBookDtor());
         this.getCommand("mguiback").setExecutor(new MineGuisExecutBack());
         this.getCommand("mguivoid").setExecutor(new MineGuisExecutVoid());
         return true;
     }
-    public Boolean doInitListens() {
+    private Boolean doInitListens() {
         this.getServer().getPluginManager().registerEvents(new MineGuisListen(), this);
         return true;
     }
-    public Boolean doInitPermits() {
+    private Boolean doInitPermits() {
         this.getServer().getPluginManager().addPermission(new MineGuisPermit());
         return true;
     }
-    public Boolean doInitConfigs() {
+    private Boolean doInitConfigs() {
         this.getConfig().options().copyDefaults(true);
         this.saveDefaultConfig();
         /*** yaml ***/
@@ -172,7 +180,19 @@ public class MineGuis extends JavaPlugin {
             this.doLogO( String.format("count: %d;", setKeys.size()) );
             for (String itrStrKey : setKeys) { this.doLogO(itrStrKey); }
         }
-        /*** item ***/
+        return true;
+    }
+    private Boolean doInitUsers() {
+        Collection<? extends Player> arrPlayers = this.getServer().getOnlinePlayers();
+        for (Player objPlayer : arrPlayers) {
+            if (this.addUser(new MineGuisUser(objPlayer)) == false) {
+                this.doLogO("failed to add the player: %s;", objPlayer.getName());
+                return false;
+            }
+        }
+        return true;
+    }
+    private Boolean doInitItems() {
         this.doLogO("========<listof_item>========");
         if (this.vetConfig("listof_item")) {
             ConfigurationSection objSectionListOf = this.getConfigSec("listof_item");
@@ -217,7 +237,9 @@ public class MineGuis extends JavaPlugin {
             this.doLogO("the config section listof_item is not found!");
             return false;
         }
-        /*** menu ***/
+        return true;
+    }
+    private Boolean doInitMenus() {
         this.doLogO("========<listof_menu>========");
         if (vetConfig("listof_menu")) {
             ConfigurationSection objSectionListOf = this.getConfigSec("listof_menu");
@@ -276,7 +298,9 @@ public class MineGuis extends JavaPlugin {
             this.doLogO("the config section listof_menu is not found!");
             return false;
         }
-        /*** book ***/
+        return true;
+    }
+    private Boolean doInitBooks() {
         this.doLogO("========<listof_book>========");
         if (this.vetConfig("listof_book")) {
             ConfigurationSection objSectionListOf = this.getConfigSec("listof_book");
@@ -338,6 +362,22 @@ public class MineGuis extends JavaPlugin {
         }
         return true;
     }
+    private Boolean doQuitUsers() {
+        this.tabUsers.clear();
+        return true;
+    }
+    private Boolean doQuitItems() {
+        this.tabItems.clear();
+        return true;
+    }
+    private Boolean doQuitMenus() {
+        this.tabMenus.clear();
+        return true;
+    }
+    private Boolean doQuitBooks() {
+        this.tabBooks.clear();
+        return true;
+    }
     /* handles */
     @Override
     public void onEnable() {
@@ -383,17 +423,65 @@ public class MineGuis extends JavaPlugin {
         } else {
             this.doLogO("init configs is failed;");
         }
+        /** users **/
+        if (this.doInitUsers()) {
+            this.doLogO("init users is done;");
+        } else {
+            this.doLogO("init users is failed;");
+        }
+        /** items **/
+        if (this.doInitItems()) {
+            this.doLogO("init items is done;");
+        } else {
+            this.doLogO("init items is failed;");
+        }
+        /** menus **/
+        if (this.doInitMenus()) {
+            this.doLogO("init menus is done;");
+        } else {
+            this.doLogO("init menus is failed;");
+        }
+        /** books **/
+        if (this.doInitBooks()) {
+            this.doLogO("init books is done;");
+        } else {
+            this.doLogO("init books is failed;");
+        }
         /* quit */
     }
     @Override
     public void onDisable() {
         /* init */
         /* work */
+        /** users **/
+        if (this.doQuitUsers()) {
+            this.doLogO("quit users is done;");
+        } else {
+            this.doLogO("quit users is failed;");
+        }
+        /** items **/
+        if (this.doQuitItems()) {
+            this.doLogO("quit items is done;");
+        } else {
+            this.doLogO("quit items is failed;");
+        }
+        /** menus **/
+        if (this.doQuitMenus()) {
+            this.doLogO("quit menus is done;");
+        } else {
+            this.doLogO("quit menus is failed;");
+        }
+        /** books **/
+        if (this.doQuitBooks()) {
+            this.doLogO("quit books is done;");
+        } else {
+            this.doLogO("quit books is failed;");
+        }
         /* quit */
-        this.tabUsers.clear(); this.tabUsers = null;
-        this.tabItems.clear(); this.tabItems = null;
-        this.tabMenus.clear(); this.tabMenus = null;
-        this.tabBooks.clear(); this.tabBooks = null;
+        this.tabUsers = null;
+        this.tabItems = null;
+        this.tabMenus = null;
+        this.tabBooks = null;
         objInstance = null;
     }
 }

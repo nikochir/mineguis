@@ -2,12 +2,10 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisUnit;
-import nikochir.unit.MineGuisUser;
-import nikochir.unit.MineGuisItem;
 import nikochir.unit.MineGuisMenu;
 import nikochir.unit.MineGuisBook;
-import nikochir.execut.MineGuisExecut;
+/** javkit **/
+import java.lang.Integer;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,9 +17,8 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutorBook class
  * > Description:
- * -> set of menu objects;
- * -> every menu is a page;
- * -> automatically sets enumerated names for all pages;
+ * -> find a global book;
+ * -> open the book on the given page;
 */
 public class MineGuisExecutBook implements CommandExecutor {
     /* handles */
@@ -37,11 +34,6 @@ public class MineGuisExecutBook implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
-        MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
-        if (objUser == null) {
-            MineGuis.get().doLogO("failed to find the user!");
-            return false;
-        }
         if (strArgs.length == 0) {
             if (MineGuis.get().getBookMain().doShow(objPlayer) == false) {
                 MineGuis.get().doLogO("failed to show the main book! MineGuisExecutBook;");
@@ -49,12 +41,80 @@ public class MineGuisExecutBook implements CommandExecutor {
             }
             return true;
         } else if (strArgs.length == 1) {
-            if (MineGuis.get().vetBook(strArgs[0]) == false) {
-                MineGuis.get().doLogO("the book is not found! MineGuisExecutBook;");
+            String strName = strArgs[0];
+            if (MineGuis.get().vetBook(strName) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "the book \"%s\" is not found! MineGuisExecutBook;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "the book \"%s\" is not found!",
+                    strName
+                ));
                 return false;
             }
-            if (MineGuis.get().getBook(strArgs[0]).doShow(objPlayer) == false) {
-                MineGuis.get().doLogO("the book is not shown! MineGuisExecutBook;");
+            MineGuisBook objBook = MineGuis.get().getBook(strName);
+            if (objBook.doShow(objPlayer) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "the book \"%s\" is not shown! MineGuisExecutBook;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "failed to show the book \"%s\"!",
+                    strName
+                ));
+                return false;
+            }
+            return true;
+        } else if (strArgs.length == 2) {
+            String strName = strArgs[0];
+            if (MineGuis.get().vetBook(strName) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "the book \"%s\" is not found! MineGuisExecutBook;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "the book \"%s\" is not found!",
+                    strName
+                ));
+                return false;
+            }
+            MineGuisBook objBook = MineGuis.get().getBook(strName);
+            Integer numPage = null;
+            try {
+                numPage = Integer.parseInt(strArgs[1]);
+            } catch (NumberFormatException exc) {
+                MineGuis.get().doLogO(String.format(
+                    "invalid argument: %s! MineGuisExecutBook;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "invalid argument: %s!",
+                    strName
+                ));
+                return false;
+            }
+            if (objBook.vetPage(numPage) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "the book \"%s\" does not have page \"%d\"! MineGuisExecutBook;",
+                    strName, numPage
+                ));
+                objSender.sendMessage(String.format(
+                    "the book \"%s\" does not have page \"%d\"!",
+                    strName, numPage
+                ));
+                return false;
+            }
+            MineGuisMenu objPage = objBook.getPage(numPage);
+            if (objPage.doShow(objPlayer) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "the book \"%s\" is not shown! MineGuisExecutBook;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "failed to show the book \"%s\"!",
+                    strName
+                ));
                 return false;
             }
             return true;
