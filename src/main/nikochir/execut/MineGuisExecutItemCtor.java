@@ -26,11 +26,103 @@ public class MineGuisExecutItemCtor implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if (strArgs.length == 0) {
-            return true;
+            MineGuis.get().doLogO(String.format(
+                "no args provided! MineGuisExecutItemCtor;"
+            ));
+            objSender.sendMessage(String.format(
+                "no arguments provided!"
+            ));
+            return false;
         } else if (strArgs.length == 1) {
+            String strName = strArgs[0];
+            if (MineGuis.get().vetItem(strName)) {
+                MineGuis.get().doLogO(String.format(
+                    "the item \"%s\" already exists! MineGuisExecutorItemCtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "the item \"%s\" already exists!",
+                    strName
+                ));
+                return false;
+            }
+            MineGuisItem objItem = new MineGuisItem(strName);
+            if (MineGuis.get().addItem(objItem) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "failed to add \"%s\" item! MineGuisExecutorItemCtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "failed to add \"%s\" item!",
+                    strName
+                ));
+                return false;
+            }
+            return true;
+        } else if (strArgs.length == 2) {
+            String strName = strArgs[0];
+            String strIcon = strArgs[1];
+            if (MineGuis.get().vetItem(strName)) {
+                MineGuis.get().doLogO(String.format(
+                    "the item \"%s\" already exists! MineGuisExecutorItemCtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "the item \"%s\" already exists!",
+                    strName
+                ));
+                return false;
+            }
+            MineGuisItem objItem = new MineGuisItem(strName, strIcon);
+            if (MineGuis.get().addItem(objItem) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "failed to add \"%s\" item! MineGuisExecutorItemCtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "failed to add \"%s\" item!",
+                    strName
+                ));
+                return false;
+            }
+            return true;
+        } else if (strArgs.length == 3) {
+            String strName = strArgs[0];
+            String strIcon = strArgs[1];
+            String strExec = strArgs[2];
+            if (MineGuis.get().vetItem(strName)) {
+                MineGuis.get().doLogO(String.format(
+                    "the item \"%s\" already exists! MineGuisExecutorItemCtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "the item \"%s\" already exists!",
+                    strName
+                ));
+                return false;
+            }
+            MineGuisItem objItem = new MineGuisItem(strName, strIcon, strExec);
+            if (MineGuis.get().addItem(objItem) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "failed to add \"%s\" item! MineGuisExecutorItemCtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "failed to add \"%s\" item!",
+                    strName
+                ));
+                return false;
+            }
             return true;
         } else {
-            MineGuis.get().doLogO("invalid argument count! MineGuisExecutItemCtor;");
+            MineGuis.get().doLogO(String.format(
+                "invalid argument count: %d! MineGuisExecutItemCtor;",
+                strArgs.length
+            ));
+            objSender.sendMessage(String.format(
+                "invalid argument count %d!",
+                strArgs.length
+            ));
             return false;
         }
     }

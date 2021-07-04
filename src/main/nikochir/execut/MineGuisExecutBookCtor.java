@@ -2,7 +2,7 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisMenu;
+import nikochir.unit.MineGuisBook;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,11 +26,91 @@ public class MineGuisExecutBookCtor implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if (strArgs.length == 0) {
-            return true;
+            MineGuis.get().doLogO(objSender,
+                "no arguments provided!"
+            );
+            return false;
         } else if (strArgs.length == 1) {
+            String strName = strArgs[0];
+            if (MineGuis.get().vetBook(strName)) {
+                MineGuis.get().doLogO(objSender,
+                    "book \"%s\" has already been created!",
+                    strName
+                );
+                return false;
+            }
+            MineGuisBook objBook = new MineGuisBook(strName);
+            if (MineGuis.get().addBook(objBook) == false) {
+                MineGuis.get().doLogO(objSender,
+                    "failed to create \"%s\" book!",
+                    strName
+                );
+                return false;
+            }
+            return true;
+        } else if (strArgs.length == 2) {
+            String strName = strArgs[0];
+            Integer numSizeInPages = null;
+            try {
+                numSizeInPages = Integer.parseInt(strArgs[1]);
+            } catch(NumberFormatException exc) {
+                MineGuis.get().doLogO(objSender,
+                    "invalid argument is passed: \"%s\"!",
+                    strArgs[1]
+                );
+                return false;
+            }
+            if (MineGuis.get().vetBook(strName)) {
+                MineGuis.get().doLogO(objSender,
+                    "book \"%s\" has already been created!",
+                    strName
+                );
+                return false;
+            }
+            MineGuisBook objBook = new MineGuisBook(strName, numSizeInPages);
+            if (MineGuis.get().addBook(objBook) == false) {
+                MineGuis.get().doLogO(objSender,
+                    "failed to create \"%s\" book!",
+                    strName
+                );
+                return false;
+            }
+            return true;
+        } else if (strArgs.length == 3) {
+            String strName = strArgs[0];
+            Integer numSizeInPages = null;
+            Integer numSizeOfPages = null;
+            try {
+                numSizeInPages = Integer.parseInt(strArgs[1]);
+                numSizeOfPages = Integer.parseInt(strArgs[2]);
+            } catch(NumberFormatException exc) {
+                MineGuis.get().doLogO(objSender,
+                    "invalid arguments were passed: \"%s\" and \"%s\"!",
+                    strArgs[1], strArgs[2]
+                );
+                return false;
+            }
+            if (MineGuis.get().vetBook(strName)) {
+                MineGuis.get().doLogO(objSender,
+                    "book \"%s\" has already been created!",
+                    strName
+                );
+                return false;
+            }
+            MineGuisBook objBook = new MineGuisBook(strName, numSizeInPages, numSizeOfPages);
+            if (MineGuis.get().addBook(objBook) == false) {
+                MineGuis.get().doLogO(objSender,
+                    "failed to create \"%s\" book!",
+                    strName
+                );
+                return false;
+            }
             return true;
         } else {
-            MineGuis.get().doLogO("invalid argument count! MineGuisExecutBookCtor;");
+            MineGuis.get().doLogO(objSender,
+                "invalid arguments count: %d!",
+                strArgs.length
+            );
             return false;
         }
     }

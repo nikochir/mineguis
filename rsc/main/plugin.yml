@@ -38,7 +38,7 @@ commands:
       execute any item using the name
   mguiitemctor:
     alias: ["mgui_item_ctor","mgui_item_constructor","mgui_item_new","mgui_item_create"]
-    usage: /<command> [name] [lore] [icon] [exec]
+    usage: /<command> [name] [icon] [exec]
     permission-message: you do not have /<permission>
     #permission: minecode.creator
     description:
@@ -50,6 +50,13 @@ commands:
     permission-message: you do not have /<permission>
     description:
       delete an item using the name
+  mguiitemlore:
+    alias: ["mgui_item_lore","mgui_item_set_lore"]
+    usage: /<command> [lore]
+    permission-message: you do not have /<permission>
+    #permission: minecode.creator
+    description:
+      set the item lore
   mguimenu:
     alias: ["mgui_menu"]
     usage: /<command> [name]
@@ -71,6 +78,13 @@ commands:
     permission-message: you do not have /<permission>
     description:
       delete a menu using the name
+  mguimenuitem:
+    alias: ["mgui_menu_item","mgui_menu_set_item"]
+    usage: /<command> [name] [row] [column]
+    permission-message: you do not have /<permission>
+    #permission: minecode.creator
+    description:
+      set the menu item with particular signature into some slot
   mguibook:
     alias: ["mgui_book"]
     usage: /<command> [name] [page]
@@ -92,6 +106,13 @@ commands:
     permission-message: you do not have /<permission>
     description:
       delete a book using the name
+  mguibookitem:
+    alias: ["mgui_book_item","mgui_book_set_item"]
+    usage: /<command> [name] [row] [column] [page]
+    permission-message: you do not have /<permission>
+    #permission: minecode.creator
+    description:
+      set the book item with particular signature into some slot
   mguiback:
     alias: ["mgui_back"]
     usage: /<command>

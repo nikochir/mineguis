@@ -64,7 +64,8 @@ public class MineGuisBook extends MineGuisUnit {
         }
         this.numCurr = 1;
     }
-    public MineGuisBook(String strTitle, Integer numSizeInPages) { this(strTitle, numSizeInPages, 6); }
+    public MineGuisBook(String strTitle, Integer numSizeInPages) { this(strTitle, numSizeInPages, MineGuis.get().getConfigInt("sizeof_usem")); }
+    public MineGuisBook(String strTitle) { this(strTitle, MineGuis.get().getConfigInt("sizeof_useb"), MineGuis.get().getConfigInt("sizeof_usem")); }
     /* getters */
     public Integer getSizeOfPages()   { return this.tabPages.get(0).getSizeInLines(); }
     public Integer getSizeInPages()   { return this.tabPages.size(); }

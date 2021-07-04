@@ -29,6 +29,7 @@ public class MineGuisMenu extends MineGuisUnit {
     private Inventory objPack;
     private List<MineGuisItem> tabItems;
     /* codetor */
+    public MineGuisMenu(String strTitle) { this(strTitle, MineGuis.get().getConfigInt("sizeof_usem")); }
     public MineGuisMenu(String strTitle, Integer numSizeInLines) {
         super(strTitle);
         Integer numLinesMin = MineGuis.get().getConfigInt("sizeof_minm");

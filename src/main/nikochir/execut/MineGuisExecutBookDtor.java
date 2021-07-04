@@ -2,7 +2,7 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisMenu;
+import nikochir.unit.MineGuisBook;
 /** javkit **/
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
@@ -27,11 +27,46 @@ public class MineGuisExecutBookDtor implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if (strArgs.length == 0) {
-            return true;
+            MineGuis.get().doLogO(String.format(
+                "no arguments provided! MineGuisExecutBookDtor;"
+            ));
+            objSender.sendMessage(String.format(
+                "no arguments provided!"
+            ));
+            return false;
         } else if (strArgs.length == 1) {
+            String strName = strArgs[0];
+            if (MineGuis.get().vetBook(strName) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "the book \"%s\" is not found! MineGuisExecutBookDtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "the book \"%s\" is not found!",
+                    strName
+                ));
+                return false;
+            }
+            MineGuisBook objBook = MineGuis.get().getBook(strName);
+            if (MineGuis.get().rmvBook(objBook) == false) {
+                MineGuis.get().doLogO(String.format(
+                    "failed to remove \"%s\" book! MineGuisExecutBookDtor;",
+                    strName
+                ));
+                objSender.sendMessage(String.format(
+                    "failed to remove \"%s\" book!",
+                    strName
+                ));
+                return false;
+            }
             return true;
         } else {
-            MineGuis.get().doLogO("invalid argument count! MineGuisExecutBookDtor;");
+            MineGuis.get().doLogO(String.format(
+                "invalid arguments count! MineGuisExecutBookDtor;"
+            ));
+            objSender.sendMessage(String.format(
+                "invalid arguments count!"
+            ));
             return false;
         }
     }

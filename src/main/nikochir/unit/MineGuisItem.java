@@ -44,22 +44,39 @@ public class MineGuisItem extends MineGuisUnit {
         }
         this.objItem.setItemMeta(objMeta);
     }
-    public MineGuisItem(String strName, String strLore,String strIcon, String strCmd) {
-        this(strName, strLore, Material.matchMaterial(strIcon), strCmd);
+    public MineGuisItem(String strName, String strLore,String strIcon, String strExec) {
+        this(strName, strLore, Material.matchMaterial(strIcon), strExec);
     }
-    public MineGuisItem(String strName, String strLore, String strCmd) {
-        this(strName, strLore, Material.COMMAND_BLOCK, strCmd);
+    public MineGuisItem(String strName, String strLore, String strExec) {
+        this(strName, strLore, Material.COMMAND_BLOCK, strExec);
     }
-    public MineGuisItem(String strName, Material valIcon, String strCmd) {
-        this(strName, "", valIcon, strCmd);
+    public MineGuisItem(String strName, Material valIcon, String strExec) {
+        this(strName, "", valIcon, strExec);
     }
-    public MineGuisItem(String strName, String strCmd) {
-        this(strName, "", Material.COMMAND_BLOCK, strCmd);
+    public MineGuisItem(String strName, String strExec) {
+        this(strName, "", Material.COMMAND_BLOCK, strExec);
+    }
+    public MineGuisItem(String strName) {
+        this(strName, "", Material.COMMAND_BLOCK, "mguivoid");
     }
     /* getters */
     public String getExec()    { return this.strExec; }
     public ItemStack getItem() { return this.objItem; }
     /* setters */
+    public Boolean setLore(String strLore) {
+        ItemMeta objMeta = this.objItem.getItemMeta();
+        List<Component> arrObjLore = new ArrayList<Component>(1);
+        arrObjLore.add(Component.text(strLore));
+        objMeta.lore(arrObjLore);
+        return true;
+    }
+    public Boolean setLore(List<String> arrStrLore) {
+        ItemMeta objMeta = this.objItem.getItemMeta();
+        List<Component> arrObjLore = new ArrayList<Component>(arrStrLore.size());
+        for (String strLore : arrStrLore) { arrObjLore.add(Component.text(strLore)); }
+        objMeta.lore(arrObjLore);
+        return true;
+    }
     /* vetters */
     public Boolean vetExec(String strExec)       { return this.getExec().equals(strExec); }
     public Boolean vetItem(ItemStack objItem)    { return this.getItem().equals(objItem); }

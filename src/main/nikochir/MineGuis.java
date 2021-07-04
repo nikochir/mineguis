@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Collection;
+import java.lang.Class;
 /** bukkit - plugin, config, events **/
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -23,6 +24,7 @@ import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -145,6 +147,19 @@ public class MineGuis extends JavaPlugin {
     /* actions */
     public void doLogO(String strFormat, Object ... objArgs) {
         System.out.printf(String.format("%s:%s\n", this.getConfigStr("nameof_logo"), strFormat), objArgs);
+    }
+    public void doLogO(CommandSender objSender, String strFormat, Object ... objArgs) {
+        this.doLogO(strFormat, objArgs);
+        objSender.sendMessage(
+            String.format(
+                String.format(
+                    "%s:%s",
+                    this.getConfigStr("nameof_logo"),
+                    strFormat
+                ),
+                objArgs
+            )
+        );
     }
     private Boolean doInitExecuts() {
         this.getCommand("mineguis").setExecutor(new MineGuisExecut());

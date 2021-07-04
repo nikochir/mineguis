@@ -26,11 +26,61 @@ public class MineGuisExecutMenuCtor implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if (strArgs.length == 0) {
-            return true;
+            MineGuis.get().doLogO(objSender,
+                "no arguments provided!"
+            );
+            return false;
         } else if (strArgs.length == 1) {
+            String strName = strArgs[0];
+            if (MineGuis.get().vetMenu(strName)) {
+                MineGuis.get().doLogO(objSender,
+                    "menu \"%s\" has already been created!",
+                    strName
+                );
+                return false;
+            }
+            MineGuisMenu objMenu = new MineGuisMenu(strName);
+            if (MineGuis.get().addMenu(objMenu) == false) {
+                MineGuis.get().doLogO(objSender,
+                    "failed to create \"%s\" menu!",
+                    strName
+                );
+                return false;
+            }
+            return true;
+        } else if (strArgs.length == 2) {
+            String strName = strArgs[0];
+            Integer numSize = null;
+            try {
+                numSize = Integer.parseInt(strArgs[1]);
+            } catch(NumberFormatException exc) {
+                MineGuis.get().doLogO(objSender,
+                    "invalid argument is passed: \"%s\"!",
+                    strArgs[1]
+                );
+                return false;
+            }
+            if (MineGuis.get().vetMenu(strName)) {
+                MineGuis.get().doLogO(objSender,
+                    "menu \"%s\" has already been created!",
+                    strName
+                );
+                return false;
+            }
+            MineGuisMenu objMenu = new MineGuisMenu(strName, numSize);
+            if (MineGuis.get().addMenu(objMenu) == false) {
+                MineGuis.get().doLogO(objSender,
+                    "failed to create \"%s\" menu!",
+                    strName
+                );
+                return false;
+            }
             return true;
         } else {
-            MineGuis.get().doLogO("invalid argument count! MineGuisExecutMenuCtor;");
+            MineGuis.get().doLogO(objSender,
+                "invalid arguments count: %d!",
+                strArgs.length
+            );
             return false;
         }
     }
