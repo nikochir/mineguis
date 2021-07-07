@@ -2,8 +2,8 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisMenu;
-import nikochir.unit.MineGuisBook;
+import nikochir.kernel.MineGuisMenu;
+import nikochir.kernel.MineGuisBook;
 /** javkit **/
 import java.lang.Integer;
 /** bukkit - command interface **/

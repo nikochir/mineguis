@@ -1,9 +1,9 @@
 /* package */
-package nikochir.unit;
+package nikochir.kernel;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisUnit;
-import nikochir.unit.MineGuisItem;
+import nikochir.kernel.MineGuisUnit;
+import nikochir.kernel.MineGuisItem;
 /* javkit */
 import java.util.List;
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class MineGuisMenu extends MineGuisUnit {
     private List<MineGuisItem> tabItems;
     /* codetor */
     public MineGuisMenu(String strTitle) { this(strTitle, MineGuis.get().getConfigInt("sizeof_usem")); }
-    public MineGuisMenu(String strTitle, Integer numSizeInLines) {
+    public MineGuisMenu(String strTitle, int numSizeInLines) {
         super(strTitle);
-        Integer numLinesMin = MineGuis.get().getConfigInt("sizeof_minm");
-        Integer numLinesMax = MineGuis.get().getConfigInt("sizeof_maxm");
+        int numLinesMin = MineGuis.get().getConfigInt("sizeof_minm");
+        int numLinesMax = MineGuis.get().getConfigInt("sizeof_maxm");
         if (numSizeInLines <= 0) {
             MineGuis.get().doLogO("invalid number of lines!");
             return;
@@ -44,13 +44,20 @@ public class MineGuisMenu extends MineGuisUnit {
             MineGuis.get().doLogO("too many lines!");
             numSizeInLines = numLinesMax;
         }
-        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, getSign());
+        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, this.getSign().toString());
         this.tabItems = new ArrayList<MineGuisItem>(numSizeInLines * 9);
-        if (MineGuis.get().vetItem("void")) {
+        /*if (MineGuis.get().vetItem("void")) {
             for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
                 this.tabItems.add(MineGuis.get().getItem("void"));
                 this.objPack.setItem(itr, this.tabItems.get(itr).getItem());
             }
+        } else {
+            MineGuis.get().doLogO("void item is not found!");
+        } */
+        MineGuisItem objItem = MineGuis.get().getItem("void", new String[] { "____" }, "BLACK_STAINED_GLASS_PANE", "mguivoid");
+        for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
+            this.tabItems.add(objItem);
+            this.objPack.setItem(itr, objItem.getItem());
         }
     }
     /* getters */
@@ -68,7 +75,7 @@ public class MineGuisMenu extends MineGuisUnit {
         return null;
     }
     /* setters */
-    public Boolean setItem(MineGuisItem objItem, int numSlot) {
+    public boolean setItem(MineGuisItem objItem, int numSlot) {
         if (objItem == null) {
             MineGuis.get().doLogO("null argument! setItem(null, numSlot);");
             return false;
@@ -77,14 +84,50 @@ public class MineGuisMenu extends MineGuisUnit {
         this.objPack.setItem((numSlot - 1) % getSizeInSlots(), objItem.getItem());
         return true;
     }
-    public Boolean setItem(MineGuisItem objItem, int numY, int numX) {
-        return this.setItem(objItem, (numY - 1) * getSizeInLines() + numX);
+    public boolean setItem(MineGuisItem objItem, int numY, int numX) {
+        return this.setItem(objItem, (numY - 1) * getSizeOfLines() + numX);
+    }
+    public boolean setItem(MineGuisItem objItem, int[] arrNums) {
+        if (arrNums.length == 0) {
+            MineGuis.get().doLogO(
+                "no coordinate arguments provided! MineGuisBook.setItem(objItem, arrNums);"
+            );
+            return false;
+        } else if (arrNums.length == 1) {
+            return this.setItem(objItem, arrNums[0]);
+        } else if (arrNums.length == 2) {
+            return this.setItem(objItem, arrNums[0], arrNums[1]);
+        } else {
+            MineGuis.get().doLogO(
+                "invalid argument count: %d! MineGuisBook.setItem(objItem, arrNums);",
+                arrNums.length
+            );
+            return false;
+        }
+    }
+    public boolean setItem(MineGuisItem objItem, List<Integer> arrNums) {
+        if (arrNums.size() == 0) {
+            MineGuis.get().doLogO(
+                "no coordinate arguments provided! MineGuisBook.setItem(objItem, arrNums);"
+            );
+            return false;
+        } else if (arrNums.size() == 1) {
+            return this.setItem(objItem, arrNums.get(0));
+        } else if (arrNums.size() == 2) {
+            return this.setItem(objItem, arrNums.get(0), arrNums.get(1));
+        } else {
+            MineGuis.get().doLogO(
+                "invalid argument count: %d! MineGuisBook.setItem(objItem, arrNums);",
+                arrNums.size()
+            );
+            return false;
+        }
     }
     /* vetters */
-    public Boolean vetPack(Inventory objPack)     { return this.objPack == objPack; }
-    public Boolean vetView(InventoryView objView) { return vetSign(objView.getTitle()); }
+    public boolean vetPack(Inventory objPack)     { return this.objPack == objPack; }
+    public boolean vetView(InventoryView objView) { return this.vetSign(objView.getTitle()); }
     /* actions */
-    public Boolean doShow(Player objPlayer) {
+    public boolean doShow(Player objPlayer) {
         if (objPlayer == null) {
             MineGuis.get().doLogO("null argument! doShow(null);");
             return false;
@@ -96,7 +139,7 @@ public class MineGuisMenu extends MineGuisUnit {
         objPlayer.openInventory(this.objPack);
         return true;
     }
-    public Boolean doHide(Player objPlayer) {
+    public boolean doHide(Player objPlayer) {
         if (objPlayer == null) {
             MineGuis.get().doLogO("null argument! doHide(null);");
             return false;
@@ -108,7 +151,7 @@ public class MineGuisMenu extends MineGuisUnit {
         objPlayer.closeInventory();
         return true;
     }
-    public Boolean doPass(Player objPlayer, ItemStack objStack) { /* pass the item across the entire pack */
+    public boolean doPass(Player objPlayer, ItemStack objStack) { /* pass the item across the entire pack */
         if (objPlayer == null || objStack == null) {
             MineGuis.get().doLogO("null argument is passed! doPass(objPlayer, objStack);");
             return false;

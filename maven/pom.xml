@@ -11,7 +11,7 @@
   <!-- project properties -->
   <groupId>nikocher</groupId>
   <artifactId>mineguis</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.4</version>
   <packaging>jar</packaging>
   <name>mineguis</name>
   <url>http://github.com/nikochir/minecode</url>

@@ -2,8 +2,8 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisMenu;
-import nikochir.unit.MineGuisUser;
+import nikochir.kernel.MineGuisMenu;
+import nikochir.kernel.MineGuisUser;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutorBack class
  * > Description:
- * -> ;
+ * -> open the lastly used by a player menu;
 */
 public class MineGuisExecutBack implements CommandExecutor {
     /* handles */

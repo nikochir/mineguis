@@ -2,11 +2,11 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisUnit;
-import nikochir.unit.MineGuisUser;
-import nikochir.unit.MineGuisItem;
-import nikochir.unit.MineGuisMenu;
-import nikochir.unit.MineGuisBook;
+import nikochir.kernel.MineGuisUnit;
+import nikochir.kernel.MineGuisUser;
+import nikochir.kernel.MineGuisItem;
+import nikochir.kernel.MineGuisMenu;
+import nikochir.kernel.MineGuisBook;
 /** javkit **/
 import java.util.ArrayList;
 /** bukkit - command interface **/
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutor class
  * > Description:
- * -> ;
+ * -> universal command to open any item, menu or a book;
 */
 public class MineGuisExecut implements CommandExecutor {
     /* handles */
@@ -47,6 +47,12 @@ public class MineGuisExecut implements CommandExecutor {
             if (strArgs[0].isEmpty()) {
                 MineGuis.get().doLogO("invalid argument!");
                 return false;
+            } else if (strArgs[0].equalsIgnoreCase("item")) {
+                if (MineGuis.get().getItemMain().doExec(objPlayer) == false) {
+                    MineGuis.get().doLogO("failed to execute the main item!");
+                    return false;
+                }
+                return true;
             } else if (strArgs[0].equalsIgnoreCase("menu")) {
                 if (MineGuis.get().getMenuMain().doShow(objPlayer) == false) {
                     MineGuis.get().doLogO("failed to show the main menu!");
@@ -79,6 +85,16 @@ public class MineGuisExecut implements CommandExecutor {
             if (strArgs[0].isEmpty()) {
                 MineGuis.get().doLogO("invalid arguments!");
                 return false;
+            } else if (strArgs[0].equalsIgnoreCase("item")) {
+                if (MineGuis.get().vetItem(strArgs[1]) == false) {
+                    MineGuis.get().doLogO("failed to find the item!");
+                    return false;
+                }
+                if (MineGuis.get().getItem(strArgs[1]).doExec(objPlayer) == false) {
+                    MineGuis.get().doLogO("failed to execute the item!");
+                    return false;
+                }
+                return true;
             } else if (strArgs[0].equalsIgnoreCase("menu")) {
                 if (MineGuis.get().vetMenu(strArgs[1]) == false) {
                     MineGuis.get().doLogO("failed to find the menu!");

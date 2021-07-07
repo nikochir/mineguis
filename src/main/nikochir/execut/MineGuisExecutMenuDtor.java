@@ -2,7 +2,7 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisMenu;
+import nikochir.kernel.MineGuisMenu;
 /** javkit **/
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutorMenuDestructor class
  * > Description:
- * -> ;
+ * -> destruct a menu with particular name;
 */
 public class MineGuisExecutMenuDtor implements CommandExecutor {
     /* handles */

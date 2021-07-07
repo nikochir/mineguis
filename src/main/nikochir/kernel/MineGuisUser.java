@@ -1,11 +1,11 @@
 /* package */
-package nikochir.unit;
+package nikochir.kernel;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisUnit;
-import nikochir.unit.MineGuisItem;
-import nikochir.unit.MineGuisMenu;
-import nikochir.unit.MineGuisBook;
+import nikochir.kernel.MineGuisUnit;
+import nikochir.kernel.MineGuisItem;
+import nikochir.kernel.MineGuisMenu;
+import nikochir.kernel.MineGuisBook;
 /* bukkit */
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.Permissible;
@@ -35,21 +35,21 @@ public class MineGuisUser extends MineGuisUnit {
     public Player getPlayer() { return (Player) this.objPermitAttachment.getPermissible(); }
     public MineGuisMenu getMenu() { return this.objMenuCurr; }
     /* setters */
-    public Boolean setPermit(String strPermit, Boolean bitPermit) {
+    public boolean setPermit(String strPermit, boolean bitPermit) {
         this.objPermitAttachment.setPermission(strPermit, bitPermit);
         return true;
     }
-    public Boolean setMenu(MineGuisMenu objMenu) {
+    public boolean setMenu(MineGuisMenu objMenu) {
         this.objMenuLast = this.objMenuCurr;
         this.objMenuCurr = objMenu;
         return true;
     }
     /* vetters */
-    public Boolean vetPermit(String strPermit)   { return this.objPermitAttachment.getPermissions().get(strPermit); }
-    public Boolean vetMenu()                     { return this.getMenu() != null; }
-    public Boolean vetMenu(MineGuisMenu objMenu) { return this.getMenu() == objMenu; }
+    public boolean vetPermit(String strPermit)   { return this.objPermitAttachment.getPermissions().get(strPermit); }
+    public boolean vetMenu()                     { return this.getMenu() != null; }
+    public boolean vetMenu(MineGuisMenu objMenu) { return this.getMenu() == objMenu; }
     /* actions */
-    public Boolean doMenuShow(MineGuisMenu objMenu) {
+    public boolean doMenuShow(MineGuisMenu objMenu) {
         if (objMenu == null) {
             MineGuis.get().doLogO("objMenu is null! doMenuShow(objMenu);");
             return false;
@@ -70,7 +70,7 @@ public class MineGuisUser extends MineGuisUnit {
         }
         return true;
     }
-    public Boolean doMenuHide(MineGuisMenu objMenu) {
+    public boolean doMenuHide(MineGuisMenu objMenu) {
         if (objMenu == null) {
             MineGuis.get().doLogO("objMenu is null! doMenuShow(objMenu);");
             return false;
@@ -85,7 +85,7 @@ public class MineGuisUser extends MineGuisUnit {
         }
         return true;
     }
-    public Boolean doMenuBack() {
+    public boolean doMenuBack() {
         if (this.objMenuLast == null) {
             MineGuis.get().doLogO("the last menu is null! doMenuBack();");
             return false;

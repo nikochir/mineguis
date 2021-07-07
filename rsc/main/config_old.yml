@@ -1,0 +1,2058 @@
+#format#
+##sign##
+###for_user=player_uid
+###for_item=display_name
+###for_menu=display_name
+###for_book=display_name
+##item##
+# item<number[00;99]>:
+#   info:
+#     sign: <"display_name">
+#     lore:
+#       - <"display_lore">
+#     icon: "<material_type>"
+#   data:
+#     exec: "<command_to_execute>"
+##menu##
+# menu<number[00;99]>:
+#   info:
+#     sign: <"display_name">
+#     size: <number[1;6]>
+#   data:
+#     item<yx>:
+#       sign: <"item_display_name">
+#       slot: [<number[1;6]>,<number[1;9]>]
+##book##
+# book<number[00;99]>:
+#   info:
+#     sign: <"display_name">
+#     size: [<number[1;as_many_as_you_have]>,<number[1;6]>]
+#   data:
+#     item<pyx>:
+#       sign: <item_display_name>
+#       slot: [<number[1;as_many_as_you_have]>,<number[1;6]>,<number[1;9]>]
+#sample#
+##item##
+# item00:
+#   info:
+#     sign: "main_menu"
+#     lore:
+#       - "go to the main menu"
+#     icon: COMPASS
+#   data:
+#     exec: mguimain
+##menu##
+# menu00:
+#   info:
+#     sign: "main"
+#     size: 6
+#   data:
+#     item12:
+#       sign: "back"
+#       slot: [1,2]
+##book##
+# book00:
+#   info:
+#     sign: "main"
+#     size: 10
+#   data:
+#     item123:
+#       sign: "back"
+#       slot: [1,2,3]
+#nameof#
+nameof_main: ${project.name}
+nameof_pack: minepack
+nameof_logo: "[${project.name}]"
+#sizeof#
+sizeof_main: 3 # main menu lines or book pages
+sizeof_maxm: 6 # maximal menu lines
+sizeof_minm: 1 # minimal menu lines
+sizeof_usem: 3 # used by default menu lines
+sizeof_maxb: 10 # maximal book pages
+sizeof_minb: 1 # minimal book pages
+sizeof_useb: 3 # used by default book pages
+#listof#
+listof_item:
+  item00:
+    info:
+      sign: "test menu"
+      lore: "open the test menu"
+      icon: "PAPER"
+    data:
+      exec: "mineguis menu test"
+  item01:
+    info:
+      sign: "test book"
+      lore: "open the test book"
+      icon: "BOOK"
+    data:
+      exec: "mineguis book test"
+  item02:
+    info:
+      sign: "let there be night!"
+      lore: "set time to night"
+      icon: "JACK_O_LANTERN"
+    data:
+      exec: "time set night"
+  item13:
+    info:
+      sign: "§6Shop"
+      lore: "§3Zum Onlineshop"
+      icon: CHEST
+    data:
+      exec: "mguivoid"
+  item14:
+    info:
+      sign: "§6Welten,Teleporter&Karten"
+      lore:
+        - "§3Raids,Dungeons,Levelmaps"
+        - "§3und weitere Welten&Orte"
+      icon: MAP
+    data:
+      exec: "mguivoid"
+  item15:
+    info:
+      sign: "§6Levelmaps"
+      lore:
+        - "§3Raids,Dungeons,Levelmaps"
+        - "§3und weitere Welten&Orte"
+      icon: EXPERIENCE_BOTTLE
+    data:
+      exec: "mguivoid"
+  item16:
+    info:
+      sign: "§6Levelmap 1"
+      lore:
+        - "§3Friedliche Farm"
+        - "§3Weltboss spawnt immer:§2 17 Uhr"
+        - "§dHinter dem Piraten "
+        - "§dSchiff auf der Sandinsel"
+      icon: EXPERIENCE_BOTTLE
+    data:
+      exec: "mguivoid"
+  item17:
+    info:
+      sign: "§6Levelmap 2"
+      lore:
+        - "§3Zombieland"
+        - "§3Weltboss spawnt immer:§2 18 Uhr"
+        - "§dOben in der Pyramide"
+      icon: EXPERIENCE_BOTTLE
+    data:
+      exec: "mguivoid"
+  item18:
+    info:
+      sign: "§6Verzaubern&Enchanten"
+      lore:
+        - "§3Verzaubere deine Waffen"
+        - "§3am Verzauberungstisch"
+      icon: EXPERIENCE_BOTTLE
+    data:
+      exec: "mguivoid"
+  item19:
+    info:
+      sign: "§6Schmiede / Amboss"
+      lore:
+        - "§3Verbessere deine Waffen"
+        - "§3am Amboss"
+      icon: ANVIL
+    data:
+      exec: "mguivoid"
+  item20:
+    info:
+      sign: "§6Zufallsteleport"
+      lore:
+        - "§3Zufallsteleport uber die"
+        - "§3Freebuild Map"
+      icon: ANVIL
+    data:
+      exec: "mguivoid"
+  item21:
+    info:
+      sign: "§6PvP"
+      lore:
+        - "§3Arenen&PvP"
+      icon: DIAMOND_SWORD
+    data:
+      exec: "mguivoid"
+  item22:
+    info:
+      sign: "§6Pets&Haustiere"
+      lore:
+        - "§3Haustiere,Pets&Mounts"
+      icon: TURTLE_EGG
+    data:
+      exec: "mguivoid"
+  item23:
+    info:
+      sign: "§6Haustier Kaufen"
+      lore:
+        - "§3Kaufe dir ein Tier"
+      icon: CHEST
+    data:
+      exec: "mguivoid"
+  item24:
+    info:
+      sign: "§6Fertigkeitsbaum"
+      lore:
+        - "§3Wechsel den Fertigkeitsbaum"
+        - "§3deines Haustieres"
+      icon: OAK_SAPLING
+    data:
+      exec: "mguivoid"
+  item25:
+    info:
+      sign: "§6Fertigkeiten&Buffs"
+      lore:
+        - "§3Wechsel die Fertigkeit"
+        - "§3deines Haustieres"
+      icon: BEACON
+    data:
+      exec: "mguivoid"
+  item26:
+    info:
+      sign: "§6Tierauswahl/Wechseln"
+      lore:
+        - "§3Wechsel dein Tier"
+        - "§3oder hole es heraus"
+      icon: ENDER_CHEST
+    data:
+      exec: "mguivoid"
+  item27:
+    info:
+      sign: "§6Tierverhalten aeandern"
+      lore:
+        - "§3Veraender das Verhalten"
+        - "§3deines tieres"
+      icon: LEAD
+    data:
+      exec: "mguivoid"
+  item28:
+    info:
+      sign: "§6Haustierinfo&Gesundheit"
+      lore:
+        - "§3Alle Informationen"
+        - "§3ueber dein Haustier"
+      icon: PAINTING
+    data:
+      exec: "mguivoid"
+  item29:
+    info:
+      sign: "§6Haustier Umbenennen"
+      lore:
+        - ""
+      icon: NAME_TAG
+    data:
+      exec: "mguivoid"
+  item30:
+    info:
+      sign: "§6Haustier Rufen"
+      lore:
+        - "§3Rufe dein Haustier"
+        - "§3herbei"
+      icon: SWEET_BERRIES
+    data:
+      exec: "mguivoid"
+  item31:
+    info:
+      sign: "§6Haustier Einpacken"
+      lore:
+        - "§3Packt dein Hasutier"
+        - "§3wieder ein"
+      icon: SHULKER_SHELL
+    data:
+      exec: "mguivoid"
+  item32:
+    info:
+      sign: "§6Enderchest"
+      lore:
+        - "§3Enderkiste (Items nicht verlierbar)"
+      icon: ENDER_CHEST
+    data:
+      exec: "mguivoid"
+  item33:
+    info:
+      sign: "§6Rucksack"
+      lore:
+        - "§3Rucksack (Items verlierbar)"
+      icon: SHULKER_SHELL
+    data:
+      exec: "mguivoid"
+  item34:
+    info:
+      sign: "§6Auktionshaus Menue"
+      lore:
+        - "§3Verkaufe Items im Auktionshaus"
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item35:
+    info:
+      sign: "§6Kopfgeld Menue"
+      lore:
+        - "§3Oeffnet das Kopfgeld Menue"
+      icon: PLAYER_HEAD
+    data:
+      exec: "mguivoid"
+  item36:
+    info:
+      sign: "§6Kopfgeld Liste"
+      lore:
+        - "§3Kaufe dir ein Tier"
+      icon: BOOK
+    data:
+      exec: "mguivoid"
+  item37:
+    info:
+      sign: "§6Kopfgeld setzen"
+      lore:
+        - "§3Kopfgeld auf einen"
+        - "§3Spieler setzen"
+      icon: GOLD_NUGGET
+    data:
+      exec: "mguivoid"
+  item38:
+    info:
+      sign: "§6Sprachchat"
+      lore:
+        - "§3Sprich mit anderen Spielern im Spiel"
+      icon: HOPPER
+    data:
+      exec: "mguivoid"
+  item39:
+    info:
+      sign: "§6Quests/Aufgaben"
+      lore:
+        - "§3Quests,Aufgaben&Belohnungen"
+      icon: BOOK
+    data:
+      exec: "mguivoid"
+  item40:
+    info:
+      sign: "§6Skill Tree"
+      lore:
+        - "§3Teleportiert dich nach Hause"
+      icon: OAK_SAPLING
+    data:
+      exec: "mguivoid"
+  item41:
+    info:
+      sign: "§6Gilden&Clans"
+      lore:
+        - ""
+      icon: WHITE_BANNER
+    data:
+      exec: "mguivoid"
+  item42:
+    info:
+      sign: "§6Meine Gilde"
+      lore:
+        - "§3Zur deiner Gilde"
+      icon: GREEN_BANNER
+    data:
+      exec: "mineguis menu Gilde"
+  item43:
+    info:
+      sign: "§5Meine Gilde"
+      lore:
+        - "§3Zur deiner Gilde"
+      icon: RED_WOOL
+    data:
+      exec: "mguivoid"
+  item43:
+    info:
+      sign: "Welten,Maps&Karten"
+      lore:
+        - ""
+      icon: MAP
+    data:
+      exec: "mineguis menu Welten,Maps&Karten"
+  item91:
+    info:
+      sign: "dummy1"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item92:
+    info:
+      sign: "dummy2"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item93:
+    info:
+      sign: "dummy3"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item94:
+    info:
+      sign: "dummy4"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item95:
+    info:
+      sign: "dummy5"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item96:
+    info:
+      sign: "dummy6"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item97:
+    info:
+      sign: "dummy7"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item98:
+    info:
+      sign: "dummy8"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+  item99:
+    info:
+      sign: "dummy9"
+      lore:
+        - ""
+        - ""
+        - ""
+      icon: END_CRYSTAL
+    data:
+      exec: "mguivoid"
+listof_menu:
+  menu00:
+    info:
+      sign: "test"
+      size: 1
+    data:
+      item11:
+        sign: "test book"
+        slot: [1,1]
+      item12:
+        sign: "let there be night!"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+  menu01:
+    info:
+      sign: "Menue"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "Welten,Maps&Karten"
+        slot: [2,1]
+      item22:
+        sign: "§6PvP"
+        slot: [2,2]
+      item23:
+        sign: "§6Pets&Haustiere"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu02:
+    info:
+      sign: "Welten,Maps&Karten"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu03:
+    info:
+      sign: "§3Alle Maps zum leveln"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu04:
+    info:
+      sign: "Welten,Maps&Karten 2"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu05:
+    info:
+      sign: "Levelmaps"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu06:
+    info:
+      sign: "Pets&Haustier"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu07:
+    info:
+      sign: "Kopfgeld"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu08:
+    info:
+      sign: "Gilde"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+  menu09:
+    info:
+      sign: "reserved"
+      size: 6
+    data:
+      item11:
+        sign: "void"
+        slot: [1,1]
+      item12:
+        sign: "void"
+        slot: [1,2]
+      item13:
+        sign: "void"
+        slot: [1,3]
+      item14:
+        sign: "void"
+        slot: [1,4]
+      item15:
+        sign: "void"
+        slot: [1,5]
+      item16:
+        sign: "void"
+        slot: [1,6]
+      item17:
+        sign: "void"
+        slot: [1,7]
+      item18:
+        sign: "void"
+        slot: [1,8]
+      item19:
+        sign: "void"
+        slot: [1,9]
+      item21:
+        sign: "void"
+        slot: [2,1]
+      item22:
+        sign: "void"
+        slot: [2,2]
+      item23:
+        sign: "void"
+        slot: [2,3]
+      item24:
+        sign: "void"
+        slot: [2,4]
+      item25:
+        sign: "void"
+        slot: [2,5]
+      item26:
+        sign: "void"
+        slot: [2,6]
+      item27:
+        sign: "void"
+        slot: [2,7]
+      item28:
+        sign: "void"
+        slot: [2,8]
+      item29:
+        sign: "void"
+        slot: [2,9]
+      item31:
+        sign: "void"
+        slot: [3,1]
+      item32:
+        sign: "void"
+        slot: [3,2]
+      item33:
+        sign: "void"
+        slot: [3,3]
+      item34:
+        sign: "void"
+        slot: [3,4]
+      item35:
+        sign: "void"
+        slot: [3,5]
+      item36:
+        sign: "void"
+        slot: [3,6]
+      item37:
+        sign: "void"
+        slot: [3,7]
+      item38:
+        sign: "void"
+        slot: [3,8]
+      item39:
+        sign: "void"
+        slot: [3,9]
+      item41:
+        sign: "void"
+        slot: [4,1]
+      item42:
+        sign: "void"
+        slot: [4,2]
+      item43:
+        sign: "void"
+        slot: [4,3]
+      item44:
+        sign: "void"
+        slot: [4,4]
+      item45:
+        sign: "void"
+        slot: [4,5]
+      item46:
+        sign: "void"
+        slot: [4,6]
+      item47:
+        sign: "void"
+        slot: [4,7]
+      item48:
+        sign: "void"
+        slot: [4,8]
+      item49:
+        sign: "void"
+        slot: [4,9]
+      item51:
+        sign: "void"
+        slot: [5,1]
+      item52:
+        sign: "void"
+        slot: [5,2]
+      item53:
+        sign: "void"
+        slot: [5,3]
+      item54:
+        sign: "void"
+        slot: [5,4]
+      item55:
+        sign: "void"
+        slot: [5,5]
+      item56:
+        sign: "void"
+        slot: [5,6]
+      item57:
+        sign: "void"
+        slot: [5,7]
+      item58:
+        sign: "void"
+        slot: [5,8]
+      item59:
+        sign: "void"
+        slot: [5,9]
+      item61:
+        sign: "void"
+        slot: [6,1]
+      item62:
+        sign: "void"
+        slot: [6,2]
+      item63:
+        sign: "void"
+        slot: [6,3]
+      item64:
+        sign: "void"
+        slot: [6,4]
+      item65:
+        sign: "void"
+        slot: [6,5]
+      item66:
+        sign: "void"
+        slot: [6,6]
+      item67:
+        sign: "void"
+        slot: [6,7]
+      item68:
+        sign: "void"
+        slot: [6,8]
+      item69:
+        sign: "void"
+        slot: [6,9]
+listof_book:
+  book00:
+    info:
+      sign: "test"
+      size: [2,1]
+    data:
+      item111:
+        sign: "test menu"
+        slot: [1,1,1]
+      item112:
+        sign: "void"
+        slot: [1,1,2]
+      item113:
+        sign: "void"
+        slot: [1,1,3]
+      item114:
+        sign: "void"
+        slot: [1,1,4]
+      item115:
+        sign: "void"
+        slot: [1,1,5]
+      item116:
+        sign: "void"
+        slot: [1,1,6]
+      item117:
+        sign: "void"
+        slot: [1,1,7]
+      item118:
+        sign: "void"
+        slot: [1,1,8]
+      item119:
+        sign: "void"
+        slot: [1,1,9]
+      item211:
+        sign: "void"
+        slot: [2,1,9]
+      item212:
+        sign: "void"
+        slot: [2,1,2]
+      item213:
+        sign: "void"
+        slot: [2,1,3]
+      item214:
+        sign: "void"
+        slot: [2,1,4]
+      item215:
+        sign: "void"
+        slot: [2,1,5]
+      item216:
+        sign: "void"
+        slot: [2,1,6]
+      item217:
+        sign: "void"
+        slot: [2,1,7]
+      item218:
+        sign: "void"
+        slot: [2,1,8]
+      item219:
+        sign: "void"
+        slot: [2,1,9]
+#mesg#
+mesg_dbug: "hello world"
+#endf#

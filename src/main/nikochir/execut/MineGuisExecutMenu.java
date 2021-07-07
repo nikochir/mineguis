@@ -2,8 +2,8 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisItem;
-import nikochir.unit.MineGuisMenu;
+import nikochir.kernel.MineGuisItem;
+import nikochir.kernel.MineGuisMenu;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutorMenu class
  * > Description:
- * -> find a global menu and open that;
+ * -> find some global menu with the given name and open that;
 */
 public class MineGuisExecutMenu implements CommandExecutor {
     /* handles */

@@ -1,7 +1,7 @@
 #main#
 name: mineguis
 main: nikochir.MineGuis
-version: 1.0.0
+version: 1.0.4
 api-version: 1.16
 #work#
 load: STARTUP

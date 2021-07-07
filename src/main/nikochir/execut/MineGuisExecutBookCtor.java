@@ -2,7 +2,7 @@
 package nikochir.execut;
 /* include */
 import nikochir.MineGuis;
-import nikochir.unit.MineGuisBook;
+import nikochir.kernel.MineGuisBook;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* MineGuisExecutorBookConstructor class
  * > Description:
- * -> ;
+ * -> construct a book with given arguments;
 */
 public class MineGuisExecutBookCtor implements CommandExecutor {
     /* handles */
