@@ -1,7 +1,7 @@
 /* package */
 package nikochir.execut;
 /* include */
-import nikochir.MineGuis;
+import nikochir.Main;
 /** javkit **/
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
@@ -12,11 +12,11 @@ import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutorVoid class
+/* ExecutorVoid class
  * > Description:
  * -> just a dummy placeholder for items without a command;
 */
-public class MineGuisExecutVoid implements CommandExecutor {
+public class ExecutVoid implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -28,10 +28,10 @@ public class MineGuisExecutVoid implements CommandExecutor {
         if (strArgs.length == 0) {
             return true;
         } else if (strArgs.length == 1) {
-            MineGuis.get().doLogO("some argument was passed in the void!");
+            Main.get().doLogO("some argument was passed in the void!");
             return true;
         } else {
-            MineGuis.get().doLogO("some arguments were passed in the void!");
+            Main.get().doLogO("some arguments were passed in the void!");
             return true;
         }
     }

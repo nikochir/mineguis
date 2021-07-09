@@ -1,13 +1,13 @@
 /* package */
 package nikochir.preset;
 /* include */
-import nikochir.MineGuis;
-import nikochir.kernel.MineGuisItem;
-import nikochir.kernel.MineGuisMenu;
-import nikochir.kernel.MineGuisBook;
+import nikochir.Main;
+import nikochir.kernel.Item;
+import nikochir.kernel.Menu;
+import nikochir.kernel.Book;
 /* typedef */
 /* endfile */
-/* MineGuisBookMain
+/* BookMain
  * > Description:
  * -> main book instance;
  * -> automatically creates a book with main configuration parameters;
@@ -17,10 +17,10 @@ import nikochir.kernel.MineGuisBook;
     *   o   p   q   r   s   t   u   *
     *   *   *   *   *   *   *   *   *
 */
-public class MineGuisBookMain extends MineGuisBook {
+public class BookMain extends Book {
     /* codetor */
-    public MineGuisBookMain() {
-        super(MineGuis.get().getConfigStr("nameof_main"), MineGuis.get().getConfigInt("sizeof_main"));
+    public BookMain() {
+        super(Main.get().getConfigStr("nameof_main"), Main.get().getConfigInt("sizeof_main"));
     }
 }
 /* endfile */

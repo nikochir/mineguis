@@ -3,14 +3,14 @@ package nikochir.permit;
 /* include */
 import org.bukkit.permissions.Permission;
 /* typedef */
-/* MineGuisPermission class
+/* Permission class
  * > Description:
  * -> ;
 */
-public class MineGuisPermit extends Permission {
+public class Permit extends Permission {
     /* members */
     /* codetor */
-    public MineGuisPermit() { super("mineguis.*"); }
+    public Permit() { super("mineguis.*"); }
     /* handles */
 }
 /* endfile */

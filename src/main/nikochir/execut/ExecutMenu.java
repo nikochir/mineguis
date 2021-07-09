@@ -1,9 +1,9 @@
 /* package */
 package nikochir.execut;
 /* include */
-import nikochir.MineGuis;
-import nikochir.kernel.MineGuisItem;
-import nikochir.kernel.MineGuisMenu;
+import nikochir.Main;
+import nikochir.kernel.Item;
+import nikochir.kernel.Menu;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,11 +13,11 @@ import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutorMenu class
+/* ExecutorMenu class
  * > Description:
  * -> find some global menu with the given name and open that;
 */
-public class MineGuisExecutMenu implements CommandExecutor {
+public class ExecutMenu implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -27,28 +27,29 @@ public class MineGuisExecutMenu implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLogO("this is not a player call!");
+            Main.get().doLogO("this is not a player call!");
             return false;
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (MineGuis.get().getMenuMain().doShow(objPlayer) == false) {
-                MineGuis.get().doLogO("failed to show the main menu! MineGuisExecutMenu;");
+            Menu objMenu = Menu.getMenu(Main.get().getConfigStr("nameof_main"), Main.get().getConfigInt("sizeof_usem"));
+            if (objMenu.doShow(objPlayer) == false) {
+                Main.get().doLogO("failed to show the main menu! ExecutMenu;");
                 return false;
             }
             return true;
         } else if (strArgs.length == 1) {
-            if (MineGuis.get().vetMenu(strArgs[0]) == false) {
-                MineGuis.get().doLogO("failed to find the menu!");
+            if (Menu.vetMenu(strArgs[0]) == false) {
+                Main.get().doLogO("failed to find the menu!");
                 return false;
             }
-            if (MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer) == false) {
-                MineGuis.get().doLogO("failed to show the menu!");
+            if (Menu.getMenu(strArgs[0]).doShow(objPlayer) == false) {
+                Main.get().doLogO("failed to show the menu!");
                 return false;
             }
             return true;
         } else {
-            MineGuis.get().doLogO("invalid argument count!");
+            Main.get().doLogO("invalid argument count!");
             return false;
         }
     }

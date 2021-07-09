@@ -1,12 +1,12 @@
 /* package */
 package nikochir.execut;
 /* include */
-import nikochir.MineGuis;
-import nikochir.kernel.MineGuisUnit;
-import nikochir.kernel.MineGuisUser;
-import nikochir.kernel.MineGuisItem;
-import nikochir.kernel.MineGuisMenu;
-import nikochir.kernel.MineGuisBook;
+import nikochir.Main;
+import nikochir.kernel.Unit;
+import nikochir.kernel.User;
+import nikochir.kernel.Item;
+import nikochir.kernel.Menu;
+import nikochir.kernel.Book;
 /** javkit **/
 import java.util.ArrayList;
 /** bukkit - command interface **/
@@ -19,11 +19,11 @@ import org.bukkit.inventory.PlayerInventory;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutor class
+/* Executor class
  * > Description:
  * -> universal command to open any item, menu or a book;
 */
-public class MineGuisExecut implements CommandExecutor {
+public class Execut implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -33,107 +33,107 @@ public class MineGuisExecut implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLogO("this is not a player call!");
+            Main.get().doLogO("this is not a player call!");
             return false;
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (MineGuis.get().getMenuMain().doShow(objPlayer) == false) {
-                MineGuis.get().doLogO("failed to show the main menu!");
+            if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+                Main.get().doLogO("failed to show the main menu!");
                 return false;
             }
             return true;
         } else if (strArgs.length == 1) {
             if (strArgs[0].isEmpty()) {
-                MineGuis.get().doLogO("invalid argument!");
+                Main.get().doLogO("invalid argument!");
                 return false;
             } else if (strArgs[0].equalsIgnoreCase("item")) {
-                if (MineGuis.get().getItemMain().doExec(objPlayer) == false) {
-                    MineGuis.get().doLogO("failed to execute the main item!");
+                if (Item.getItem(Main.get().getConfigStr("nameof_main")).doExec(objPlayer) == false) {
+                    Main.get().doLogO("failed to execute the main item!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("menu")) {
-                if (MineGuis.get().getMenuMain().doShow(objPlayer) == false) {
-                    MineGuis.get().doLogO("failed to show the main menu!");
+                if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+                    Main.get().doLogO("failed to show the main menu!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("book")) {
-                if (MineGuis.get().getBookMain().doShow(objPlayer) == false) {
-                    MineGuis.get().doLogO("failed to show the main book!");
+                if (Book.getBook(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+                    Main.get().doLogO("failed to show the main book!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("debug")) {
-                MineGuis.get().doLogO("debug command is called!");
+                Main.get().doLogO("debug command is called!");
                 objSender.sendMessage("you have just called debug command;");
-                objSender.sendMessage(MineGuis.get().getConfigStr("mesg_dbug"));
+                objSender.sendMessage(Main.get().getConfigStr("mesg_dbug"));
                 return true;
             } else {
-                if (MineGuis.get().vetMenu(strArgs[0]) == false) {
-                    MineGuis.get().doLogO("failed to find the menu!");
+                if (Menu.vetMenu(strArgs[0]) == false) {
+                    Main.get().doLogO("failed to find the menu!");
                     return false;
                 }
-                if (MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer) == false) {
-                    MineGuis.get().doLogO("failed to show the main book!");
+                if (Menu.getMenu(strArgs[0]).doShow(objPlayer) == false) {
+                    Main.get().doLogO("failed to show the main book!");
                     return false;
                 }
                 return true;
             }
         } else if (strArgs.length == 2) {
             if (strArgs[0].isEmpty()) {
-                MineGuis.get().doLogO("invalid arguments!");
+                Main.get().doLogO("invalid arguments!");
                 return false;
             } else if (strArgs[0].equalsIgnoreCase("item")) {
-                if (MineGuis.get().vetItem(strArgs[1]) == false) {
-                    MineGuis.get().doLogO("failed to find the item!");
+                if (Item.vetItem(strArgs[1]) == false) {
+                    Main.get().doLogO("failed to find the item!");
                     return false;
                 }
-                if (MineGuis.get().getItem(strArgs[1]).doExec(objPlayer) == false) {
-                    MineGuis.get().doLogO("failed to execute the item!");
+                if (Item.getItem(strArgs[1]).doExec(objPlayer) == false) {
+                    Main.get().doLogO("failed to execute the item!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("menu")) {
-                if (MineGuis.get().vetMenu(strArgs[1]) == false) {
-                    MineGuis.get().doLogO("failed to find the menu!");
+                if (Menu.vetMenu(strArgs[1]) == false) {
+                    Main.get().doLogO("failed to find the menu!");
                     return false;
                 }
-                if (MineGuis.get().getMenu(strArgs[1]).doShow(objPlayer) == false) {
-                    MineGuis.get().doLogO("failed to show the menu!");
+                if (Menu.getMenu(strArgs[1]).doShow(objPlayer) == false) {
+                    Main.get().doLogO("failed to show the menu!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("book")) {
                 if (strArgs[1].isEmpty()) {
-                    MineGuis.get().doLogO("invalid arguments!");
+                    Main.get().doLogO("invalid arguments!");
                     return false;
                 } else {
-                    if (MineGuis.get().vetBook(strArgs[1]) == false) {
-                        MineGuis.get().doLogO("failed to find the book!");
+                    if (Book.vetBook(strArgs[1]) == false) {
+                        Main.get().doLogO("failed to find the book!");
                         return false;
                     } else {
-                        if (MineGuis.get().getBook(strArgs[1]).doShow(objPlayer) == false) {
-                            MineGuis.get().doLogO("failed to show the book!");
+                        if (Book.getBook(strArgs[1]).doShow(objPlayer) == false) {
+                            Main.get().doLogO("failed to show the book!");
                             return false;
                         }
                         return true;
                     }
                 }
             } else {
-                if (MineGuis.get().vetMenu(strArgs[0]) == false) {
-                    MineGuis.get().doLogO("failed to find the menu!");
+                if (Menu.vetMenu(strArgs[0]) == false) {
+                    Main.get().doLogO("failed to find the menu!");
                     return false;
                 }
-                if (MineGuis.get().getMenu(strArgs[0]).doShow(objPlayer) == false) {
-                    MineGuis.get().doLogO("failed to show the main book!");
+                if (Menu.getMenu(strArgs[0]).doShow(objPlayer) == false) {
+                    Main.get().doLogO("failed to show the main book!");
                     return false;
                 }
                 return true;
             }
         } else {
-            MineGuis.get().doLogO("too many arguments!");
+            Main.get().doLogO("too many arguments!");
             return false;
         }
     }

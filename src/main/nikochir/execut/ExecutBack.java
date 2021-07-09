@@ -1,9 +1,9 @@
 /* package */
 package nikochir.execut;
 /* include */
-import nikochir.MineGuis;
-import nikochir.kernel.MineGuisMenu;
-import nikochir.kernel.MineGuisUser;
+import nikochir.Main;
+import nikochir.kernel.Menu;
+import nikochir.kernel.User;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,11 +13,11 @@ import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutorBack class
+/* ExecutorBack class
  * > Description:
  * -> open the lastly used by a player menu;
 */
-public class MineGuisExecutBack implements CommandExecutor {
+public class ExecutBack implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -27,23 +27,23 @@ public class MineGuisExecutBack implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLogO("this is not a player call!");
+            Main.get().doLogO("this is not a player call!");
             return false;
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (MineGuis.get().vetUser(objPlayer) == false) {
-                MineGuis.get().doLogO("failed to find the user!");
+            if (User.vetUser(objPlayer) == false) {
+                Main.get().doLogO("failed to find the user!");
                 return false;
             }
-            MineGuisUser objUser = MineGuis.get().getUser(objPlayer);
+            User objUser = User.getUser(objPlayer);
             if (objUser.doMenuBack() == false) {
                 objSender.sendMessage("back menu is not found!");
                 return false;
             }
             return true;
         } else {
-            MineGuis.get().doLogO("invalid argument count!");
+            Main.get().doLogO("invalid argument count!");
             return false;
         }
     }

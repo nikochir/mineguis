@@ -1,8 +1,8 @@
 /* package */
 package nikochir.execut;
 /* include */
-import nikochir.MineGuis;
-import nikochir.kernel.MineGuisItem;
+import nikochir.Main;
+import nikochir.kernel.Item;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,12 +12,12 @@ import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* MineGuisExecutorItem class
+/* ExecutorItem class
  * > Description:
  * -> find a global item;
  * -> execute the item;
 */
-public class MineGuisExecutItem implements CommandExecutor {
+public class ExecutItem implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -27,20 +27,17 @@ public class MineGuisExecutItem implements CommandExecutor {
         @NotNull String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
-            MineGuis.get().doLogO("this is not a player call!");
+            Main.get().doLogO("this is not a player call!");
             return false;
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (MineGuis.get().getItemMain().doExec(objPlayer) == false) {
-                MineGuis.get().doLogO("failed to exec the main item! MineGuisExecutItem;");
-                return false;
-            }
-            return true;
+            Main.get().doLogO("no arguments found!");
+            return false;
         } else if (strArgs.length == 1) {
             String strName = strArgs[0];
-            if (MineGuis.get().vetItem(strName) == false) {
-                MineGuis.get().doLogO(String.format(
+            if (Item.vetItem(strName) == false) {
+                Main.get().doLogO(String.format(
                     "the item \"%s\" is not found!",
                     strName
                 ));
@@ -50,10 +47,10 @@ public class MineGuisExecutItem implements CommandExecutor {
                 ));
                 return false;
             }
-            MineGuisItem objItem = MineGuis.get().getItem(strName);
+            Item objItem = Item.getItem(strName);
             if (objItem.doExec(objPlayer) == false) {
-                MineGuis.get().doLogO(String.format(
-                    "the item exec \"%s\" is failed! MineGuisExecutItem;",
+                Main.get().doLogO(String.format(
+                    "the item exec \"%s\" is failed! ExecutItem;",
                     objItem.getExec()
                 ));
                 objSender.sendMessage(String.format(
@@ -64,7 +61,7 @@ public class MineGuisExecutItem implements CommandExecutor {
             }
             return true;
         } else {
-            MineGuis.get().doLogO("invalid argument count! MineGuisExecutItem;");
+            Main.get().doLogO("invalid argument count! ExecutItem;");
             return false;
         }
     }

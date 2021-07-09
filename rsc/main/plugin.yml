@@ -1,6 +1,6 @@
 #main#
 name: mineguis
-main: nikochir.MineGuis
+main: nikochir.Main
 version: ${project.version}
 api-version: 1.16
 #work#
@@ -36,27 +36,6 @@ commands:
     permission-message: you do not have /<permission>
     description:
       execute any item using the name
-  mguiitemctor:
-    alias: ["mgui_item_ctor","mgui_item_constructor","mgui_item_new","mgui_item_create"]
-    usage: /<command> [name] [icon] [exec]
-    permission-message: you do not have /<permission>
-    #permission: minecode.creator
-    description:
-      create an item with specified arguments
-  mguiitemdtor:
-    alias: ["mgui_item_dtor","mgui_item_destructor","mgui_item_del","mgui_item_delete"]
-    usage: /<command> [name]
-    #permission: minecode.creator
-    permission-message: you do not have /<permission>
-    description:
-      delete an item using the name
-  mguiitemlore:
-    alias: ["mgui_item_lore","mgui_item_set_lore"]
-    usage: /<command> [lore]
-    permission-message: you do not have /<permission>
-    #permission: minecode.creator
-    description:
-      set the item lore
   mguimenu:
     alias: ["mgui_menu"]
     usage: /<command> [name]
@@ -64,20 +43,6 @@ commands:
     permission-message: you do not have /<permission>
     description:
       open any menu panel using the name
-  mguimenuctor:
-    alias: ["mgui_menu_ctor","mgui_menu_constructor","mgui_menu_new","mgui_menu_create"]
-    usage: /<command> [name] [size]
-    permission-message: you do not have /<permission>
-    #permission: minecode.creator
-    description:
-      create a menu with specified arguments
-  mguimenudtor:
-    alias: ["mgui_menu_dtor","mgui_menu_destructor","mgui_menu_del","mgui_menu_delete"]
-    usage: /<command> [name]
-    #permission: minecode.creator
-    permission-message: you do not have /<permission>
-    description:
-      delete a menu using the name
   mguimenuitem:
     alias: ["mgui_menu_item","mgui_menu_set_item"]
     usage: /<command> [name] [row] [column]
@@ -92,20 +57,6 @@ commands:
     permission-message: you do not have /<permission>
     description:
       open any book panel using the name
-  mguibookctor:
-    alias: ["mgui_book_ctor","mgui_book_constructor","mgui_book_new","mgui_book_create"]
-    usage: /<command> [name] [size]
-    permission-message: you do not have /<permission>
-    #permission: minecode.creator
-    description:
-      create a book with specified arguments
-  mguibookdtor:
-    alias: ["mgui_book_dtor","mgui_book_destructor","mgui_book_del","mgui_book_delete"]
-    usage: /<command> [name]
-    #permission: minecode.creator
-    permission-message: you do not have /<permission>
-    description:
-      delete a book using the name
   mguibookitem:
     alias: ["mgui_book_item","mgui_book_set_item"]
     usage: /<command> [name] [row] [column] [page]

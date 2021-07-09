@@ -1,4 +1,4 @@
 #main#
 name: mineguis
-main: nikochir.MineGuis
+main: nikochir.Main
 version: 1.0.4
