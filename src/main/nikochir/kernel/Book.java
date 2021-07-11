@@ -82,7 +82,7 @@ public class Book extends Unit {
     public int getSizeOfSlots()   { return this.arrPages.get(0).getSizeOfSlots(); }
     public int getSizeInSlots()   { return this.getSizeInPages() * this.getSizeOfPages() * this.getSizeOfLines(); }
     public Menu getPage()            { return this.arrPages.get(0); }
-    public Menu getPage(int numPage) { return this.arrPages.get(numPage - 1); }
+    public Menu getPage(int numPage) { return this.arrPages.get((numPage - 1) % getSizeInPages()); }
     /* setters */
     static public boolean setBook(String strTitle, int numSizeInPages, int numSizeInLines) {
         if (vetBook(strTitle)) { Main.get().doLogO("the book \"%s\" has already been set!", strTitle); return false; }
@@ -160,13 +160,14 @@ public class Book extends Unit {
                 if (Book.setBook(itrStrSign, itrNumSize.get(0), itrNumSize.get(1))) {
                     /* Main.get().doLogO("the book \"%s\" has been added;",
                         itrStrSign
-                    ); */
-                } else {
-                    Main.get().doLogO(
-                        "failed to add the book \"%s\";",
-                        itrStrSign
-                    );
-                    return false;
+                        ); */
+                    } else {
+                        Main.get().doLogO(
+                            "failed to add the book \"%s\";",
+                            itrStrSign
+                        );
+                    continue;
+                    // return false;
                 }
                 Book itrObjBook = Book.getBook(itrStrSign);
                 if (itrObjSectionBook.contains("data")) {
@@ -187,14 +188,16 @@ public class Book extends Unit {
                                     "failed to add the book item: \"%s\";",
                                     itrStrItemSign
                                 );
-                                return false;
+                                continue;
+                                // return false;
                             }
                         } else {
                             Main.get().doLogO(
                                 "the book item \"%s\" is not found;",
                                 itrStrItemSign
                             );
-                            return false;
+                            continue;
+                            // return false;
                         }
                     }
                 } else {
@@ -202,7 +205,8 @@ public class Book extends Unit {
                         "config section \"%s\" does not have config section \"data\"!",
                         itrStrSign
                     );
-                    return false;
+                    continue;
+                    // return false;
                 }
             }
         } else {

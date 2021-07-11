@@ -35,11 +35,14 @@ public class ExecutMain implements CommandExecutor {
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (Menu.vetMenu(Main.get().getConfigStr("nameof_main")) == false) {
+            String strMain = null;
+            strMain = "Menue";
+            // strMain = Main.get().getConfigStr("nameof_main");
+            if (Menu.vetMenu(strMain) == false) {
                 Main.get().doLogO(objSender, "failed to find the main menu!");
                 return false;
             }
-            if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+            if (Menu.getMenu(strMain).doShow(objPlayer) == false) {
                 Main.get().doLogO(objSender, "failed to show the main menu!");
                 return false;
             }

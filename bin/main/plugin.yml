@@ -8,62 +8,72 @@ load: STARTUP
 loadbefore: []
 database: false
 commands:
+  #user#
   mineguis:
     alias: ["mgui"]
-    usage: /<command> [type] [name]
-    #permission: minecode.*
+    usage: /<command> [type] [sign]
+    permission: minecode.user
     permission-message: you do not have /<permission>
     description:
-      open any menu or book panel using the name
-  mguivoid:
-    alias: ["mgui_void"]
-    usage: /<command>
-    #permission: minecode.*
-    permission-message: you do not have /<permission>
-    description:
-      just click on a dummy item
+      open any item, menu or book using the sign
   mguimain:
-    alias: ["mgui_main"]
+    alias: ["mgui_main", "e"]
     usage: /<command>
-    #permission: minecode.*
+    permission: minecode.user
     permission-message: you do not have /<permission>
     description:
       open main menu
+  e:
+    alias: ["mgui_main", "e"]
+    usage: /<command>
+    permission: minecode.user
+    permission-message: you do not have /<permission>
+    description:
+      open main menu
+  mguivoid:
+    alias: ["mgui_void"]
+    usage: /<command>
+    permission: minecode.user
+    permission-message: you do not have /<permission>
+    description:
+      just click on a dummy item
   mguiitem:
     alias: ["mgui_item"]
     usage: /<command> [name]
-    #permission: minecode.*
+    permission: minecode.user
     permission-message: you do not have /<permission>
     description:
       execute any mineguis item using its name
   mguimenu:
     alias: ["mgui_menu"]
     usage: /<command> [name]
-    #permission: minecode.*
+    permission: minecode.user
     permission-message: you do not have /<permission>
     description:
       open any menu panel using the name
   mguibook:
     alias: ["mgui_book"]
     usage: /<command> [name]
-    #permission: minecode.*
+    permission: minecode.user
     permission-message: you do not have /<permission>
     description:
       open any book panel using the name
   mguiback:
     alias: ["mgui_back"]
     usage: /<command>
-    #permission: minecode.*
+    permission: minecode.user
     permission-message: you do not have /<permission>
     description:
       open the last viewed menu
+  #oper#
   mguiinfo:
     alias: ["mgui_info"]
     usage: /<command> [type]
-    #permission: minecode.*
+    permission: minecode.oper
     permission-message: you do not have /<permission>
     description:
       show all gui objects of the same type, or display information about them
+  #over#
 permissions:
   mineguis.user:
     default: true

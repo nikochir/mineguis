@@ -39,15 +39,11 @@ public class Listen implements Listener {
         }
         Player objPlayer = (Player) objEvent.getWhoClicked();
         if (Menu.vetMenu(objEvent.getView().getTitle()) == false) {
-            Main.get().doLogO("the menu is not found! onInventoryClick(objEvent);");
+            //Main.get().doLogO("the menu is not found! onInventoryClick(objEvent);");
             return;
         }
         /*Menu objMenu = Menu.getMenu(objEvent.getView().getTitle());
         we do no need this, only check if it exists */
-        // respond in some way;
-        objEvent.setCancelled(true);
-        objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
-        // in this case we are cancelling the click producing a sound;
         ItemStack objStack = objEvent.getCurrentItem();
         if (objStack == null) { return; }
         if (objStack.hasItemMeta() == false) { return; }
@@ -55,10 +51,15 @@ public class Listen implements Listener {
             Main.get().doLogO(
                 "the item is not registered! onInventoryClick(objEvent); "
                 + objStack.getItemMeta().getDisplayName()
-            );
-            return;
+                );
+                return;
         }
-        if (Item.getItem(objStack).doExec(objPlayer) == false) {
+        // respond in some way;
+        objEvent.setCancelled(true);
+        objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
+        // in this case we are cancelling the click producing a sound;
+        Item objItem = Item.getItem(objStack);
+        if (objItem.doExec(objPlayer) == false) {
             Main.get().doLogO("failed to execute the item command! onIntentoryClick(objEvent);");
             return;
         }
@@ -91,7 +92,7 @@ public class Listen implements Listener {
     @EventHandler
     public void onInventoryHide(InventoryCloseEvent objEvent) {
         if (User.vetUser(objEvent.getPlayer()) == false) {
-            Main.get().doLogO("user is not found! onInventoryHide(objEvent);");
+            Main.get().doLogO("the user is not found! onInventoryHide(objEvent);");
             return;
         }
         User objUser = User.getUser(objEvent.getPlayer());

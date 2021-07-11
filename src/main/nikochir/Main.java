@@ -70,14 +70,20 @@ public class Main extends JavaPlugin {
         objSender.sendMessage(String.format(strFormat, objArgs));
     }
     public Boolean doInitExecuts() {
+        /* defs */
+        /** user **/
         this.getCommand("mineguis").setExecutor(new Execut());
         this.getCommand("mguimain").setExecutor(new ExecutMain());
+        this.getCommand("e").setExecutor(new ExecutMain());
+        this.getCommand("mguivoid").setExecutor(new ExecutVoid());
         this.getCommand("mguiitem").setExecutor(new ExecutItem());
         this.getCommand("mguimenu").setExecutor(new ExecutMenu());
         this.getCommand("mguibook").setExecutor(new ExecutBook());
         this.getCommand("mguiback").setExecutor(new ExecutBack());
         this.getCommand("mguiinfo").setExecutor(new ExecutInfo());
-        this.getCommand("mguivoid").setExecutor(new ExecutVoid());
+        /** oper **/
+        /** over **/
+        /* quit */
         return true;
     }
     public Boolean doInitListens() {

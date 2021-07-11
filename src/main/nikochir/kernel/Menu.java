@@ -128,10 +128,13 @@ public class Menu extends Unit {
     /* actions */
     static private boolean doCreate() {
         if (false
-            || Menu.setMenu(Main.get().getConfigStr("nameof_main"), Main.get().getConfigInt("sizeof_usem")) == false
-            || Menu.setMenu("Menue", "6") == false
-            || Menu.setMenu("Levelmap_1", "3") == false
-            || Menu.setMenu("Levelmap_2", "3") == false
+            || Menu.setMenu(
+                Main.get().getConfigStr("nameof_main"),
+                Main.get().getConfigInt("sizeof_usem")
+            ) == false
+            || Menu.setMenu("Menue_", 6) == false
+            || Menu.setMenu("Levelmap1", 3) == false
+            || Menu.setMenu("Levelmap2", 3) == false
         ) { Main.get().doLogO("failed to create some default menu!"); return false; }
         return true;
     }
@@ -170,7 +173,8 @@ public class Menu extends Unit {
                         "config section \"%s\" does not have config section \"info\"!",
                         itrStrSign
                     );
-                    return false;
+                    continue;
+                    //return false;
                 }
                 if (Menu.setMenu(itrStrSign, itrNumSize)) {
                     /*Main.get().doLogO(
@@ -182,7 +186,8 @@ public class Menu extends Unit {
                         "failed to add the menu \"%s\";",
                         itrStrKey
                     );
-                    return false;
+                    continue;
+                    //return false;
                 }
                 Menu itrObjMenu = Menu.getMenu(itrStrSign);
                 if (itrObjSectionMenu.contains("data")) {
@@ -203,14 +208,16 @@ public class Menu extends Unit {
                                     "failed to add the menu item \"\";",
                                     itrStrItemSign
                                 );
-                                return false;
+                                continue;
+                                // return false;
                             }
                         } else {
                             Main.get().doLogO(
                                 "the menu item \"%s\" is not found;",
                                 itrStrItemSign
                             );
-                            return false;
+                            continue;
+                            // return false;
                         }
                     }
                 } else {
@@ -218,7 +225,8 @@ public class Menu extends Unit {
                         "config section \"%s\" does not have config section \"data\"!",
                         itrStrSign
                     );
-                    return false;
+                    continue;
+                    // return false;
                 }
             }
         } else {

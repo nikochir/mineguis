@@ -35,6 +35,7 @@ public class User extends Unit {
         this.objPermitAttachment = new PermissionAttachment(Main.get(), objPlayer);
         this.objMenuCurr = null;
         this.objMenuLast = null;
+        this.setPermit("mineguis.user", true);
     }
     //public User(String strPlayer) { this(Main.get().getPlayer(strPlayer)); }
     /* getters */
@@ -53,6 +54,7 @@ public class User extends Unit {
     public String getName()   { return getPlayer().getName(); }
     public Player getPlayer() { return (Player) this.objPermitAttachment.getPermissible(); }
     public Menu getMenu() { return this.objMenuCurr; }
+    public boolean getPermit(String strPermit) { return this.objPermitAttachment.getPermissible().hasPermission(strPermit); }
     /* setters */
     static public boolean setUser(Player objPlayer) {
         if (vetUser(objPlayer)) { Main.get().doLogO("the user has already been created!"); return false; }
@@ -62,11 +64,11 @@ public class User extends Unit {
         if (objEntity instanceof Player) { return setUser((Player) objEntity); }
         else { return false; }
     }
-    public Boolean setPermit(String strPermit, Boolean bitPermit) {
+    public boolean setPermit(String strPermit, Boolean bitPermit) {
         this.objPermitAttachment.setPermission(strPermit, bitPermit);
         return true;
     }
-    public Boolean setMenu(Menu objMenu) {
+    public boolean setMenu(Menu objMenu) {
         this.objMenuLast = this.objMenuCurr;
         this.objMenuCurr = objMenu;
         return true;

@@ -111,7 +111,11 @@ public class Item extends Unit {
     /* actions */
     static private boolean doCreate() {
         if (false
-            || Item.setItem(Main.get().getConfigStr("nameof_main"), "KNOWLEDGE_BOOK", "execute the main gui command", Main.get().getConfigStr("nameof_main")) == false
+            || Item.setItem(
+                Main.get().getConfigStr("nameof_main"),
+                "KNOWLEDGE_BOOK",
+                "execute the main gui command", Main.get().getConfigStr("nameof_main")
+            ) == false
             || Item.setItem("back", "COMPASS", "switch to the last menu", "mguiback") == false
             || Item.setItem("void", "BLACK_STAINED_GLASS_PANE", "____", "mguivoid") == false
         ) { Main.get().doLogO("failed to create some default item!"); return false; }
@@ -158,7 +162,8 @@ public class Item extends Unit {
                         "config section \"%s\" does not have config section \"info\"!",
                         itrStrSign
                     );
-                    return false;
+                    continue;
+                    // return false;
                 }
                 if (itrObjSectionItem.contains("data")) {
                     ConfigurationSection itrObjSectionData = itrObjSectionItem.getConfigurationSection("data");
@@ -168,7 +173,8 @@ public class Item extends Unit {
                         "config section \"%s\" does not have config section \"data\"!",
                         itrStrSign
                     );
-                    return false;
+                    continue;
+                    // return false;
                 }
                 boolean bitResult = false;
                 if (itrStrLore != null) { bitResult = Item.setItem(itrStrSign, itrStrIcon, itrStrLore, itrStrExec); }
@@ -180,10 +186,11 @@ public class Item extends Unit {
                     ); */
                 } else {
                     Main.get().doLogO(
-                        "failed to add the item \"%s\";",
+                        "failed to set the item \"%s\";",
                         itrStrKey
                     );
-                    return false;
+                    continue;
+                    // return false;
                 }
                 Item objItem = Item.getItem(itrStrSign);
             }
