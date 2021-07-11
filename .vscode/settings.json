@@ -30,6 +30,32 @@
         //"Manic Miner, Mayfair NBP, VT323 Regular"
         //"Manic Maner Regular"
     ,
+    /** terminal **/
+    "terminal.explorerKind": "integrated",
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.splitCwd": "workspaceRoot",
+    "terminal.integrated.confirmOnExit": true,
+    "terminal.integrated.scrollback": 1000,
+    /*** cursor ***/
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.cursorWidth": 1,
+    /*** scroll ***/
+    "terminal.integrated.mouseWheelScrollSensitivity": 1,
+    "terminal.integrated.fastScrollSensitivity": 5,
+    /*** text ***/
+    "terminal.integrated.drawBoldTextInBrightColors": true,
+    "terminal.integrated.unicodeVersion": "6",
+    "terminal.integrated.letterSpacing": 0,
+    "terminal.integrated.lineHeight": 1,
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.fontWeight": 400,
+    "terminal.integrated.fontWeightBold": 1000,
+    "terminal.integrated.fontFamily": "MonoId, Source Code Pro",
+    "terminal.integrated.wordSeparators": " ()[]{}',\"`?",
+    /*** tabs ***/
+    "terminal.integrated.tabs.showActiveTerminal": "always",
     /* extensions */
     /** drawio **/
     "hediet.vscode-drawio.offline": true,
@@ -45,6 +71,9 @@
     "dashboard.projectTileWidth": 350,
     "dashboard.displayProjectPath": true,
     "dashboard.showAddProjectButtonTile": false,
+    /** markdown **/
+    "markdown.styles": [],
+    "markdown.links.openLocation": "beside",
     /** java **/
     "java.home": "f:/cdev/jdk",
     "java.trace.server": "off",
@@ -64,8 +93,8 @@
     /*** configuration ***/
     "java.configuration.checkProjectSettingsExclusions": false,
     "java.configuration.updateBuildConfiguration": "disabled",
-    "java.configuration.maven.userSettings": "${workspaceFolder}/maven/settings.xml",
-    "java.configuration.maven.globalSettings": "${workspaceFolder}/maven/settings.xml",
+    "java.configuration.maven.userSettings": "${workspaceFolder}/mvn/settings.xml",
+    "java.configuration.maven.globalSettings": "${workspaceFolder}/mvn/settings.xml",
     /*** completion ***/
     "java.completion.enabled": true,
     "java.completion.overwrite": true,
@@ -102,7 +131,13 @@
     ],
     /** maven **/
     "maven.view": "hierarchical",
-    "maven.terminal.customEnv": [],
+    "maven.showInExplorerContextMenu": "true",
+    "maven.excludedFolders": [],
+    "maven.terminal.customEnv": [
+        { "environmentVariable": "USER", "value": "${workspaceFolder}/mvn/user" },
+        { "environmentVariable": "TEMP", "value": "${workspaceFolder}/mvn/temp" },
+        { "environmentVariable": "APPDATA", "value": "${workspaceFolder}/mvn/appdata" }
+    ],
     "maven.terminal.favorites": [],
     "maven.terminal.useJavaHome": true,
     "maven.executable.options": "",

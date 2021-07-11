@@ -3,7 +3,6 @@ package nikochir;
 /* include */
 import nikochir.*;
 import nikochir.kernel.*;
-import nikochir.preset.*;
 import nikochir.execut.*;
 import nikochir.listen.*;
 import nikochir.permit.*;
@@ -15,8 +14,6 @@ import java.util.Map;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Collection;
-import java.lang.Class;
 /** bukkit - plugin, config, events **/
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -47,14 +44,14 @@ public class Main extends JavaPlugin {
     public static Main get() { return objInstance; }
     public PluginCommand getCommand(String strCommand) { return this.getServer().getPluginCommand(strCommand); }
     public Player getPlayer(String strPlayer)          { return this.getServer().getPlayer(strPlayer); }
-    public boolean getConfigBit(String strKey)      { return this.getConfig().getBoolean(strKey); }
+    public Boolean getConfigBit(String strKey)      { return this.getConfig().getBoolean(strKey); }
     public Integer getConfigInt(String strKey)      { return this.getConfig().getInt(strKey); }
     public Double getConfigNum(String strKey)       { return this.getConfig().getDouble(strKey); }
     public String getConfigStr(String strKey)       { return this.getConfig().getString(strKey); }
-    public List<Boolean> getConfigBitList(String strKey) { return this.getConfig().getBooleanList(strKey); }
-    public List<Integer> getConfigIntList(String strKey) { return this.getConfig().getIntegerList(strKey); }
-    public List<Double> getConfigNumList(String strKey)  { return this.getConfig().getDoubleList(strKey); }
-    public List<String> getConfigStrList(String strKey)  { return this.getConfig().getStringList(strKey); }
+    public List<Boolean> getConfigBitList(String strKey)    { return this.getConfig().getBooleanList(strKey); }
+    public List<Integer> getConfigIntList(String strKey)    { return this.getConfig().getIntegerList(strKey); }
+    public List<Double> getConfigNumList(String strKey)     { return this.getConfig().getDoubleList(strKey); }
+    public List<String> getConfigStrList(String strKey)     { return this.getConfig().getStringList(strKey); }
     public ConfigurationSection getConfigSec(String strKey) { return this.getConfig().getConfigurationSection(strKey); }
     /* setters */
     //public boolean setConfigBit(String strKey, Boolean bitVal)      { this.getConfig().setBoolean(strKey, bitVal); return true; }
@@ -69,44 +66,36 @@ public class Main extends JavaPlugin {
         System.out.printf(String.format("%s:%s\n", this.getConfigStr("nameof_logo"), strFormat), objArgs);
     }
     public void doLogO(CommandSender objSender, String strFormat, Object ... objArgs) {
-        this.doLogO(strFormat, objArgs);
-        objSender.sendMessage(
-            String.format(
-                String.format(
-                    "%s:%s",
-                    this.getConfigStr("nameof_logo"),
-                    strFormat
-                ),
-                objArgs
-            )
-        );
+        System.out.printf(String.format("%s:%s\n", this.getConfigStr("nameof_logo"), strFormat), objArgs);
+        objSender.sendMessage(String.format(strFormat, objArgs));
     }
-    private boolean doInitExecuts() {
+    public Boolean doInitExecuts() {
         this.getCommand("mineguis").setExecutor(new Execut());
         this.getCommand("mguimain").setExecutor(new ExecutMain());
         this.getCommand("mguiitem").setExecutor(new ExecutItem());
         this.getCommand("mguimenu").setExecutor(new ExecutMenu());
         this.getCommand("mguibook").setExecutor(new ExecutBook());
         this.getCommand("mguiback").setExecutor(new ExecutBack());
+        this.getCommand("mguiinfo").setExecutor(new ExecutInfo());
         this.getCommand("mguivoid").setExecutor(new ExecutVoid());
         return true;
     }
-    private boolean doInitListens() {
+    public Boolean doInitListens() {
         this.getServer().getPluginManager().registerEvents(new Listen(), this);
         return true;
     }
-    private boolean doInitPermits() {
+    public Boolean doInitPermits() {
         this.getServer().getPluginManager().addPermission(new Permit());
         return true;
     }
-    private boolean doInitConfigs() {
+    public Boolean doInitConfigs() {
         this.getConfig().options().copyDefaults(true);
         this.saveDefaultConfig();
         /*** yaml ***/
-        /* this.doLogO("========<config_yaml>========"); */
+        this.doLogO("========<config_yaml>========");
         {
             Set<String> setKeys = this.getConfig().getKeys(true);
-            /*this.doLogO("count: %d;", setKeys.size()); */
+            this.doLogO( String.format("count: %d;", setKeys.size()) );
             for (String itrStrKey : setKeys) { /* this.doLogO(itrStrKey); */ }
         }
         return true;
@@ -141,18 +130,6 @@ public class Main extends JavaPlugin {
         } else {
             this.doLogO("init configs is failed;");
         }
-        /** signs **/
-        if (Sign.doInit()) {
-            this.doLogO("init signs is done;");
-        } else {
-            this.doLogO("init signs is failed;");
-        }
-        /** units **/
-        if (Unit.doInit()) {
-            this.doLogO("init units is done;");
-        } else {
-            this.doLogO("init signs is failed;");
-        }
         /** users **/
         if (User.doInit()) {
             this.doLogO("init users is done;");
@@ -183,18 +160,6 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         /* init */
         /* work */
-        /** sign **/
-        if (Sign.doQuit()) {
-            this.doLogO("quit signs is done;");
-        } else {
-            this.doLogO("quit signs is failed;");
-        }
-        /** units **/
-        if (Unit.doQuit()) {
-            this.doLogO("quit units is done;");
-        } else {
-            this.doLogO("quit units is failed;");
-        }
         /** users **/
         if (User.doQuit()) {
             this.doLogO("quit users is done;");

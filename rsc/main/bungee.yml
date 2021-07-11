@@ -2,3 +2,4 @@
 name: mineguis
 main: nikochir.Main
 version: ${project.version}
+#endfile#

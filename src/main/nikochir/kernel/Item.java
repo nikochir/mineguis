@@ -5,13 +5,13 @@ import nikochir.Main;
 import nikochir.kernel.Unit;
 import nikochir.kernel.Item;
 import nikochir.kernel.Menu;
-/* javkit */
+/** javkit **/
 import java.util.Set;
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.HashMap;
-/* bukkit */
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+/** bukkit **/
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -21,8 +21,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
-/* nkyori */
-import net.kyori.adventure.text.Component;
 /* typedef */
 /* Item class
  * > Description:
@@ -31,210 +29,180 @@ import net.kyori.adventure.text.Component;
  * -> the sign is the item name;
  * --> ItemStack.getI18NDisplayName() is invalid;
  * --> use ItemMeta.getDisplayName() instead - this is what we see;
- * -> exec is the actual command to execute;
- * --> sign does not include Executive command;
+ * -> Exec is the actual command to execute;
 */
 public class Item extends Unit {
     /* members */
-    static private HashMap<Sign, Item> tab;
+    static private HashMap<String, Item> tab;
     private final ItemStack objStack;
-    private String strExec;
+    private final String strExec;
     /* codetor */
     protected Item(String strName, String strIcon, List<String> arrStrLore, String strExec) {
-        super(strName, strIcon, arrStrLore);
-        this.objStack = new ItemStack(Material.matchMaterial(strIcon));
-        this.objStack.setLore(arrStrLore);
-        this.objStack.getItemMeta().setDisplayName(strName);
+        super(strName);
         this.strExec = strExec;
-        tab.put(this.getSign(), this);
+        Material valMaterial = Material.matchMaterial(strIcon);
+        if (valMaterial == null) {
+            Main.get().doLogO("no material \"%s\" found!", strIcon);
+            valMaterial = Material.DEBUG_STICK;
+        }
+        this.objStack = new ItemStack(valMaterial);
+        ItemMeta objMeta = this.objStack.getItemMeta();
+        objMeta.setDisplayName(this.getSign());
+        objMeta.setLore(arrStrLore);
+        this.objStack.setItemMeta(objMeta);
     }
     protected Item(String strName, String strIcon, String[] arrStrLore, String strExec) {
         this(strName, strIcon, Arrays.asList(arrStrLore), strExec);
     }
     protected Item(String strName, String strIcon, String strLore, String strExec) {
-        this(strName, strIcon, new String[] { strLore }, strExec);
+        this(strName, strIcon, new String[]{ strLore }, strExec);
     }
-    /** not_exec **/
-    protected Item(String strName, String strIcon, List<String> arrStrLore) {
-        this(strName, strIcon, arrStrLore, "");
+    protected Item(String strName, String strIcon, String strExec) {
+        this(strName, strIcon, "", strExec);
     }
-    protected Item(String strName, String strIcon, String[] arrStrLore) {
-        this(strName, strIcon, arrStrLore, "");
+    protected Item(String strName, String strExec) {
+        this(strName, "BOOK", strExec);
     }
-    protected Item(String strName, String strIcon, String strLore) {
-        this(strName, strIcon, strLore, "");
-    }
-    /** not_lore **/
-    protected Item(String strName, String strIcon) {
-        this(strName, strIcon, "");
-    }
-    protected Item(String strName) {
-        this(strName, "BOOK", "");
+    protected Item(String strExec) {
+        this(strExec.split(" ")[0], "BOOK", strExec.split(" "), strExec);
     }
     /* getters */
-    static public Item getItem(String strName, String strIcon, List<String> arrStrLore, String strExec) {
-        Sign objSign = Sign.getSign(strName, strIcon, arrStrLore);
-        Item objItem = null;
-        if (vetItem(objSign)) {
-            objItem = tab.get(objSign);
-            if (objItem.vetExec(strExec) == false) {
-                Main.get().doLogO("Item Exec is changed! [%s] -> [%s];", objItem.getExec(), strExec);
-                objItem.strExec = strExec;
-            }
-        }
-        else { objItem = new Item(strName, strIcon, arrStrLore, strExec); }
-        return objItem;
+    public static HashMap<String, Item> getItemTab() { return tab; }
+    public static Item getItem(String strSign) {
+        strSign = strSign.replace(" ", "_");
+        if (vetItem(strSign)) { return tab.get(strSign); }
+        else { Main.get().doLogO("the item \"%s\" is not found!", strSign); return null; }
     }
-    static public Item getItem(String strName, String strIcon, String[] arrStrLore, String strExec) {
-        return getItem(strName, strIcon, Arrays.asList(arrStrLore), strExec);
-    }
-    static public Item getItem(String strName, String strIcon, String strLore, String strExec) {
-        return getItem(strName, strIcon, new String[] { strLore }, strExec);
-    }
-    /** execoff **/
-    static public Item getItem(String strName, String strIcon, List<String> arrStrLore) {
-        return getItem(strName, strIcon, arrStrLore, "");
-    }
-    static public Item getItem(String strName, String strIcon, String[] arrStrLore) {
-        return getItem(strName, strIcon, arrStrLore, "");
-    }
-    static public Item getItem(String strName, String strIcon, String strLore) {
-        return getItem(strName, strIcon, strLore, "");
-    }
-    static public Item getItem(String strName, String strIcon) {
-        return getItem(strName, strIcon, "", "");
-    }
-    static public Item getItem(String strName) {
-        return getItem(strName, "BOOK", "", "");
-    }
-    static public Item getItem(ItemStack objStack, String strExec) {
-        return getItem(
-            objStack.getItemMeta().getDisplayName(),
-            objStack.getType().toString(),
-            objStack.getLore(),
-            strExec
-        );
-    }
-    static public Item getItem(ItemStack objStack) {
-        return getItem(objStack, "");
+    public static Item getItem(ItemStack objStack) {
+        return getItem(objStack.getItemMeta().getDisplayName());
     }
     public String getExec()       { return this.strExec; }
     public String getName()       { return this.objStack.getItemMeta().getDisplayName(); }
-    public List<String> getLore() { return this.objStack.getLore(); }
     public String getIcon()       { return this.objStack.getType().toString(); }
+    public List<String> getLore() { return this.objStack.getItemMeta().getLore(); }
     public ItemStack getStack()   { return this.objStack; }
-    public ItemMeta getMeta()     { return this.objStack.getItemMeta(); }
     /* setters */
+    static public boolean setItem(String strName, String strIcon, List<String> arrStrLore, String strExec) {
+        if (vetItem(strName)) { Main.get().doLogO("failed to set the item \"%s\";", strName); return false; }
+        else { tab.put(strName.replace(" ", "_"), new Item(strName, strIcon, arrStrLore, strExec)); return true; }
+    }
+    static public boolean setItem(String strName, String strIcon, String[] arrStrLore, String strExec) {
+        return setItem(strName, strIcon, Arrays.asList(arrStrLore), strExec);
+    }
+    static public boolean setItem(String strName, String strIcon, String strLore, String strExec) {
+        return setItem(strName, strIcon, Arrays.asList(new String[]{ strLore }), strExec);
+    }
+    static public boolean setItem(String strName, String strIcon, String strExec) {
+        return setItem(strName, strIcon, "", strExec);
+    }
+    static public boolean setItem(String strName, String strExec) {
+        return setItem(strName, "BOOK", "", strExec);
+    }
+    static public boolean setItem(String strExec) {
+        return setItem(strExec.split(" ")[0], "BOOK", strExec.split(" "), strExec);
+    }
     /* vetters */
-    static public boolean vetItem(Item objItem)      { return tab.containsKey(objItem.getSign()); }
-    static public boolean vetItem(Sign objSign)      { return tab.containsKey(objSign); }
-    static public boolean vetItem(Object ... arrObj) { return tab.containsKey(arrObj); }
-    public boolean vetName(String strName)           { return this.getName().equals(strName); }
-    public boolean vetLore(List<String> arrStrLore)  { return this.getLore().equals(arrStrLore); }
-    public boolean vetLore(String[] arrStrLore)      { return this.vetLore(Arrays.asList(arrStrLore)); }
-    public boolean vetLore(String strLore)           { return this.vetLore(new String[]{ strLore }); }
-    public boolean vetIcon(Material valIcon)         { return this.getIcon().equals(valIcon.toString()); }
-    public boolean vetIcon(String strIcon)           { return this.getIcon().equals(strIcon); }
-    public boolean vetExec(String strExec)           { return this.getExec().equals(strExec); }
-    public boolean vetStack(ItemStack objStack)      { return this.getStack().equals(objStack); }
-    public boolean vetMeta(ItemMeta objMeta)         { return this.getMeta().equals(objMeta); }
+    static public boolean vetItem(String strSign)     { return tab.containsKey(strSign.replace(" ", "_")); }
+    static public boolean vetItem(Item objItem)       { return tab.containsKey(objItem.getSign()); }
+    static public boolean vetItem(ItemMeta objMeta)   { return tab.containsKey(objMeta.getDisplayName()); }
+    static public boolean vetItem(ItemStack objStack) { return tab.containsKey(objStack.getItemMeta().getDisplayName()); }
+    public boolean vetExec(String strExec)        { return this.getExec().equals(strExec); }
+    public boolean vetStack(ItemStack objStack)   { return this.getStack().equals(objStack); }
     /* actions */
+    static private boolean doCreate() {
+        if (false
+            || Item.setItem(Main.get().getConfigStr("nameof_main"), "KNOWLEDGE_BOOK", "execute the main gui command", Main.get().getConfigStr("nameof_main")) == false
+            || Item.setItem("back", "COMPASS", "switch to the last menu", "mguiback") == false
+            || Item.setItem("void", "BLACK_STAINED_GLASS_PANE", "____", "mguivoid") == false
+        ) { Main.get().doLogO("failed to create some default item!"); return false; }
+        return true;
+    }
     static public boolean doInit() {
         if (tab != null) {
-            Main.get().doLogO(
-                "init is already done!"
-            );
+            Main.get().doLogO("the init has already been done!");
             return false;
         }
-        tab = new HashMap<Sign, Item>();
-//        if (Main.get().vetConfig("listof_item")) {
-//            ConfigurationSection objSectionListOf = Main.get().getConfigSec("listof_item");
-//            Set<String> setKeys = objSectionListOf.getKeys(false);
-//            if (setKeys.size() > 0) {
-//                /* Main.get().doLogO(
-//                    "count: %d;",
-//                    setKeys.size()
-//                ); */
-//            } else {
-//                Main.get().doLogO(
-//                    "the listof config section is empty!"
-//                );
-//                return false;
-//            }
-//            for (String itrStrKey : setKeys) {
-//                ConfigurationSection itrObjSectionItem = objSectionListOf.getConfigurationSection(itrStrKey);
-//                String itrStrSign = null;
-//                String itrStrLore = null; List<String> itrArrLore = null;
-//                String itrStrIcon = null;
-//                String itrStrExec = null;
-//                if (itrObjSectionItem.contains("info")) {
-//                    ConfigurationSection itrObjSectionInfo = itrObjSectionItem.getConfigurationSection("info");
-//                    itrStrSign = itrObjSectionInfo.getString("sign");
-//                    itrStrIcon = itrObjSectionInfo.getString("icon");
-//                    if (itrObjSectionInfo.isString("lore")) {
-//                        itrStrLore = itrObjSectionInfo.getString("lore");
-//                    } else if (itrObjSectionInfo.isList("lore")) {
-//                        itrArrLore = itrObjSectionInfo.getStringList("lore");
-//                    } else {
-//                        Main.get().doLogO("invalid item lore type!");
-//                        return false;
-//                    }
-//                } else {
-//                    Main.get().doLogO(
-//                        "config section \"%s\" does not have config section \"info\"!",
-//                        itrStrKey
-//                    );
-//                    return false;
-//                }
-//                if (itrObjSectionItem.contains("data")) {
-//                    ConfigurationSection itrObjSectionData = itrObjSectionItem.getConfigurationSection("data");
-//                    itrStrExec = itrObjSectionData.getString("exec");
-//                } else {
-//                    Main.get().doLogO(
-//                        "config section \"%s\" does not have config section \"data\"!",
-//                        itrStrKey
-//                    );
-//                    return false;
-//                }
-//                Item itrObjItem = null;
-//                if (itrStrLore == null && itrArrLore == null) {
-//                    itrObjItem = Item.getItem(itrStrSign, itrStrIcon, itrStrExec);
-//                } else if (itrStrLore != null) {
-//                    itrObjItem = Item.getItem(itrStrSign, itrStrIcon, itrStrLore, itrStrExec);
-//                } else if (itrArrLore != null) {
-//                    itrObjItem = Item.getItem(itrStrSign, itrStrIcon, itrArrLore, itrStrExec);
-//                }
-//                if (itrObjItem != null) {
-//                    /* Main.get().doLogO(
-//                        "the item has been added: %s;",
-//                        itrStrKey
-//                    ); */
-//                } else {
-//                    Main.get().doLogO(
-//                        "failed to add the item: %s;",
-//                        itrStrKey
-//                    );
-//                    return false;
-//                }
-//            }
-//        } else {
-//            Main.get().doLogO(
-//                "the config section listof_item is not found!"
-//            );
-//            return false;
-//        }
+        tab = new HashMap<String, Item>();
+        if (Item.doCreate() == false) { Main.get().doLogO("failed to create default items!"); return false; }
+        Main.get().doLogO("========<listof_item>========");
+        if (Main.get().vetConfig("listof_item")) {
+            ConfigurationSection objSectionListOf = Main.get().getConfigSec("listof_item");
+            Set<String> setKeys = objSectionListOf.getKeys(false);
+            if (setKeys.size() > 0) {
+                Main.get().doLogO(
+                    "count: %d;",
+                    setKeys.size()
+                );
+            } else {
+                Main.get().doLogO(
+                    "the listof config section is empty!"
+                );
+                return false;
+            }
+            for (String itrStrKey : setKeys) {
+                ConfigurationSection itrObjSectionItem = objSectionListOf.getConfigurationSection(itrStrKey);
+                String itrStrSign = null;
+                String itrStrIcon = null;
+                String itrStrLore = null;
+                List<String> itrArrStrLore = null;
+                String itrStrExec = null;
+                if (itrObjSectionItem.contains("info")) {
+                    ConfigurationSection itrObjSectionInfo = itrObjSectionItem.getConfigurationSection("info");
+                    itrStrSign = itrObjSectionInfo.getString("sign");
+                    itrStrIcon = itrObjSectionInfo.getString("icon");
+                    if (itrObjSectionInfo.isString("lore")) { itrStrLore = itrObjSectionInfo.getString("lore"); }
+                    else { itrArrStrLore = itrObjSectionInfo.getStringList("lore"); }
+                    itrStrLore = itrObjSectionInfo.getString("lore");
+                } else {
+                    Main.get().doLogO(
+                        "config section \"%s\" does not have config section \"info\"!",
+                        itrStrSign
+                    );
+                    return false;
+                }
+                if (itrObjSectionItem.contains("data")) {
+                    ConfigurationSection itrObjSectionData = itrObjSectionItem.getConfigurationSection("data");
+                    itrStrExec = itrObjSectionData.getString("exec");
+                } else {
+                    Main.get().doLogO(
+                        "config section \"%s\" does not have config section \"data\"!",
+                        itrStrSign
+                    );
+                    return false;
+                }
+                boolean bitResult = false;
+                if (itrStrLore != null) { bitResult = Item.setItem(itrStrSign, itrStrIcon, itrStrLore, itrStrExec); }
+                else { bitResult = Item.setItem(itrStrSign, itrStrIcon, itrArrStrLore, itrStrExec); }
+                if (bitResult) {
+                    /* Main.get().doLogO(
+                        "the item \"%s\" has been added;",
+                        itrStrKey
+                    ); */
+                } else {
+                    Main.get().doLogO(
+                        "failed to add the item \"%s\";",
+                        itrStrKey
+                    );
+                    return false;
+                }
+                Item objItem = Item.getItem(itrStrSign);
+            }
+        } else {
+            Main.get().doLogO("the config section listof_item is not found!");
+            return false;
+        }
         return true;
     }
     static public boolean doQuit() {
         if (tab == null) {
-            Main.get().doLogO("init is not done!");
+            Main.get().doLogO("the quit has already been done!");
             return false;
         }
         tab.clear();
         tab = null;
         return true;
     }
-    public boolean doExec(Player objPlayer) {
+    public Boolean doExec(Player objPlayer) {
         if (objPlayer == null) {
             Main.get().doLogO("null argument is passed! doExecute(objPlayer);");
             return false;

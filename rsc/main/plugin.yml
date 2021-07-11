@@ -35,7 +35,7 @@ commands:
     #permission: minecode.*
     permission-message: you do not have /<permission>
     description:
-      execute any item using the name
+      execute any mineguis item using its name
   mguimenu:
     alias: ["mgui_menu"]
     usage: /<command> [name]
@@ -43,27 +43,13 @@ commands:
     permission-message: you do not have /<permission>
     description:
       open any menu panel using the name
-  mguimenuitem:
-    alias: ["mgui_menu_item","mgui_menu_set_item"]
-    usage: /<command> [name] [row] [column]
-    permission-message: you do not have /<permission>
-    #permission: minecode.creator
-    description:
-      set the menu item with particular signature into some slot
   mguibook:
     alias: ["mgui_book"]
-    usage: /<command> [name] [page]
+    usage: /<command> [name]
     #permission: minecode.*
     permission-message: you do not have /<permission>
     description:
       open any book panel using the name
-  mguibookitem:
-    alias: ["mgui_book_item","mgui_book_set_item"]
-    usage: /<command> [name] [row] [column] [page]
-    permission-message: you do not have /<permission>
-    #permission: minecode.creator
-    description:
-      set the book item with particular signature into some slot
   mguiback:
     alias: ["mgui_back"]
     usage: /<command>
@@ -71,6 +57,13 @@ commands:
     permission-message: you do not have /<permission>
     description:
       open the last viewed menu
+  mguiinfo:
+    alias: ["mgui_info"]
+    usage: /<command> [type]
+    #permission: minecode.*
+    permission-message: you do not have /<permission>
+    description:
+      show all gui objects of the same type, or display information about them
 permissions:
   mineguis.user:
     default: true

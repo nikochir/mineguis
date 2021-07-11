@@ -2,8 +2,11 @@
 package nikochir.execut;
 /* include */
 import nikochir.Main;
+import nikochir.kernel.Unit;
+import nikochir.kernel.User;
 import nikochir.kernel.Item;
 import nikochir.kernel.Menu;
+import nikochir.execut.Execut;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* ExecutorMenu class
  * > Description:
- * -> find some global menu with the given name and open that;
+ * -> ;
 */
 public class ExecutMenu implements CommandExecutor {
     /* handles */
@@ -31,25 +34,37 @@ public class ExecutMenu implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
+        if (User.vetUser(objPlayer) == false) {
+            Main.get().doLogO("failed to find the user!");
+            return false;
+        }
+        User objUser = User.getUser(objPlayer);
+        if (objUser == null) {
+            Main.get().doLogO("failed to find the user!");
+            return false;
+        }
         if (strArgs.length == 0) {
-            Menu objMenu = Menu.getMenu(Main.get().getConfigStr("nameof_main"), Main.get().getConfigInt("sizeof_usem"));
-            if (objMenu.doShow(objPlayer) == false) {
-                Main.get().doLogO("failed to show the main menu! ExecutMenu;");
+            if (Menu.vetMenu(Main.get().getConfigStr("nameof_main")) == false) {
+                Main.get().doLogO(objSender, "failed to find the main menu!");
+                return false;
+            }
+            if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+                Main.get().doLogO(objSender, "failed to show the main menu!");
                 return false;
             }
             return true;
         } else if (strArgs.length == 1) {
             if (Menu.vetMenu(strArgs[0]) == false) {
-                Main.get().doLogO("failed to find the menu!");
+                Main.get().doLogO(objSender, "failed to find the \"%s\" menu!", strArgs[0]);
                 return false;
             }
             if (Menu.getMenu(strArgs[0]).doShow(objPlayer) == false) {
-                Main.get().doLogO("failed to show the menu!");
+                Main.get().doLogO(objSender, "failed to show the \"%s\" menu!", strArgs[0]);
                 return false;
             }
             return true;
         } else {
-            Main.get().doLogO("invalid argument count!");
+            Main.get().doLogO(objSender, "invalid argument count: %d!", strArgs.length);
             return false;
         }
     }

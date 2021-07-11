@@ -4,12 +4,12 @@ package nikochir.kernel;
 import nikochir.Main;
 import nikochir.kernel.Unit;
 import nikochir.kernel.Item;
-/* javkit */
-import java.util.Set;
+/** javkit **/
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.HashMap;
-/* bukkit */
+/** bukkit **/
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
@@ -32,14 +32,14 @@ import org.bukkit.configuration.ConfigurationSection;
 */
 public class Menu extends Unit {
     /* members */
-    static private HashMap<Sign, Menu> tab;
+    static private HashMap<String, Menu> tab;
     private Inventory objPack;
     private List<Item> tabItems;
     /* codetor */
     protected Menu(String strTitle, int numSizeInLines) {
-        super(strTitle, numSizeInLines);
-        int numLinesMin = Main.get().getConfigInt("sizeof_minm");
-        int numLinesMax = Main.get().getConfigInt("sizeof_maxm");
+        super(strTitle);
+        Integer numLinesMin = Main.get().getConfigInt("sizeof_minm");
+        Integer numLinesMax = Main.get().getConfigInt("sizeof_maxm");
         if (numSizeInLines <= 0) {
             Main.get().doLogO("invalid number of lines!");
             return;
@@ -50,36 +50,30 @@ public class Menu extends Unit {
             Main.get().doLogO("too many lines!");
             numSizeInLines = numLinesMax;
         }
-        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, strTitle);
+        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, getSign());
         this.tabItems = new ArrayList<Item>(numSizeInLines * 9);
-        Item objItem = Item.getItem("void", "BLACK_STAINED_GLASS_PANE", "____", "mguivoid");
+        /*if (Item.vetItem("void")) {
+            for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
+                this.tabItems.add(Item.getItem("void"));
+                this.objPack.setItem(itr, this.tabItems.get(itr).getItem());
+            }
+        }*/
         for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
-            this.tabItems.add(objItem);
-            this.objPack.setItem(itr, objItem.getStack());
+            this.tabItems.add(null);
+            this.objPack.setItem(itr, null);
         }
-        tab.put(this.getSign(), this);
-    }
-    protected Menu(String strTitle) {
-        this(strTitle, Main.get().getConfigInt("sizeof_usem"));
     }
     /* getters */
-    static public Menu getMenu(String strTitle, int numSizeInLines) {
-        Sign objSign = Sign.getSign(strTitle, numSizeInLines);
-        Menu objMenu = null;
-        if (vetMenu(objSign)) { objMenu = tab.get(objSign); }
-        else                  { objMenu = new Menu(strTitle, numSizeInLines); }
-        return objMenu;
-    }
-    static public Menu getMenu(String strTitle) {
-        return getMenu(strTitle, Main.get().getConfigInt("sizeof_usem"));
-    }
-    static public Menu getMenu(InventoryView objView) {
-        return getMenu(objView.getTitle(), objView.getTopInventory().getSize() / 9);
+    public static HashMap<String, Menu> getMenuTab() { return tab; }
+    static public Menu getMenu(String strSign) {
+        strSign = strSign.replace(" ", "_");
+        if (vetMenu(strSign)) { return tab.get(strSign); }
+        else { Main.get().doLogO("the menu \"%s\" is not found!", strSign); return null; }
     }
     public int getSizeOfSlots() { return 1; }
     public int getSizeOfLines() { return 9; }
     public int getSizeInSlots() { return this.objPack.getSize(); }
-    public int getSizeInLines() { return this.getSizeInSlots(); }
+    public int getSizeInLines() { return this.getSizeInSlots() / this.getSizeOfLines(); }
     public Item getItem(int numSlot)        { return this.tabItems.get((numSlot - 1) % this.getSizeOfLines()); }
     public Item getItem(int numY, int numX) { return this.getItem((numY - 1) * this.getSizeInLines() + numX - 1); }
     public Item getItem(ItemStack objStack)  {
@@ -90,9 +84,18 @@ public class Menu extends Unit {
         return null;
     }
     /* setters */
+    static public boolean setMenu(String strTitle, int numSizeInLines) {
+        strTitle = strTitle.replace(" ", "_");
+        if (Menu.vetMenu(strTitle)) { Main.get().doLogO("the menu \"%s\" has already been set!", strTitle); return false; }
+        else { tab.put(strTitle, new Menu(strTitle, numSizeInLines)); return true; }
+    }
     public boolean setItem(Item objItem, int numSlot) {
         if (objItem == null) {
             Main.get().doLogO("null argument! setItem(null, numSlot);");
+            return false;
+        }
+        if (vetItem(numSlot)) {
+            Main.get().doLogO("the item slot is already used!");
             return false;
         }
         this.tabItems.set((numSlot - 1) % getSizeInSlots(), objItem);
@@ -102,144 +105,133 @@ public class Menu extends Unit {
     public boolean setItem(Item objItem, int numY, int numX) {
         return this.setItem(objItem, (numY - 1) * getSizeOfLines() + numX);
     }
-    public boolean setItem(Item objItem, int[] arrNums) {
-        if (arrNums.length == 0) {
-            Main.get().doLogO(
-                "no coordinate arguments provided! Book.setItem(objItem, arrNums);"
-            );
-            return false;
-        } else if (arrNums.length == 1) {
-            return this.setItem(objItem, arrNums[0]);
-        } else if (arrNums.length == 2) {
-            return this.setItem(objItem, arrNums[0], arrNums[1]);
-        } else {
-            Main.get().doLogO(
-                "invalid argument count: %d! Book.setItem(objItem, arrNums);",
-                arrNums.length
-            );
-            return false;
+    public boolean setItem(Item objItem, List<Integer> numSlot) {
+        switch (numSlot.size()) {
+            case 1: { return this.setItem(objItem, numSlot.get(0)); }
+            case 2: { return this.setItem(objItem, numSlot.get(0), numSlot.get(1)); }
+            default: { return false; }
         }
     }
-    public boolean setItem(Item objItem, List<Integer> arrNums) {
-        if (arrNums.size() == 0) {
-            Main.get().doLogO(
-                "no coordinate arguments provided! Book.setItem(objItem, arrNums);"
-            );
-            return false;
-        } else if (arrNums.size() == 1) {
-            return this.setItem(objItem, arrNums.get(0));
-        } else if (arrNums.size() == 2) {
-            return this.setItem(objItem, arrNums.get(0), arrNums.get(1));
-        } else {
-            Main.get().doLogO(
-                "invalid argument count: %d! Book.setItem(objItem, arrNums);",
-                arrNums.size()
-            );
-            return false;
+    public boolean setItem(Item objItem, int[] numSlot) {
+        switch (numSlot.length) {
+            case 1: { return this.setItem(objItem, numSlot[0]); }
+            case 2: { return this.setItem(objItem, numSlot[0], numSlot[1]); }
+            default: { return false; }
         }
     }
     /* vetters */
-    static public boolean vetMenu(Menu objMenu)          { return tab.containsKey(objMenu.getSign()); }
-    static public boolean vetMenu(Sign objSign)          { return tab.containsKey(objSign); }
-    static public boolean vetMenu(InventoryView objView) { return tab.containsKey(Sign.getSign(objView.getTitle(), objView.getTopInventory().getSize() / 9)); }
-    static public boolean vetMenu(Object ... arrObj) { return tab.containsKey(Sign.getSign(arrObj)); }
-    public boolean vetPack(Inventory objPack)     { return this.objPack.equals(objPack); }
-    public boolean vetView(InventoryView objView) { return this.vetSign(Sign.getSign(objView.getTitle(), objView.getTopInventory().getSize() / 9)); }
+    static public boolean vetMenu(String strTitle) { return tab.containsKey(strTitle.replace(" ", "_")); }
+    static public boolean vetMenu(Menu objMenu)    { return tab.containsKey(objMenu.getSign()); }
+    public boolean vetPack(Inventory objPack)      { return this.objPack == objPack; }
+    public boolean vetView(InventoryView objView)  { return vetSign(objView.getTitle()); }
+    public boolean vetItem(int numSlot)            { return this.objPack.getItem((numSlot - 1) % getSizeInSlots()) != null; }
     /* actions */
+    static private boolean doCreate() {
+        if (false
+            || Menu.setMenu(Main.get().getConfigStr("nameof_main"), Main.get().getConfigInt("sizeof_usem")) == false
+            || Menu.setMenu("Menue", "6") == false
+            || Menu.setMenu("Levelmap_1", "3") == false
+            || Menu.setMenu("Levelmap_2", "3") == false
+        ) { Main.get().doLogO("failed to create some default menu!"); return false; }
+        return true;
+    }
     static public boolean doInit() {
         if (tab != null) {
-            Main.get().doLogO("init is already done!");
+            Main.get().doLogO("the init has already been done!");
             return false;
         }
-        tab = new HashMap<Sign, Menu>();
-//        if (Main.get().vetConfig("listof_menu")) {
-//            ConfigurationSection objSectionListOf = Main.get().getConfigSec("listof_menu");
-//            Set<String> setKeys = objSectionListOf.getKeys(false);
-//            if (setKeys.size() > 0) {
-//                /* Main.get().doLogO(
-//                    "count: %d;",
-//                    setKeys.size()
-//                ); */
-//            } else {
-//                Main.get().doLogO(
-//                    "the listof config section is empty!"
-//                );
-//                return false;
-//            }
-//            for (String itrStrKey : setKeys) {
-//                ConfigurationSection itrObjSectionMenu = objSectionListOf.getConfigurationSection(itrStrKey);
-//                String itrStrSign = null;
-//                Integer itrNumSize = null;
-//                if (itrObjSectionMenu.contains("info")) {
-//                    ConfigurationSection itrObjSectionInfo = itrObjSectionMenu.getConfigurationSection("info");
-//                    itrStrSign = itrObjSectionInfo.getString("sign");
-//                    itrNumSize = itrObjSectionInfo.getInt("size");
-//                } else {
-//                    Main.get().doLogO(
-//                        "config section \"%s\" does not have config section \"info\"!",
-//                        itrStrKey
-//                    );
-//                    return false;
-//                }
-//                Menu itrObjMenu = Menu.getMenu(itrStrSign, itrNumSize);
-//                if (itrObjMenu != null) {
-//                    /* Main.get().doLogO(
-//                        "the menu has been added: %s;",
-//                        itrStrKey
-//                    ); */
-//                } else {
-//                    Main.get().doLogO(
-//                        "failed to add the menu: %s;",
-//                        itrStrKey
-//                    );
-//                    return false;
-//                }
-//                if (itrObjSectionMenu.contains("data")) {
-//                    ConfigurationSection itrObjSectionData = itrObjSectionMenu.getConfigurationSection("data");
-//                    Set<String> itrSetItems = itrObjSectionData.getKeys(false);
-//                    for (String itrStrItem : itrSetItems) {
-//                        ConfigurationSection itrObjSectionItem = itrObjSectionData.getConfigurationSection(itrStrItem);
-//                        String itrStrItemSign = itrObjSectionItem.getString("sign");
-//                        List<Integer> itrArrItemSlot = itrObjSectionItem.getIntegerList("slot");
-//                        if (Item.vetItem(itrStrItemSign)) {
-//                            if (itrObjMenu.setItem(
-//                                Item.getItem(itrStrItemSign),
-//                                itrArrItemSlot.get(0), itrArrItemSlot.get(1)
-//                            ) == true) {
-//                                /* this.doLogO("the menu item has been set; sign: %s; slot: [%d,%d]",
-//                                itrStrItemSign, itrArrItemSlot.get(0), itrArrItemSlot.get(1)); */
-//                            } else {
-//                                Main.get().doLogO(
-//                                    "failed to set the menu item: %s;",
-//                                    itrStrItemSign
-//                                );
-//                                return false;
-//                            }
-//                        } else {
-//                            Main.get().doLogO(
-//                                "the menu item is not found: %s;",
-//                                itrStrItemSign
-//                            );
-//                            return false;
-//                        }
-//                    }
-//                } else {
-//                    Main.get().doLogO(
-//                        "config section \"%s\" does not have config section \"data\"!",
-//                        itrStrKey
-//                    );
-//                    return false;
-//                }
-//            }
-//        } else {
-//            Main.get().doLogO("the config section listof_menu is not found!");
-//            return false;
-//        }
+        tab = new HashMap<String, Menu>();
+        if (Menu.doCreate() == false) { Main.get().doLogO("failed to create default menus!"); return false; }
+        Main.get().doLogO("========<listof_menu>========");
+        if (Main.get().vetConfig("listof_menu")) {
+            ConfigurationSection objSectionListOf = Main.get().getConfigSec("listof_menu");
+            Set<String> setKeys = objSectionListOf.getKeys(false);
+            if (setKeys.size() > 0) {
+                Main.get().doLogO(
+                    "count: %d;",
+                    setKeys.size()
+                );
+            } else {
+                Main.get().doLogO(
+                    "the listof config section is empty!"
+                );
+                return false;
+            }
+            for (String itrStrKey : setKeys) {
+                ConfigurationSection itrObjSectionMenu = objSectionListOf.getConfigurationSection(itrStrKey);
+                String itrStrSign = null;
+                Integer itrNumSize = null;
+                if (itrObjSectionMenu.contains("info")) {
+                    ConfigurationSection itrObjSectionInfo = itrObjSectionMenu.getConfigurationSection("info");
+                    itrStrSign = itrObjSectionInfo.getString("sign");
+                    itrNumSize = itrObjSectionInfo.getInt("size");
+                } else {
+                    Main.get().doLogO(
+                        "config section \"%s\" does not have config section \"info\"!",
+                        itrStrSign
+                    );
+                    return false;
+                }
+                if (Menu.setMenu(itrStrSign, itrNumSize)) {
+                    /*Main.get().doLogO(
+                        "the menu \"%s\" has been added: ",
+                        itrStrKey
+                    );*/
+                } else {
+                    Main.get().doLogO(
+                        "failed to add the menu \"%s\";",
+                        itrStrKey
+                    );
+                    return false;
+                }
+                Menu itrObjMenu = Menu.getMenu(itrStrSign);
+                if (itrObjSectionMenu.contains("data")) {
+                    ConfigurationSection itrObjSectionData = itrObjSectionMenu.getConfigurationSection("data");
+                    Set<String> itrSetItems = itrObjSectionData.getKeys(false);
+                    for (String itrStrItem : itrSetItems) {
+                        ConfigurationSection itrObjSectionItem = itrObjSectionData.getConfigurationSection(itrStrItem);
+                        String itrStrItemSign = itrObjSectionItem.getString("sign");
+                        List<Integer> itrItemNum = itrObjSectionItem.getIntegerList("slot");
+                        if (Item.vetItem(itrStrItemSign)) {
+                            if (itrObjMenu.setItem(Item.getItem(itrStrItemSign), itrItemNum)) {
+                                /*Main.get().doLogO(
+                                    "the menu item \"%s\" has been added;",
+                                    itrStrItemSign
+                                );*/
+                            } else {
+                                Main.get().doLogO(
+                                    "failed to add the menu item \"\";",
+                                    itrStrItemSign
+                                );
+                                return false;
+                            }
+                        } else {
+                            Main.get().doLogO(
+                                "the menu item \"%s\" is not found;",
+                                itrStrItemSign
+                            );
+                            return false;
+                        }
+                    }
+                } else {
+                    Main.get().doLogO(
+                        "config section \"%s\" does not have config section \"data\"!",
+                        itrStrSign
+                    );
+                    return false;
+                }
+            }
+        } else {
+            Main.get().doLogO(
+                "the config section listof_menu is not found!"
+            );
+            return false;
+        }
         return true;
     }
     static public boolean doQuit() {
         if (tab == null) {
-            Main.get().doLogO("init is not done!");
+            Main.get().doLogO("the quit has already been done!");
             return false;
         }
         tab.clear();

@@ -18,7 +18,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.block.Action;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -28,107 +27,58 @@ import org.bukkit.Sound;
 /* typedef */
 /* Listener class
  * > Description:
- * -> global event listener for all main general events;
- * --> processes every single player event related to the gui;
- * -> user could be a listener itself, but because we are listening to
- * global events, every single user would have to listen each other;
- * --> so we have only one global listener for all global events;
+ * -> ;
 */
 public class Listen implements Listener {
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent objEvent) {
-        User objUser = User.getUser(objEvent.getPlayer());
-        if (User.vetUser(objEvent.getPlayer()) != true) {
-            Main.get().doLogO("the user is not registered! onPlayerJoin(objEvent);");
-            return;
-        }
-    }
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent objEvent) {
-        if (User.vetUser(objEvent.getPlayer()) != true) {
-            Main.get().doLogO("the user is not registered! onPlayerJoin(objEvent);");
-            return;
-        }
-        User objUser = User.getUser(objEvent.getPlayer());
-    }
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent objEvent) {
-        if (User.vetUser(objEvent.getPlayer()) != true) {
-            Main.get().doLogO("failed to find the user!");
-            return;
-        }
-        User objUser = User.getUser(objEvent.getPlayer());
-        if (objEvent.isCancelled() == true) { return; }
-        Action objAction = objEvent.getAction();
-        switch (objAction) {
-            case PHYSICAL: {
-            }
-            break;
-            case LEFT_CLICK_AIR: case LEFT_CLICK_BLOCK: {
-            }
-            break;
-            case RIGHT_CLICK_AIR: case RIGHT_CLICK_BLOCK: {
-                if (objEvent.hasItem() == false) { return; }
-                ItemStack objStack = objEvent.getItem();
-                if (Item.vetItem(objStack) != true) { return; }
-                Item objItem = Item.getItem(objStack);
-                objEvent.setCancelled(true);
-                if (objItem.doExec(objEvent.getPlayer()) != true) {
-                    Main.get().doLogO("failed to execute the item! onPlayerInteract(objEvent);");
-                    return;
-                }
-            }
-            break;
-        }
-    }
     /* handles */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent objEvent) {
-        if ((objEvent.getWhoClicked() instanceof Player) != true) {
+        if ((objEvent.getWhoClicked() instanceof Player) == false) {
             Main.get().doLogO("not player click!");
             return;
         }
         Player objPlayer = (Player) objEvent.getWhoClicked();
-        if (Menu.vetMenu(objEvent.getView()) != true) {
+        if (Menu.vetMenu(objEvent.getView().getTitle()) == false) {
             Main.get().doLogO("the menu is not found! onInventoryClick(objEvent);");
             return;
         }
-        /* Menu objMenu = Menu.getMenu(objEvent.getView().getTitle());
-        we do not need this, only check if it exists */
+        /*Menu objMenu = Menu.getMenu(objEvent.getView().getTitle());
+        we do no need this, only check if it exists */
         // respond in some way;
         objEvent.setCancelled(true);
         objPlayer.playSound(objPlayer.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
         // in this case we are cancelling the click producing a sound;
         ItemStack objStack = objEvent.getCurrentItem();
         if (objStack == null) { return; }
-        if (Item.vetItem(objStack) != true) {
+        if (objStack.hasItemMeta() == false) { return; }
+        if (Item.vetItem(objStack) == false) {
             Main.get().doLogO(
                 "the item is not registered! onInventoryClick(objEvent); "
                 + objStack.getItemMeta().getDisplayName()
             );
             return;
         }
-        if (Item.getItem(objStack).doExec(objPlayer) != true) {
+        if (Item.getItem(objStack).doExec(objPlayer) == false) {
             Main.get().doLogO("failed to execute the item command! onIntentoryClick(objEvent);");
             return;
         }
-        /* if (objMenu.doPass(objPlayer, objStack) == false) {
+        /*if (objMenu.doPass(objPlayer, objStack) == false) {
             Main.get().doLogO("failed menu pass! onInventoryClick(objEvent);");
             return;
         } we already have all items, no need to pass it in the menu */
     }
     @EventHandler
-    public void onInventoryOpen(InventoryOpenEvent objEvent) {
-        if (User.vetUser(objEvent.getPlayer()) != true) {
+    public void onInventoryShow(InventoryOpenEvent objEvent) {
+        if (User.vetUser(objEvent.getPlayer().getUniqueId().toString()) == false) {
             Main.get().doLogO("user is not found! onInventoryShow(objEvent);");
             return;
         }
-        User objUser = User.getUser(objEvent.getPlayer());
-        if (Menu.vetMenu(objEvent.getView()) != true) {
+        User objUser = User.getUser(objEvent.getPlayer().getUniqueId().toString());
+        if (Menu.vetMenu(objEvent.getView().getTitle()) == false) {
             //Main.get().doLogO("menu is not found! onInventoryHide(objEvent);");
             return;
         }
-        Menu objMenu = Menu.getMenu(objEvent.getView());
+        Menu objMenu = Menu.getMenu(objEvent.getView().getTitle());
         if (objUser.vetMenu(objMenu) == true) {
             Main.get().doLogO("this is already current menu! onInventoryShow(objEvent);");
             return;
@@ -139,18 +89,18 @@ public class Listen implements Listener {
         }
     }
     @EventHandler
-    public void onInventoryClose(InventoryCloseEvent objEvent) {
+    public void onInventoryHide(InventoryCloseEvent objEvent) {
         if (User.vetUser(objEvent.getPlayer()) == false) {
             Main.get().doLogO("user is not found! onInventoryHide(objEvent);");
             return;
         }
         User objUser = User.getUser(objEvent.getPlayer());
-        if (Menu.vetMenu(objEvent.getView()) != true) {
+        if (Menu.vetMenu(objEvent.getView().getTitle()) == false) {
             //Main.get().doLogO("menu is not found! onInventoryHide(objEvent);");
             return;
         }
-        Menu objMenu = Menu.getMenu(objEvent.getView());
-        if (objUser.vetMenu(objMenu) != true) {
+        Menu objMenu = Menu.getMenu(objEvent.getView().getTitle());
+        if (objUser.vetMenu(objMenu) == false) {
             Main.get().doLogO("this is not the current menu! onInventoryHide(objEvent);");
             return;
         }
@@ -158,6 +108,23 @@ public class Listen implements Listener {
             Main.get().doLogO("failed to set the current menu! onInventoryHide(objEvent);");
             return;
         }*/
+    }
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent objEvent) {
+        if (User.setUser(objEvent.getPlayer())) { Main.get().doLogO("the user has been added!"); }
+        else { Main.get().doLogO("failed to create the user!"); return; }
+    }
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent objEvent) {
+        User objUser = User.getUser(objEvent.getPlayer());
+    }
+    @EventHandler
+    public void onPlayerWork(PlayerInteractEvent objEvent) {
+        if (User.vetUser(objEvent.getPlayer()) == false) {
+            Main.get().doLogO("failed to find the user!");
+            return;
+        }
+        User objUser = User.getUser(objEvent.getPlayer());
     }
 }
 /* endfile */

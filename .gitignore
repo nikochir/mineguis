@@ -1,6 +1,13 @@
 #directories#
 bin/
-data/vdeo/
+lib/
+data/movi/
+*.settings/
+*.target/
+*/mvn/bin
+*/mvn/repo
+#extension#
+*.project
 #binary#
 *.class
 #logging#

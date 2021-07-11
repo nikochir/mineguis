@@ -12,16 +12,16 @@ menu:
   items:
     item1:
       material: CHEST
-      name: "Â§6Shop"
+      name: "§6Shop"
       lore:
-        - "Â§3Zum Onlineshop"
-      command: "say Â§6Hier gehts zum Onlineshop: Â§3https://jacksa.de/minecraftshop/"
+        - "§3Zum Onlineshop"
+      command: "say §6Hier gehts zum Onlineshop: §3https://jacksa.de/minecraftshop/"
     item2:
       material: MAP
-      name: "Â§6Welten, Teleporter & Karten"
+      name: "§6Welten, Teleporter & Karten"
       lore:
-        - "Â§3Raids, Dungeons, Levelmaps"
-        - "Â§3und weitere Welten & Orte"
+        - "§3Raids, Dungeons, Levelmaps"
+        - "§3und weitere Welten & Orte"
       sub-menu:
         name: "Welten, Maps & Karten" #name of the submenu
         rows: 6 #sub-menu rows, atleast 3 or more for border
@@ -34,10 +34,10 @@ menu:
         items:
           item20:
             material: EXPERIENCE_BOTTLE
-            name: "Â§6Levelmaps"
+            name: "§6Levelmaps"
             lore:
-              - "Â§3Alle Maps zum leveln"
-              - "Â§3deines Characters"
+              - "§3Alle Maps zum leveln"
+              - "§3deines Characters"
             sub-menu:
               name: "Levelmaps" #name of the submenu
               rows: 6 #sub-menu rows, atleast 3 or more for border
@@ -50,57 +50,57 @@ menu:
               items:
                 item21:
                   material: EXPERIENCE_BOTTLE
-                  name: "Â§6Levelmap 1"
+                  name: "§6Levelmap 1"
                   lore:
-                    - "Â§3Friedliche Farm"
-                    - "Â§3Weltboss spawnt immer:Â§2 17 Uhr"
-                    - "Â§dHinter dem Piraten "
-                    - "Â§dSchiff auf der Sandinsel"
+                    - "§3Friedliche Farm"
+                    - "§3Weltboss spawnt immer:§2 17 Uhr"
+                    - "§dHinter dem Piraten "
+                    - "§dSchiff auf der Sandinsel"
                   command: "/warp map1"
                   anvil-input: true
                   placeholder: "placeholder"
                 item22:
                   material: EXPERIENCE_BOTTLE
-                  name: "Â§6Levelmap 2"
+                  name: "§6Levelmap 2"
                   lore:
-                    - "Â§3Zombieland"
-                    - "Â§3Weltboss spawnt immer:Â§2 18 Uhr"
-                    - "Â§dOben in der Pyramide"
+                    - "§3Zombieland"
+                    - "§3Weltboss spawnt immer:§2 18 Uhr"
+                    - "§dOben in der Pyramide"
                   command: "/warp map2"
                   anvil-input: true
                   placeholder: "placeholder"
           item21:
             material: ENCHANTING_TABLE
-            name: "Â§6Verzaubern & Enchanten"
+            name: "§6Verzaubern & Enchanten"
             lore:
-              - "Â§3Verzaubere deine Waffen"
-              - "Â§3am Verzauberungstisch"
+              - "§3Verzaubere deine Waffen"
+              - "§3am Verzauberungstisch"
             command: "warp verzaubern"
           item22:
             material: ANVIL
-            name: "Â§6Schmiede / Amboss"
+            name: "§6Schmiede / Amboss"
             lore:
-              - "Â§3Verbessere deine Waffen"
-              - "Â§3am Amboss"
+              - "§3Verbessere deine Waffen"
+              - "§3am Amboss"
             command: "warp schmiede"
           item23:
             material: ANVIL
-            name: "Â§6Zufallsteleport"
+            name: "§6Zufallsteleport"
             lore:
-              - "Â§3Zufallsteleport uber die"
-              - "Â§3Freebuild Map"
+              - "§3Zufallsteleport uber die"
+              - "§3Freebuild Map"
             command: "zufallsteleport"
     item3:
       material: DIAMOND_SWORD
-      name: "Â§6PvP"
+      name: "§6PvP"
       lore:
-        - "Â§3Arenen & PvP"
-      command: "say Â§cComing soon"
+        - "§3Arenen & PvP"
+      command: "say §cComing soon"
     item4:
       material: WHITE_BANNER
-      name: "Â§6Gilden"
+      name: "§6Gilden"
       lore:
-        - "Â§3Gilden & Clans"
+        - "§3Gilden & Clans"
       sub-menu:
         name: "abc" #name of the submenu
         rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -109,17 +109,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: RED_STAINED_GLASS_PANE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -128,25 +128,25 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "abc %input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item4:
       material: TURTLE_EGG
-      name: "Â§6Pets & Haustiere"
+      name: "§6Pets & Haustiere"
       lore:
-        - "Â§3Haustiere, Pets & Mounts"
+        - "§3Haustiere, Pets & Mounts"
       sub-menu:
         name: "Pets & Haustier" #name of the submenu
         rows: 6 #sub-menu rows, atleast 3 or more for border
@@ -159,48 +159,48 @@ menu:
         items:
           item1:
             material: CHEST
-            name: "Â§6Haustier Kaufen"
+            name: "§6Haustier Kaufen"
             lore:
-              - "Â§3Kaufe dir ein Tier"
+              - "§3Kaufe dir ein Tier"
             command: "petshop all"
           item2:
             material: OAK_SAPLING
-            name: "Â§6Fertigkeitsbaum"
+            name: "§6Fertigkeitsbaum"
             lore:
-              - "Â§3Wechsel den Fertigkeitsbaum"
-              - "Â§3deines Haustieres"
+              - "§3Wechsel den Fertigkeitsbaum"
+              - "§3deines Haustieres"
             command: "petchooseskilltree"
           item3:
             material: BEACON
-            name: "Â§6Fertigkeiten & Buffs"
+            name: "§6Fertigkeiten & Buffs"
             lore:
-              - "Â§3Wechsel die Fertigkeit"
-              - "Â§3deines Haustieres"
+              - "§3Wechsel die Fertigkeit"
+              - "§3deines Haustieres"
             command: "petbeacon"
           item4:
             material: ENDER_CHEST
-            name: "Â§6Tierauswahl / Wechseln"
+            name: "§6Tierauswahl / Wechseln"
             lore:
-              - "Â§3Wechsel dein Tier"
-              - "Â§3oder hole es heraus"
+              - "§3Wechsel dein Tier"
+              - "§3oder hole es heraus"
             command: "petswitch"
           item5:
             material: LEAD
-            name: "Â§6Tierverhalten aeandern"
+            name: "§6Tierverhalten aeandern"
             lore:
-              - "Â§3Veraender das Verhalten"
-              - "Â§3deines tieres"
+              - "§3Veraender das Verhalten"
+              - "§3deines tieres"
             command: "petbehavior"
           item6:
             material: PAINTING
-            name: "Â§6Haustierinfo & Gesundheit"
+            name: "§6Haustierinfo & Gesundheit"
             lore:
-              - "Â§3Alle Informationen"
-              - "Â§3ueber dein Haustier"
+              - "§3Alle Informationen"
+              - "§3ueber dein Haustier"
             command: "petinfo"
           item7:
             material: NAME_TAG
-            name: "Â§6Haustier Umbenennen"
+            name: "§6Haustier Umbenennen"
             lore:
               - ""
             command: "petname %input%"
@@ -208,23 +208,23 @@ menu:
             placeholder: "placeholder"
           item8:
             material: SWEET_BERRIES
-            name: "Â§6Haustier Rufen"
+            name: "§6Haustier Rufen"
             lore:
-              - "Â§3Rufe dein Haustier"
-              - "Â§3herbei"
+              - "§3Rufe dein Haustier"
+              - "§3herbei"
             command: "petcall"
           item9:
             material: SHULKER_SHELL
-            name: "Â§6Haustier Einpacken"
+            name: "§6Haustier Einpacken"
             lore:
-              - "Â§3Packt dein Hasutier"
-              - "Â§3wieder ein"
+              - "§3Packt dein Hasutier"
+              - "§3wieder ein"
             command: "petstore"
     item5:
       material: ENDER_CHEST
-      name: "Â§6Enderchest"
+      name: "§6Enderchest"
       lore:
-        - "Â§3Enderkiste (Items nicht verlierbar)"
+        - "§3Enderkiste (Items nicht verlierbar)"
       command: "ec"
       sub-menu:
         name: "abc" #name of the submenu
@@ -234,17 +234,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: RED_STAINED_GLASS_PANE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -253,37 +253,37 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "abc %input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item6:
       material: SHULKER_SHELL
-      name: "Â§6Rucksack"
+      name: "§6Rucksack"
       lore:
-        - "Â§3Rucksack (Items verlierbar)"
+        - "§3Rucksack (Items verlierbar)"
       command: "backpack"
     item234:
       material: END_CRYSTAL
-      name: "Â§6Auktionshaus Menue"
+      name: "§6Auktionshaus Menue"
       lore:
-        - "Â§3Verkaufe Items im Auktionshaus"
+        - "§3Verkaufe Items im Auktionshaus"
       command: "ah"
     item33:
       material: PLAYER_HEAD
-      name: "Â§6Kopfgeld Menue"
+      name: "§6Kopfgeld Menue"
       lore:
-        - "Â§3Oeffnet das Kopfgeld Menue"
+        - "§3Oeffnet das Kopfgeld Menue"
       sub-menu:
         name: "Kopfgeld" #name of the submenu
         rows: 6 #sub-menu rows, atleast 3 or more for border
@@ -296,42 +296,42 @@ menu:
         items:
           item1:
             material: BOOK
-            name: "Â§6Kopfgeld Liste"
+            name: "§6Kopfgeld Liste"
             lore:
-              - "Â§3Kaufe dir ein Tier"
+              - "§3Kaufe dir ein Tier"
             command: "kopfgeldliste"
           item2:
             material: GOLD_NUGGET
-            name: "Â§6Kopfgeld setzen"
+            name: "§6Kopfgeld setzen"
             lore:
-              - "Â§3Kopfgeld auf einen"
-              - "Â§3Spieler setzen"
+              - "§3Kopfgeld auf einen"
+              - "§3Spieler setzen"
             command: "kopfgeld setzen %input%"
             anvil-input: true
             placeholder: "placeholder"
     item9:
       material: HOPPER
-      name: "Â§6Sprachchat"
+      name: "§6Sprachchat"
       lore:
-        - "Â§3Sprich mit anderen Spielern im Spiel"
-      command: "say Â§cComing soon"
+        - "§3Sprich mit anderen Spielern im Spiel"
+      command: "say §cComing soon"
     item10:
       material: BOOK
-      name: "Â§6Quests / Aufgaben"
+      name: "§6Quests / Aufgaben"
       lore:
-        - "Â§3Quests, Aufgaben & Belohnungen"
-      command: "say Â§cComing soon"
+        - "§3Quests, Aufgaben & Belohnungen"
+      command: "say §cComing soon"
     item15:
       material: OAK_SAPLING
-      name: "Â§6Skill Tree"
+      name: "§6Skill Tree"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
-      command: "say Â§cComing soon"
+        - "§3Teleportiert dich nach Hause"
+      command: "say §cComing soon"
     item11:
       material: CAMPFIRE
-      name: "Â§6Nach Hause1"
+      name: "§6Nach Hause1"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       command: "home"
       sub-menu:
         name: "abc" #name of the submenu
@@ -341,17 +341,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: RED_STAINED_GLASS_PANE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -360,23 +360,23 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "abc %input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item16:
       material: WHITE_BANNER
-      name: "Â§6Gilden & Clans"
+      name: "§6Gilden & Clans"
       lore:
         - ""
       sub-menu:
@@ -387,15 +387,15 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: GREEN_BANNER
-            name: "Â§6Meine Gilde"
+            name: "§6Meine Gilde"
             lore:
-              - "Â§3Zur deiner Gilde"
+              - "§3Zur deiner Gilde"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -404,25 +404,25 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "aaa%input%"
                   anvil-input: true
                   placeholder: "placeholder"
           item2:
             material: RED_WOOL
-            name: "Â§6Meine Gilde"
+            name: "§6Meine Gilde"
             lore:
-              - "Â§3Zur deiner Gilde"
+              - "§3Zur deiner Gilde"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -431,25 +431,25 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "aaa%input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item11:
       material: CAMPFIRE
-      name: "Â§6Nach Hause1"
+      name: "§6Nach Hause1"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       command: "home"
       sub-menu:
         name: "abc" #name of the submenu
@@ -459,17 +459,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: RED_STAINED_GLASS_PANE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -478,25 +478,25 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "abc %input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item12:
       material: CAMPFIRE
-      name: "Â§6Nach Hause2"
+      name: "§6Nach Hause2"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       command: "home haus2"
       sub-menu:
         name: "abc" #name of the submenu
@@ -506,17 +506,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: RED_STAINED_GLASS_PANE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -525,26 +525,26 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "asd %input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item13:
       material: CAMPFIRE
-      name: "Â§6Nach Hause3"
+      name: "§6Nach Hause3"
       command: "home haus3"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       sub-menu:
         name: "abc" #name of the submenu
         rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -553,17 +553,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: RED_STAINED_GLASS_PANE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -572,25 +572,25 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "asd %input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item19:
       material: SOUL_CAMPFIRE
-      name: "Â§6Zu Hause 1 setzen"
+      name: "§6Zu Hause 1 setzen"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       command: "sethome"
       sub-menu:
         name: "abc" #name of the submenu
@@ -600,17 +600,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: SOUL_CAMPFIRE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -619,25 +619,25 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "asd %input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item20:
       material: SOUL_CAMPFIRE
-      name: "Â§6Zu Hause 2 setzen"
+      name: "§6Zu Hause 2 setzen"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       command: "sethome haus2"
       sub-menu:
         name: "abc" #name of the submenu
@@ -647,17 +647,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: SOUL_CAMPFIRE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -666,25 +666,25 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "aaa%input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item21:
       material: SOUL_CAMPFIRE
-      name: "Â§6Zu Hause 3 setzen"
+      name: "§6Zu Hause 3 setzen"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       command: "sethome haus3"
       sub-menu:
         name: "abc" #name of the submenu
@@ -694,17 +694,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: SOUL_CAMPFIRE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -713,33 +713,33 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "aaa%input%"
                   anvil-input: true
                   placeholder: "placeholder"
     item8:
       material: BELL
-      name: "Â§6Support & Hilfe"
+      name: "§6Support & Hilfe"
       lore:
-        - "Â§3Meldet dich zur"
-        - "Â§3warteschlange der"
-        - "Â§3Supporter an"
+        - "§3Meldet dich zur"
+        - "§3warteschlange der"
+        - "§3Supporter an"
       command: "support"
     item17:
       material: STONECUTTER
-      name: "Â§6Einstellungen"
+      name: "§6Einstellungen"
       lore:
-        - "Â§3Teleportiert dich nach Hause"
+        - "§3Teleportiert dich nach Hause"
       sub-menu:
         name: "abc" #name of the submenu
         rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -748,17 +748,17 @@ menu:
           material: BLACK_STAINED_GLASS_PANE
           name: " "
           lore:
-            - "Â§cline1"
-            - "Â§aline2"
-            - "Â§eline3"
+            - "§cline1"
+            - "§aline2"
+            - "§eline3"
         items:
           item1:
             material: SOUL_CAMPFIRE
             name: " "
             lore:
-              - "Â§cline1"
-              - "Â§aline2"
-              - "Â§eline3"
+              - "§cline1"
+              - "§aline2"
+              - "§eline3"
             sub-menu:
               name: "menu3" #name of the submenu
               rows: 3 #sub-menu rows, atleast 3 or more for border
@@ -767,17 +767,17 @@ menu:
                 material: BLACK_STAINED_GLASS_PANE
                 name: " "
                 lore:
-                  - "Â§cline1"
-                  - "Â§aline2"
-                  - "Â§eline3"
+                  - "§cline1"
+                  - "§aline2"
+                  - "§eline3"
               items:
                 item1:
                   material: RED_STAINED_GLASS_PANE
                   name: " "
                   lore:
-                    - "Â§cline1"
-                    - "Â§aline2"
-                    - "Â§eline3"
+                    - "§cline1"
+                    - "§aline2"
+                    - "§eline3"
                   command: "aaa%input%"
                   anvil-input: true
                   placeholder: "placeholder"

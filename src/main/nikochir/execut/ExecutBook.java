@@ -2,10 +2,12 @@
 package nikochir.execut;
 /* include */
 import nikochir.Main;
+import nikochir.kernel.Unit;
+import nikochir.kernel.User;
+import nikochir.kernel.Item;
 import nikochir.kernel.Menu;
 import nikochir.kernel.Book;
-/** javkit **/
-import java.lang.Integer;
+import nikochir.execut.Execut;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,8 +19,9 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* ExecutorBook class
  * > Description:
- * -> find a global book;
- * -> open the book on the given page;
+ * -> set of menu objects;
+ * -> every menu is a page;
+ * -> automatically sets enumerated names for all pages;
 */
 public class ExecutBook implements CommandExecutor {
     /* handles */
@@ -34,97 +37,33 @@ public class ExecutBook implements CommandExecutor {
             return false;
         }
         Player objPlayer = (Player) objSender;
+        User objUser = User.getUser(objPlayer);
+        if (objUser == null) {
+            Main.get().doLogO("failed to find the user!");
+            return false;
+        }
         if (strArgs.length == 0) {
-            Book objBook = Book.getBook(
-                Main.get().getConfigStr("nameof_main"),
-                Main.get().getConfigInt("sizeof_useb"),
-                Main.get().getConfigInt("sizeof_usem")
-            );
-            if (objBook.doShow(objPlayer) == false) {
-                Main.get().doLogO("failed to show the main book! ExecutBook;");
+            if (Book.vetBook(Main.get().getConfigStr("nameof_main")) == false) {
+                Main.get().doLogO(objSender, "failed to find the main book!");
+                return false;
+            }
+            if (Book.getBook(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+                Main.get().doLogO(objSender, "failed to show the main book!");
                 return false;
             }
             return true;
         } else if (strArgs.length == 1) {
-            String strName = strArgs[0];
-            if (Book.vetBook(strName) == false) {
-                Main.get().doLogO(String.format(
-                    "the book \"%s\" is not found! ExecutBook;",
-                    strName
-                ));
-                objSender.sendMessage(String.format(
-                    "the book \"%s\" is not found!",
-                    strName
-                ));
+            if (Book.vetBook(strArgs[0]) == false) {
+                Main.get().doLogO(objSender, "the book \"%s\" is not found!", strArgs[0]);
                 return false;
             }
-            Book objBook = Book.getBook(strName);
-            if (objBook.doShow(objPlayer) == false) {
-                Main.get().doLogO(String.format(
-                    "the book \"%s\" is not shown! ExecutBook;",
-                    strName
-                ));
-                objSender.sendMessage(String.format(
-                    "failed to show the book \"%s\"!",
-                    strName
-                ));
-                return false;
-            }
-            return true;
-        } else if (strArgs.length == 2) {
-            String strName = strArgs[0];
-            if (Book.vetBook(strName) == false) {
-                Main.get().doLogO(String.format(
-                    "the book \"%s\" is not found! ExecutBook;",
-                    strName
-                ));
-                objSender.sendMessage(String.format(
-                    "the book \"%s\" is not found!",
-                    strName
-                ));
-                return false;
-            }
-            Book objBook = Book.getBook(strName);
-            Integer numPage = null;
-            try {
-                numPage = Integer.parseInt(strArgs[1]);
-            } catch (NumberFormatException exc) {
-                Main.get().doLogO(String.format(
-                    "invalid argument: %s! ExecutBook;",
-                    strName
-                ));
-                objSender.sendMessage(String.format(
-                    "invalid argument: %s!",
-                    strName
-                ));
-                return false;
-            }
-            if (objBook.vetPage(numPage) == false) {
-                Main.get().doLogO(String.format(
-                    "the book \"%s\" does not have page \"%d\"! ExecutBook;",
-                    strName, numPage
-                ));
-                objSender.sendMessage(String.format(
-                    "the book \"%s\" does not have page \"%d\"!",
-                    strName, numPage
-                ));
-                return false;
-            }
-            Menu objPage = objBook.getPage(numPage);
-            if (objPage.doShow(objPlayer) == false) {
-                Main.get().doLogO(String.format(
-                    "the book \"%s\" is not shown! ExecutBook;",
-                    strName
-                ));
-                objSender.sendMessage(String.format(
-                    "failed to show the book \"%s\"!",
-                    strName
-                ));
+            if (Book.getBook(strArgs[0]).doShow(objPlayer) == false) {
+                Main.get().doLogO(objSender, "the book \"%s\" is not shown!", strArgs[0]);
                 return false;
             }
             return true;
         } else {
-            Main.get().doLogO("invalid argument count!");
+            Main.get().doLogO(objSender, "invalid argument count: %d!", strArgs.length);
             return false;
         }
     }

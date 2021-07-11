@@ -2,8 +2,13 @@
 package nikochir.execut;
 /* include */
 import nikochir.Main;
+import nikochir.kernel.Unit;
 import nikochir.kernel.Menu;
 import nikochir.kernel.User;
+import nikochir.kernel.Book;
+import nikochir.execut.Execut;
+/** javkit **/
+import java.util.ArrayList;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* ExecutorBack class
  * > Description:
- * -> open the lastly used by a player menu;
+ * -> ;
 */
 public class ExecutBack implements CommandExecutor {
     /* handles */
@@ -38,12 +43,12 @@ public class ExecutBack implements CommandExecutor {
             }
             User objUser = User.getUser(objPlayer);
             if (objUser.doMenuBack() == false) {
-                objSender.sendMessage("back menu is not found!");
+                Main.get().doLogO(objSender, "back menu is not found!");
                 return false;
             }
             return true;
         } else {
-            Main.get().doLogO("invalid argument count!");
+            Main.get().doLogO(objSender, "invalid argument count: %d!", strArgs.length);
             return false;
         }
     }

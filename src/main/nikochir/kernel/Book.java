@@ -7,9 +7,9 @@ import nikochir.kernel.Item;
 import nikochir.kernel.Menu;
 /** javkit **/
 import java.util.Set;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 /** bukkit **/
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -22,9 +22,6 @@ import org.bukkit.configuration.ConfigurationSection;
 /* typedef */
 /* Book class
  * > Description:
- * -> set of menu objects;
- * -> every menu is a page;
- * -> automatically sets enumerated names for all pages;
  * -> counts pages [from 1 to the_number_of_pages];
  * -> coordinates are considered from greater to lesser:
  * --> [z, y, x] is used because this is how we use counting systems;
@@ -33,14 +30,14 @@ import org.bukkit.configuration.ConfigurationSection;
 */
 public class Book extends Unit {
     /* members */
-    static private HashMap<Sign, Book> tab;
-    private List<Menu> tabPages;
+    static private HashMap<String, Book> tab;
+    private List<Menu> arrPages;
     /* codetor */
     protected Book(String strTitle, int numSizeInPages, int numSizeOfPages) {
-        super(strTitle, numSizeInPages, numSizeOfPages);
+        super(strTitle);
         int numPagesMin = Main.get().getConfigInt("sizeof_minb");
         int numPagesMax = Main.get().getConfigInt("sizeof_maxb");
-        if (numSizeInPages == 0) {
+        if (numSizeInPages <= 0) {
             Main.get().doLogO("invalid number of pages!");
             return;
         } else if (numSizeInPages < numPagesMin) {
@@ -50,48 +47,47 @@ public class Book extends Unit {
             Main.get().doLogO("too many pages!");
             numSizeInPages = numPagesMax;
         }
-        this.tabPages = new ArrayList<Menu>(numSizeInPages);
+        this.arrPages = new ArrayList<Menu>(numSizeInPages);
         int numSizeInSlots = numSizeOfPages * 9;
         for (int itrNumPage = 1; itrNumPage <= numSizeInPages; itrNumPage++) {
-            String itrStrPage = String.format("%s|%d/%d|", strTitle, itrNumPage, numSizeInPages);
-            Menu itrObjPage = Menu.getMenu(itrStrPage, numSizeOfPages);
+            String itrStrPage = String.format("%s|%d/%d|", this.getSign(), itrNumPage, numSizeInPages);
+            if (Menu.vetMenu(itrStrPage) == false) { Menu.setMenu(itrStrPage, numSizeOfPages); }
+            Menu itrObjPage = Menu.getMenu(itrStrPage);
             String itrStrPagePrev = String.format("%s|%d/%d|", strTitle, itrNumPage > 1 ? itrNumPage - 1 : numSizeInPages, numSizeInPages);
             String itrStrPageNext = String.format("%s|%d/%d|", strTitle, itrNumPage < numSizeInPages ? itrNumPage + 1 : 1, numSizeInPages);
-            Item itrObjItemPrev = Item.getItem(itrStrPagePrev, "PAPER", "previous page", "mguimenu " + itrStrPagePrev);
-            Item itrObjItemNext = Item.getItem(itrStrPageNext, "PAPER", "following page", "mguimenu " + itrStrPageNext);
-            Item itrObjItemBack = Item.getItem("back", "COMPASS", "swich to the last seen menu...", "back");
-            itrObjPage.setItem(itrObjItemPrev, numSizeInSlots - 3);
-            itrObjPage.setItem(itrObjItemBack, numSizeInSlots - 2);
-            itrObjPage.setItem(itrObjItemNext, numSizeInSlots - 1);
-            this.tabPages.add(itrObjPage);
+            if (Item.vetItem(itrStrPagePrev) == false) { Item.setItem(itrStrPagePrev, "PAPER", "switch to the previous page", "mguimenu " + itrStrPagePrev); }
+            if (Item.vetItem(itrStrPageNext) == false) { Item.setItem(itrStrPageNext, "PAPER", "switch to the following page", "mguimenu " + itrStrPageNext); }
+            Item itrObjItemPrev = Item.getItem(itrStrPagePrev);
+            Item itrObjItemNext = Item.getItem(itrStrPageNext);
+            Item itrObjItemBack = Item.getItem("back");
+            itrObjPage.setItem(itrObjItemPrev, itrObjPage.getSizeInSlots() - 2);
+            itrObjPage.setItem(itrObjItemBack, itrObjPage.getSizeInSlots() - 1);
+            itrObjPage.setItem(itrObjItemNext, itrObjPage.getSizeInSlots() - 0);
+            this.arrPages.add(itrObjPage);
         }
-        tab.put(this.getSign(), this);
     }
-    protected Book(String strTitle, int numSizeInPages) { this(strTitle, numSizeInPages, Main.get().getConfigInt("sizeof_usem")); }
+    protected Book(String strTitle, int numSizeInPages) { this(strTitle, numSizeInPages, 6); }
     protected Book(String strTitle) { this(strTitle, Main.get().getConfigInt("sizeof_useb"), Main.get().getConfigInt("sizeof_usem")); }
     /* getters */
-    static public Book getBook(String strTitle, int numSizeInPages, int numSizeOfPages) {
-        Sign objSign = Sign.getSign(strTitle, numSizeInPages, numSizeOfPages);
-        Book objBook = null;
-        if (vetBook(objSign)) { objBook = tab.get(objSign); }
-        else                  { objBook = new Book(strTitle, numSizeInPages, numSizeOfPages); }
-        return objBook;
+    public static HashMap<String, Book> getBookTab() { return tab; }
+    static public Book getBook(String strSign) {
+        strSign = strSign.replace(" ", "_");
+        if (vetBook(strSign)) { return tab.get(strSign); }
+        else { Main.get().doLogO("the book \"%s\" is not found!", strSign); return null; }
     }
-    static public Book getBook(String strTitle, int numSizeInPages) {
-        return getBook(strTitle, numSizeInPages, Main.get().getConfigInt("sizeof_usem"));
-    }
-    static public Book getBook(String strTitle) {
-        return getBook(strTitle, Main.get().getConfigInt("sizeof_useb"), Main.get().getConfigInt("sizeof_usem"));
-    }
-    public int getSizeOfPages() { return this.tabPages.get(0).getSizeInLines(); }
-    public int getSizeInPages() { return this.tabPages.size(); }
-    public int getSizeOfLines() { return this.tabPages.get(0).getSizeOfLines(); }
-    public int getSizeInLines() { return this.getSizeInPages() * this.getSizeOfPages(); }
-    public int getSizeOfSlots() { return this.tabPages.get(0).getSizeOfSlots(); }
-    public int getSizeInSlots() { return this.getSizeInPages() * this.getSizeOfPages() * this.getSizeOfLines(); }
-    public Menu getPage()            { return this.tabPages.get(0); }
-    public Menu getPage(int numPage) { return this.tabPages.get(numPage - 1); }
+    public int getSizeOfPages()   { return this.arrPages.get(0).getSizeInLines(); }
+    public int getSizeInPages()   { return this.arrPages.size(); }
+    public int getSizeOfLines()   { return this.arrPages.get(0).getSizeOfLines(); }
+    public int getSizeInLines()   { return this.getSizeInPages() * this.getSizeOfPages(); }
+    public int getSizeOfSlots()   { return this.arrPages.get(0).getSizeOfSlots(); }
+    public int getSizeInSlots()   { return this.getSizeInPages() * this.getSizeOfPages() * this.getSizeOfLines(); }
+    public Menu getPage()            { return this.arrPages.get(0); }
+    public Menu getPage(int numPage) { return this.arrPages.get(numPage - 1); }
     /* setters */
+    static public boolean setBook(String strTitle, int numSizeInPages, int numSizeInLines) {
+        if (vetBook(strTitle)) { Main.get().doLogO("the book \"%s\" has already been set!", strTitle); return false; }
+        else { tab.put(strTitle, new Book(strTitle.replace(" ", "_"), numSizeInPages, numSizeInLines)); return true; }
+    }
     public boolean setItem(Item objItem, int numSlot) {
         return this.getPage().setItem(objItem, numSlot);
     }
@@ -101,156 +97,125 @@ public class Book extends Unit {
     public boolean setItem(Item objItem, int numP, int numY, int numX) {
         return this.getPage(numP).setItem(objItem, numY, numX);
     }
-    public boolean setItem(Item objItem, int[] arrNums) {
-        if (arrNums.length == 0) {
-            Main.get().doLogO(
-                "no coordinate arguments provided! Book.setItem(objItem, arrNums);"
-            );
-            return false;
-        } else if (arrNums.length == 1) {
-            return this.setItem(objItem, arrNums[0]);
-        } else if (arrNums.length == 2) {
-            return this.setItem(objItem, arrNums[0], arrNums[1]);
-        } else if (arrNums.length == 3) {
-            return this.setItem(objItem, arrNums[0], arrNums[1], arrNums[2]);
-        } else {
-            Main.get().doLogO(
-                "invalid argument count: %d! Book.setItem(objItem, arrNums);",
-                arrNums.length
-            );
-            return false;
+    public boolean setItem(Item objItem, List<Integer> numSlot) {
+        switch (numSlot.size()){
+            case 1: { return this.setItem(objItem, numSlot.get(0)); }
+            case 2: { return this.setItem(objItem, numSlot.get(0), numSlot.get(1)); }
+            case 3: { return this.setItem(objItem, numSlot.get(0), numSlot.get(1), numSlot.get(2)); }
+            default: { return false; }
         }
     }
-    public boolean setItem(Item objItem, List<Integer> arrNums) {
-        if (arrNums.size() == 0) {
-            Main.get().doLogO(
-                "no coordinate arguments provided! Book.setItem(objItem, arrNums);"
-            );
-            return false;
-        } else if (arrNums.size() == 1) {
-            return this.setItem(objItem, arrNums.get(0));
-        } else if (arrNums.size() == 2) {
-            return this.setItem(objItem, arrNums.get(0), arrNums.get(1));
-        } else if (arrNums.size() == 3) {
-            return this.setItem(objItem, arrNums.get(0), arrNums.get(1), arrNums.get(2));
-        } else {
-            Main.get().doLogO(
-                "invalid argument count : %d! Book.setItem(objItem, arrNums);",
-                arrNums.size()
-            );
-            return false;
+    public boolean setItem(Item objItem, int[] numSlot) {
+        switch (numSlot.length){
+            case 1: { return this.setItem(objItem, numSlot[0]); }
+            case 2: { return this.setItem(objItem, numSlot[0], numSlot[1]); }
+            case 3: { return this.setItem(objItem, numSlot[0], numSlot[1], numSlot[2]); }
+            default: { return false; }
         }
     }
     /* vetters */
-    static public boolean vetBook(Book objBook)      { return tab.containsKey(objBook.getSign()); }
-    static public boolean vetBook(Sign objSign)      { return tab.containsKey(objSign); }
-    static public boolean vetBook(Object ... arrObj) { return tab.containsKey(Sign.getSign(arrObj)); }
-    public boolean vetSize(int numNumb) { return this.getSizeInPages() >= numNumb; }
-    public boolean vetPage(int numPage) { return this.getSizeInPages() >= numPage; }
+    public static boolean vetBook(String strSign) { return tab.containsKey(strSign.replace(" ", "_")); }
+    public static boolean vetBook(Book objBook)   { return tab.containsKey(objBook.getSign()); }
+    public boolean vetSize(Integer numNumb)       { return this.getSizeInPages() >= numNumb; }
     /* actions */
     static public boolean doInit() {
         if (tab != null) {
+            Main.get().doLogO("the init has already been done!");
+            return false;
+        }
+        tab = new HashMap<String, Book>();
+        if (false
+            || Book.setBook(Main.get().getConfigStr("nameof_main"), Main.get().getConfigInt("sizeof_useb"), Main.get().getConfigInt("sizeof_usem")) == false
+        ) { Main.get().doLogO("failed to initialize default books!"); }
+        Main.get().doLogO("========<listof_book>========");
+        if (Main.get().vetConfig("listof_book")) {
+            ConfigurationSection objSectionListOf = Main.get().getConfigSec("listof_book");
+            Set<String> setKeys = objSectionListOf.getKeys(false);
+            if (setKeys.size() > 0) {
+                Main.get().doLogO(
+                    "count: %d;",
+                    setKeys.size()
+                );
+            } else {
+                Main.get().doLogO(
+                    "the config section listof_book is empty!"
+                );
+                return false;
+            }
+            for (String itrStrKey : setKeys) {
+                ConfigurationSection itrObjSectionBook = objSectionListOf.getConfigurationSection(itrStrKey);
+                String itrStrSign = null;
+                List<Integer> itrNumSize = null;
+                if (itrObjSectionBook.contains("info")) {
+                    ConfigurationSection itrObjSectionInfo = itrObjSectionBook.getConfigurationSection("info");
+                    itrStrSign = itrObjSectionInfo.getString("sign");
+                    itrNumSize = itrObjSectionInfo.getIntegerList("size");
+                } else {
+                    Main.get().doLogO(
+                        "the config section \"%s\" does not have config section\"info\"!",
+                        itrStrSign
+                    );
+                    return false;
+                }
+                if (Book.setBook(itrStrSign, itrNumSize.get(0), itrNumSize.get(1))) {
+                    /* Main.get().doLogO("the book \"%s\" has been added;",
+                        itrStrSign
+                    ); */
+                } else {
+                    Main.get().doLogO(
+                        "failed to add the book \"%s\";",
+                        itrStrSign
+                    );
+                    return false;
+                }
+                Book itrObjBook = Book.getBook(itrStrSign);
+                if (itrObjSectionBook.contains("data")) {
+                    ConfigurationSection itrObjSectionData = itrObjSectionBook.getConfigurationSection("data");
+                    Set<String> itrSetItems = itrObjSectionData.getKeys(false);
+                    for (String itrStrItem : itrSetItems) {
+                        ConfigurationSection itrObjSectionItem = itrObjSectionData.getConfigurationSection(itrStrItem);
+                        String itrStrItemSign = itrObjSectionItem.getString("sign");
+                        List<Integer> itrItemSlot = itrObjSectionItem.getIntegerList("slot");
+                        if (Item.vetItem(itrStrItemSign)) {
+                            if (itrObjBook.setItem(Item.getItem(itrStrItemSign), itrItemSlot)) {
+                                /*Main.get().doLogO(
+                                    "the book item \"%s\" has been added;",
+                                    itrStrItemSign
+                                );*/
+                            } else {
+                                Main.get().doLogO(
+                                    "failed to add the book item: \"%s\";",
+                                    itrStrItemSign
+                                );
+                                return false;
+                            }
+                        } else {
+                            Main.get().doLogO(
+                                "the book item \"%s\" is not found;",
+                                itrStrItemSign
+                            );
+                            return false;
+                        }
+                    }
+                } else {
+                    Main.get().doLogO(
+                        "config section \"%s\" does not have config section \"data\"!",
+                        itrStrSign
+                    );
+                    return false;
+                }
+            }
+        } else {
             Main.get().doLogO(
-                "init has already beendone!"
+                "the config section listof_book is not found!"
             );
             return false;
         }
-        tab = new HashMap<Sign, Book>();
-//        if (Main.get().vetConfig("listof_book")) {
-//            ConfigurationSection objSectionListOf = Main.get().getConfigSec("listof_book");
-//            Set<String> setKeys = objSectionListOf.getKeys(false);
-//            /*if (setKeys.size() > 0) {
-//                Main.get().doLogO(
-//                    "count: %d;", setKeys.size()
-//                );
-//            } else {
-//                Main.get().doLogO(
-//                    "the config section listof_book is empty!"
-//                );
-//                return false;
-//            }*/
-//            for (String itrStrKey : setKeys) {
-//                ConfigurationSection itrObjSectionBook = objSectionListOf.getConfigurationSection(itrStrKey);
-//                String itrStrSign = null;
-//                List<Integer> itrNumSize = null;
-//                if (itrObjSectionBook.contains("info")) {
-//                    ConfigurationSection itrObjSectionInfo = itrObjSectionBook.getConfigurationSection("info");
-//                    itrStrSign = itrObjSectionInfo.getString("sign");
-//                    itrNumSize = itrObjSectionInfo.getIntegerList("size");
-//                } else {
-//                    Main.get().doLogO(
-//                        "the config section \"%s\" does not have config section\"info\"!",
-//                        itrStrSign
-//                    );
-//                    return false;
-//                }
-//                Book itrObjBook = Book.getBook(itrStrSign, itrNumSize.get(0), itrNumSize.get(1));
-//                if (itrObjBook != null) {
-//                    /* Main.get().doLogO(
-//                        "the book has been added: %s;",
-//                        itrStrKey
-//                    ); */
-//                } else {
-//                    Main.get().doLogO(
-//                        "failed to add the book: %s;",
-//                        itrStrSign
-//                    );
-//                    return false;
-//                }
-//                if (itrObjSectionBook.contains("data")) {
-//                    ConfigurationSection itrObjSectionData = itrObjSectionBook.getConfigurationSection("data");
-//                    Set<String> itrSetItems = itrObjSectionData.getKeys(false);
-//                    for (String itrStrItem : itrSetItems) {
-//                        ConfigurationSection itrObjSectionItem = itrObjSectionData.getConfigurationSection(itrStrItem);
-//                        String itrStrItemSign = itrObjSectionItem.getString("sign");
-//                        List<Integer> itrArrItemSlot = itrObjSectionItem.getIntegerList("slot");
-//                        if (Item.vetItem(itrStrItemSign)) {
-//                            if (itrObjBook.setItem(
-//                                Item.getItem(itrStrItemSign),
-//                                itrArrItemSlot.get(0), itrArrItemSlot.get(1), itrArrItemSlot.get(2)
-//                            ) == true) {
-//                                /* Main.get().doLogO("the book item has been set: %s;", itrStrItemSign); */
-//                            } else {
-//                                Main.get().doLogO(
-//                                    "failed to set the book item: %s;",
-//                                    itrStrItemSign
-//                                );
-//                                return false;
-//                            }
-//                        } else {
-//                            Main.get().doLogO(
-//                                "the book item is not found: %s;",
-//                                itrStrItemSign
-//                            );
-//                            return false;
-//                        }
-//                    }
-//                } else {
-//                    Main.get().doLogO(
-//                        "config section \"%s\" does not have config section \"data\"!",
-//                        itrStrKey
-//                    );
-//                    return false;
-//                }
-//            }
-//        } else {
-//            Main.get().doLogO("the config section listof_book is not found!");
-//            return false;
-//        }
-//        return true;
-//    }
-//    static public boolean doQuit() {
-//        if (tab == null) {
-//            Main.get().doLogO("init is not done!");
-//            return false;
-//        }
-//        tab.clear();
-//        tab = null;
         return true;
     }
     static public boolean doQuit() {
         if (tab == null) {
-            Main.get().doLogO("init is not done!");
+            Main.get().doLogO("the quit has already been done!");
             return false;
         }
         tab.clear();

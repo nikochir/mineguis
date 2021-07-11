@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* Executor class
  * > Description:
- * -> universal command to open any item, menu or a book;
+ * -> ;
 */
 public class Execut implements CommandExecutor {
     /* handles */
@@ -38,96 +38,106 @@ public class Execut implements CommandExecutor {
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
+            if (Menu.vetMenu(Main.get().getConfigStr("nameof_main")) == false) {
+                Main.get().doLogO(objSender, "failed to find the main menu!");
+                return false;
+            }
             if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
-                Main.get().doLogO("failed to show the main menu!");
+                Main.get().doLogO(objSender, "failed to show the main menu!");
                 return false;
             }
             return true;
         } else if (strArgs.length == 1) {
             if (strArgs[0].isEmpty()) {
-                Main.get().doLogO("invalid argument!");
+                Main.get().doLogO(objSender, "invalid argument!");
                 return false;
             } else if (strArgs[0].equalsIgnoreCase("item")) {
+                if (Item.vetItem(Main.get().getConfigStr("nameof_main")) == false) {
+                    Main.get().doLogO(objSender, "failed to find the main item!");
+                    return false;
+                }
                 if (Item.getItem(Main.get().getConfigStr("nameof_main")).doExec(objPlayer) == false) {
-                    Main.get().doLogO("failed to execute the main item!");
+                    Main.get().doLogO(objSender, "failed to exec the main item!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("menu")) {
+                if (Menu.vetMenu(Main.get().getConfigStr("nameof_main")) == false) {
+                    Main.get().doLogO(objSender, "failed to find the main menu!");
+                    return false;
+                }
                 if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
-                    Main.get().doLogO("failed to show the main menu!");
+                    Main.get().doLogO(objSender, "failed to show the main menu!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("book")) {
+                if (Book.vetBook(Main.get().getConfigStr("nameof_main")) == false) {
+                    Main.get().doLogO(objSender, "failed to find the main book!");
+                    return false;
+                }
                 if (Book.getBook(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
-                    Main.get().doLogO("failed to show the main book!");
+                    Main.get().doLogO(objSender, "failed to show the main book!");
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("debug")) {
                 Main.get().doLogO("debug command is called!");
-                objSender.sendMessage("you have just called debug command;");
-                objSender.sendMessage(Main.get().getConfigStr("mesg_dbug"));
+                objPlayer.sendMessage("you have just called debug command;");
+                objPlayer.sendMessage(Main.get().getConfigStr("mesg_dbug"));
                 return true;
             } else {
                 if (Menu.vetMenu(strArgs[0]) == false) {
-                    Main.get().doLogO("failed to find the menu!");
+                    Main.get().doLogO(objSender, "failed to find the \"%s\" menu!", strArgs[0]);
                     return false;
                 }
                 if (Menu.getMenu(strArgs[0]).doShow(objPlayer) == false) {
-                    Main.get().doLogO("failed to show the main book!");
+                    Main.get().doLogO(objSender, "failed to show the \"%s\" menu!", strArgs[0]);
                     return false;
                 }
                 return true;
             }
         } else if (strArgs.length == 2) {
             if (strArgs[0].isEmpty()) {
-                Main.get().doLogO("invalid arguments!");
+                Main.get().doLogO(objSender, "invalid argument!");
                 return false;
             } else if (strArgs[0].equalsIgnoreCase("item")) {
                 if (Item.vetItem(strArgs[1]) == false) {
-                    Main.get().doLogO("failed to find the item!");
+                    Main.get().doLogO(objSender, "failed to find the \"%s\" item!", strArgs[1]);
                     return false;
                 }
                 if (Item.getItem(strArgs[1]).doExec(objPlayer) == false) {
-                    Main.get().doLogO("failed to execute the item!");
+                    Main.get().doLogO(objSender, "failed to show the \"%s\" item!", strArgs[1]);
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("menu")) {
                 if (Menu.vetMenu(strArgs[1]) == false) {
-                    Main.get().doLogO("failed to find the menu!");
+                    Main.get().doLogO(objSender, "failed to find the \"%s\" menu!", strArgs[1]);
                     return false;
                 }
                 if (Menu.getMenu(strArgs[1]).doShow(objPlayer) == false) {
-                    Main.get().doLogO("failed to show the menu!");
+                    Main.get().doLogO(objSender, "failed to show the \"%s\" menu!", strArgs[1]);
                     return false;
                 }
                 return true;
             } else if (strArgs[0].equalsIgnoreCase("book")) {
-                if (strArgs[1].isEmpty()) {
-                    Main.get().doLogO("invalid arguments!");
+                if (Book.vetBook(strArgs[1]) == false) {
+                    Main.get().doLogO(objSender, "failed to find the \"%s\" book!", strArgs[1]);
                     return false;
-                } else {
-                    if (Book.vetBook(strArgs[1]) == false) {
-                        Main.get().doLogO("failed to find the book!");
-                        return false;
-                    } else {
-                        if (Book.getBook(strArgs[1]).doShow(objPlayer) == false) {
-                            Main.get().doLogO("failed to show the book!");
-                            return false;
-                        }
-                        return true;
-                    }
                 }
+                if (Book.getBook(strArgs[1]).doShow(objPlayer) == false) {
+                    Main.get().doLogO(objSender, "failed to show the \"%s\" book!", strArgs[1]);
+                    return false;
+                }
+                return true;
             } else {
                 if (Menu.vetMenu(strArgs[0]) == false) {
-                    Main.get().doLogO("failed to find the menu!");
+                    Main.get().doLogO(objSender, "failed to find the \"%s\" menu!", strArgs[0]);
                     return false;
                 }
                 if (Menu.getMenu(strArgs[0]).doShow(objPlayer) == false) {
-                    Main.get().doLogO("failed to show the main book!");
+                    Main.get().doLogO(objSender, "failed to show the \"%s\" menu!", strArgs[0]);
                     return false;
                 }
                 return true;

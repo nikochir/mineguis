@@ -2,7 +2,11 @@
 package nikochir.execut;
 /* include */
 import nikochir.Main;
+import nikochir.kernel.Unit;
+import nikochir.kernel.User;
+import nikochir.kernel.Item;
 import nikochir.kernel.Menu;
+import nikochir.execut.Execut;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 /* typedef */
 /* ExecutorMain class
  * > Description:
- * -> open the main menu;
+ * -> ;
 */
 public class ExecutMain implements CommandExecutor {
     /* handles */
@@ -31,14 +35,17 @@ public class ExecutMain implements CommandExecutor {
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            Menu objMenu = Menu.getMenu(Main.get().getConfigStr("nameof_main"), Main.get().getConfigInt("sizeof_usem"));
-            if (objMenu.doShow(objPlayer) == false) {
-                Main.get().doLogO("failed to show the menu!");
+            if (Menu.vetMenu(Main.get().getConfigStr("nameof_main")) == false) {
+                Main.get().doLogO(objSender, "failed to find the main menu!");
+                return false;
+            }
+            if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+                Main.get().doLogO(objSender, "failed to show the main menu!");
                 return false;
             }
             return true;
         } else {
-            Main.get().doLogO("invalid argument count!");
+            Main.get().doLogO(objSender, "invalid argument count: %d!", strArgs.length);
             return true;
         }
     }
