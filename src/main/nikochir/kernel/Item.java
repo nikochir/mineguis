@@ -1,10 +1,10 @@
 /* package */
-package nikochir.kernel;
+package src.main.nikochir.kernel;
 /* include */
-import nikochir.Main;
-import nikochir.kernel.Unit;
-import nikochir.kernel.Item;
-import nikochir.kernel.Menu;
+import src.main.nikochir.Main;
+import src.main.nikochir.kernel.Unit;
+import src.main.nikochir.kernel.Item;
+import src.main.nikochir.kernel.Menu;
 /** javkit **/
 import java.util.Set;
 import java.util.HashMap;
@@ -21,6 +21,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
+/** nkyori **/
+import net.kyori.adventure.text.Component;
 /* typedef */
 /* Item class
  * > Description:
@@ -47,8 +49,11 @@ public class Item extends Unit {
         }
         this.objStack = new ItemStack(valMaterial);
         ItemMeta objMeta = this.objStack.getItemMeta();
-        objMeta.setDisplayName(this.getSign());
-        objMeta.setLore(arrStrLore);
+        Component objName = Component.text(this.getSign());
+        objMeta.displayName(objName);
+        List<Component> arrObjLore = new ArrayList<Component>(arrStrLore.size());
+        for (String itrStrLore : arrStrLore) { arrObjLore.add(Component.text(itrStrLore)); }
+        objMeta.lore(arrObjLore);
         this.objStack.setItemMeta(objMeta);
     }
     protected Item(String strName, String strIcon, String[] arrStrLore, String strExec) {
@@ -154,9 +159,8 @@ public class Item extends Unit {
                     ConfigurationSection itrObjSectionInfo = itrObjSectionItem.getConfigurationSection("info");
                     itrStrSign = itrObjSectionInfo.getString("sign");
                     itrStrIcon = itrObjSectionInfo.getString("icon");
-                    if (itrObjSectionInfo.isString("lore")) { itrStrLore = itrObjSectionInfo.getString("lore"); }
-                    else { itrArrStrLore = itrObjSectionInfo.getStringList("lore"); }
-                    itrStrLore = itrObjSectionInfo.getString("lore");
+                    if (itrObjSectionInfo.isList("lore")) { itrArrStrLore = itrObjSectionInfo.getStringList("lore"); }
+                    else { itrStrLore = itrObjSectionInfo.getString("lore"); }
                 } else {
                     Main.get().doLogO(
                         "config section \"%s\" does not have config section \"info\"!",

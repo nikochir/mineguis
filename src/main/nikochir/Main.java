@@ -1,11 +1,11 @@
 /* package */
-package nikochir;
+package src.main.nikochir;
 /* include */
-import nikochir.*;
-import nikochir.kernel.*;
-import nikochir.execut.*;
-import nikochir.listen.*;
-import nikochir.permit.*;
+import src.main.nikochir.*;
+import src.main.nikochir.kernel.*;
+import src.main.nikochir.execut.*;
+import src.main.nikochir.listen.*;
+import src.main.nikochir.permit.*;
 /** javkit - standard utilities **/
 import java.util.List;
 import java.util.ArrayList;

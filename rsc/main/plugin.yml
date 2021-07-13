@@ -1,6 +1,6 @@
 #main#
 name: mineguis
-main: nikochir.Main
+main: src.main.nikochir.Main
 version: ${project.version}
 api-version: 1.16
 #work#

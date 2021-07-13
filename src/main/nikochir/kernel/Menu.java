@@ -1,9 +1,9 @@
 /* package */
-package nikochir.kernel;
+package src.main.nikochir.kernel;
 /* include */
-import nikochir.Main;
-import nikochir.kernel.Unit;
-import nikochir.kernel.Item;
+import src.main.nikochir.Main;
+import src.main.nikochir.kernel.Unit;
+import src.main.nikochir.kernel.Item;
 /** javkit **/
 import java.util.List;
 import java.util.ArrayList;

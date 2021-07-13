@@ -1,5 +1,5 @@
 /* package */
-package nikochir.permit;
+package src.main.nikochir.permit;
 /* include */
 import org.bukkit.permissions.Permission;
 /* typedef */

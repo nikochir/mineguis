@@ -1,12 +1,12 @@
 /* package */
-package nikochir.execut;
+package src.main.nikochir.execut;
 /* include */
-import nikochir.Main;
-import nikochir.kernel.Unit;
-import nikochir.kernel.User;
-import nikochir.kernel.Item;
-import nikochir.kernel.Menu;
-import nikochir.execut.Execut;
+import src.main.nikochir.Main;
+import src.main.nikochir.kernel.Unit;
+import src.main.nikochir.kernel.User;
+import src.main.nikochir.kernel.Item;
+import src.main.nikochir.kernel.Menu;
+import src.main.nikochir.execut.Execut;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

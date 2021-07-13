@@ -1,10 +1,10 @@
 /* package */
-package nikochir.kernel;
+package src.main.nikochir.kernel;
 /* import */
-import nikochir.Main;
-import nikochir.kernel.Unit;
-import nikochir.kernel.Item;
-import nikochir.kernel.Menu;
+import src.main.nikochir.Main;
+import src.main.nikochir.kernel.Unit;
+import src.main.nikochir.kernel.Item;
+import src.main.nikochir.kernel.Menu;
 /** javkit **/
 import java.util.Set;
 import java.util.HashMap;

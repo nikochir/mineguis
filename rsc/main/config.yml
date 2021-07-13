@@ -281,24 +281,21 @@ listof_item:
     info:
       sign: "AuktionsHausMenue"
       icon: END_CRYSTAL
-      lore:
-        - "Verkaufe Items im AuktionsHaus"
+      lore: "Verkaufe Items im AuktionsHaus"
     data:
       exec: "ah"
   item35:
     info:
       sign: "KopfgeldMenue"
       icon: PLAYER_HEAD
-      lore:
-        - "Oeffnet das Kopfgeld Menue"
+      lore: "Oeffnet das Kopfgeld Menue"
     data:
       exec: "mguimenu Kopfgeld"
   item36:
     info:
       sign: "KopfgeldListe"
       icon: BOOK
-      lore:
-        - "Kaufe dir ein Tier"
+      lore: "Kaufe dir ein Tier"
     data:
       exec: "kopfgeldliste"
   item37:

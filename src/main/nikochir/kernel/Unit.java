@@ -1,7 +1,7 @@
 /* package */
-package nikochir.kernel;
+package src.main.nikochir.kernel;
 /* include */
-import nikochir.Main;
+import src.main.nikochir.Main;
 /** javkit **/
 import java.util.HashMap;
 /* typedef */
