@@ -21,6 +21,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
+/** nkyori **/
+import net.kyori.adventure.text.Component;
 /* typedef */
 /* Menu class
  * > Description:
@@ -50,7 +52,7 @@ public class Menu extends Unit {
             Main.get().doLogO("too many lines!");
             numSizeInLines = numLinesMax;
         }
-        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, getSign());
+        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, Component.text(this.getSign()));
         this.tabItems = new ArrayList<Item>(numSizeInLines * 9);
         /*if (Item.vetItem("void")) {
             for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
