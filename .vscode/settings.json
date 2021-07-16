@@ -80,7 +80,7 @@
     "java.server.launchMode": "Standard",
     "java.contentProvider.preferred": "",
     /*** project ***/
-    "java.project.outputPath": "${workspaceFolder}/bin/",
+    "java.project.outputPath": "bin/",
     "java.project.exportJar.targetPath": "${workspaceFolder}/bin/${workspaceFolderBasename}.jar",
     "java.project.sourcePaths": [ "${workspaceFolder}/src", "${workspaceFolder}/src/main", "${workspaceFolder}/src/test" ],
     "java.project.referencedLibraries": [

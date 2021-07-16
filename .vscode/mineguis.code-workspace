@@ -86,8 +86,9 @@
 		"java.trace.server": "off",
 		"java.server.launchMode": "Standard",
 		"java.contentProvider.preferred": "",
+		"java.settings.url": "${workspaceFolder}/mvn/settings.xml",
 		/*** project ***/
-		"java.project.outputPath": "${workspaceFolder}/bin/",
+		"java.project.outputPath": "bin/",
 		"java.project.exportJar.targetPath": "${workspaceFolder}/bin/${workspaceFolderBasename}.jar",
 		"java.project.sourcePaths": [ "" ],
 		"java.project.referencedLibraries": [ "lib/**/*.jar" ],

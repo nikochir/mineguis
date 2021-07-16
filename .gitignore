@@ -6,6 +6,8 @@ data/movi/
 *.target/
 */mvn/bin
 */mvn/repo
+#temporary#
+minecord
 #extension#
 *.project
 #binary#

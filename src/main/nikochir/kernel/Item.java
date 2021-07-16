@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.Material;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationOptions;
@@ -36,24 +37,32 @@ import net.kyori.adventure.text.Component;
 public class Item extends Unit {
     /* members */
     static private HashMap<String, Item> tab;
-    private final ItemStack objStack;
+    private ItemStack objStack;
     private final String strExec;
     /* codetor */
     protected Item(String strName, String strIcon, List<String> arrStrLore, String strExec) {
-        super(strName);
+        super(ChatColor.translateAlternateColorCodes('@', strName));
         this.strExec = strExec;
-        Material valMaterial = Material.matchMaterial(strIcon);
-        if (valMaterial == null) {
-            Main.get().doLogO("no material \"%s\" found!", strIcon);
-            valMaterial = Material.DEBUG_STICK;
+        Integer numCustomModelData = null;
+        if (strIcon.matches("\\w+:\\d+")) {
+            numCustomModelData = Integer.parseInt(strIcon.substring(strIcon.lastIndexOf(':') + 1));
+            strIcon = strIcon.substring(0, strIcon.lastIndexOf(':'));
         }
+        Material valMaterial = Material.matchMaterial(strIcon);
+        if (valMaterial == null) { Main.get().doLogO("no material \"%s\" found!", strIcon); valMaterial = Material.DEBUG_STICK; }
         this.objStack = new ItemStack(valMaterial);
-        ItemMeta objMeta = this.objStack.getItemMeta();
+        //Component objName = Component.text(this.getSign());
         Component objName = Component.text(this.getSign());
-        objMeta.displayName(objName);
         List<Component> arrObjLore = new ArrayList<Component>(arrStrLore.size());
-        for (String itrStrLore : arrStrLore) { arrObjLore.add(Component.text(itrStrLore)); }
+        for (String itrStrLore : arrStrLore) {
+            //Component objLine = Component.text(itrStrLore);
+            Component objLine = Component.text(ChatColor.translateAlternateColorCodes('@', itrStrLore));
+            arrObjLore.add(objLine);
+        }
+        ItemMeta objMeta = this.objStack.getItemMeta();
+        objMeta.displayName(objName);
         objMeta.lore(arrObjLore);
+        objMeta.setCustomModelData(numCustomModelData);
         this.objStack.setItemMeta(objMeta);
     }
     protected Item(String strName, String strIcon, String[] arrStrLore, String strExec) {
@@ -88,8 +97,14 @@ public class Item extends Unit {
     public ItemStack getStack()   { return this.objStack; }
     /* setters */
     static public boolean setItem(String strName, String strIcon, List<String> arrStrLore, String strExec) {
-        if (vetItem(strName)) { Main.get().doLogO("failed to set the item \"%s\";", strName); return false; }
-        else { tab.put(strName.replace(" ", "_"), new Item(strName, strIcon, arrStrLore, strExec)); return true; }
+        if (vetItem(strName)) {
+            Main.get().doLogO("failed to set the item \"%s\";", strName);
+            return false;
+        } else {
+            Item objItem = new Item(strName, strIcon, arrStrLore, strExec);
+            tab.put(objItem.getSign(), objItem);
+            return true;
+        }
     }
     static public boolean setItem(String strName, String strIcon, String[] arrStrLore, String strExec) {
         return setItem(strName, strIcon, Arrays.asList(arrStrLore), strExec);
@@ -121,7 +136,7 @@ public class Item extends Unit {
                 "KNOWLEDGE_BOOK",
                 "execute the main gui command", Main.get().getConfigStr("nameof_main")
             ) == false
-            || Item.setItem("back", "COMPASS", "switch to the last menu", "mguiback") == false
+            || Item.setItem("back", "CARROT_ON_A_STICK:10", "switch to the last menu", "mguiback") == false
             || Item.setItem("void", "BLACK_STAINED_GLASS_PANE", "____", "mguivoid") == false
         ) { Main.get().doLogO("failed to create some default item!"); return false; }
         return true;

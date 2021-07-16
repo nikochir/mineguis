@@ -21,6 +21,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.ChatColor;
 /** nkyori **/
 import net.kyori.adventure.text.Component;
 /* typedef */
@@ -39,7 +40,7 @@ public class Menu extends Unit {
     private List<Item> tabItems;
     /* codetor */
     protected Menu(String strTitle, int numSizeInLines) {
-        super(strTitle);
+        super(ChatColor.translateAlternateColorCodes('@', strTitle));
         Integer numLinesMin = Main.get().getConfigInt("sizeof_minm");
         Integer numLinesMax = Main.get().getConfigInt("sizeof_maxm");
         if (numSizeInLines <= 0) {
@@ -52,7 +53,13 @@ public class Menu extends Unit {
             Main.get().doLogO("too many lines!");
             numSizeInLines = numLinesMax;
         }
-        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, Component.text(this.getSign()));
+        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, Component.text(this.getSign()));
+        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, Component.text(ChatColor.MAGIC + this.getSign()));
+        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, ChatColor.AQUA + this.getSign());
+        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, ChatColor.translateAlternateColorCodes('&', this.getSign()));
+        //Component objTitle = Component.text(ChatColor.AQUA + this.getSign());
+        Component objTitle = Component.text(this.getSign());
+        this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, objTitle);
         this.tabItems = new ArrayList<Item>(numSizeInLines * 9);
         /*if (Item.vetItem("void")) {
             for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
@@ -88,8 +95,14 @@ public class Menu extends Unit {
     /* setters */
     static public boolean setMenu(String strTitle, int numSizeInLines) {
         strTitle = strTitle.replace(" ", "_");
-        if (Menu.vetMenu(strTitle)) { Main.get().doLogO("the menu \"%s\" has already been set!", strTitle); return false; }
-        else { tab.put(strTitle, new Menu(strTitle, numSizeInLines)); return true; }
+        if (Menu.vetMenu(strTitle)) {
+            Main.get().doLogO("the menu \"%s\" has already been set!", strTitle);
+            return false;
+        } else {
+            Menu objMenu = new Menu(strTitle, numSizeInLines);
+            tab.put(objMenu.getSign(), objMenu);
+            return true;
+        }
     }
     public boolean setItem(Item objItem, int numSlot) {
         if (objItem == null) {

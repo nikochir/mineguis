@@ -78,7 +78,6 @@ public class Main extends JavaPlugin {
         this.getCommand("mguivoid").setExecutor(new ExecutVoid());
         this.getCommand("mguiitem").setExecutor(new ExecutItem());
         this.getCommand("mguimenu").setExecutor(new ExecutMenu());
-        this.getCommand("mguibook").setExecutor(new ExecutBook());
         this.getCommand("mguiback").setExecutor(new ExecutBack());
         this.getCommand("mguiinfo").setExecutor(new ExecutInfo());
         /** oper **/
@@ -154,12 +153,6 @@ public class Main extends JavaPlugin {
         } else {
             this.doLogO("init menus is failed;");
         }
-        /** books **/
-        if (Book.doInit()) {
-            this.doLogO("init books is done;");
-        } else {
-            this.doLogO("init books is failed;");
-        }
         /* quit */
     }
     @Override
@@ -183,12 +176,6 @@ public class Main extends JavaPlugin {
             this.doLogO("quit menus is done;");
         } else {
             this.doLogO("quit menus is failed;");
-        }
-        /** books **/
-        if (Book.doQuit()) {
-            this.doLogO("quit books is done;");
-        } else {
-            this.doLogO("quit books is failed;");
         }
         /* quit */
         objInstance = null;

@@ -6,7 +6,6 @@ import src.main.nikochir.kernel.Unit;
 import src.main.nikochir.kernel.User;
 import src.main.nikochir.kernel.Item;
 import src.main.nikochir.kernel.Menu;
-import src.main.nikochir.kernel.Book;
 import src.main.nikochir.execut.Execut;
 import src.main.nikochir.permit.Permit;
 /** bukkit **/
@@ -24,6 +23,9 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.Sound;
+import org.bukkit.ChatColor;
+/** nkyori **/
+import net.kyori.adventure.text.Component;
 /* typedef */
 /* Listener class
  * > Description:

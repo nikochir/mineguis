@@ -15,7 +15,7 @@ commands:
     permission: minecode.user
     permission-message: you do not have /<permission>
     description:
-      open any item, menu or book using the sign
+      open any item or menu using the sign
   mguimain:
     alias: ["mgui_main", "e"]
     usage: /<command>
@@ -51,13 +51,6 @@ commands:
     permission-message: you do not have /<permission>
     description:
       open any menu panel using the name
-  mguibook:
-    alias: ["mgui_book"]
-    usage: /<command> [name]
-    permission: minecode.user
-    permission-message: you do not have /<permission>
-    description:
-      open any book panel using the name
   mguiback:
     alias: ["mgui_back"]
     usage: /<command>

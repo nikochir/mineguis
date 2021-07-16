@@ -101,10 +101,10 @@ public class ExecutInfo implements CommandExecutor {
         @NotNull String strLabel,
         @NotNull String[] strArgs
     ) {
-        if ((objSender instanceof Player) == false) {
+        /*if ((objSender instanceof Player) == false) {
             Main.get().doLogO("this is not a player call!");
             return false;
-        }
+        }*/
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
             if (this.doSendListofUser(objSender) == false) {
