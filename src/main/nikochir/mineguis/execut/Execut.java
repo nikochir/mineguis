@@ -1,21 +1,14 @@
 /* package */
-package src.main.nikochir.execut;
+package src.main.nikochir.mineguis.execut;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.User;
-import src.main.nikochir.kernel.Item;
-import src.main.nikochir.kernel.Menu;
-import src.main.nikochir.kernel.Book;
-/** javkit **/
-import java.util.ArrayList;
+import src.main.nikochir.mineguis.Main;
+import src.main.nikochir.mineguis.kernel.Item;
+import src.main.nikochir.mineguis.kernel.Menu;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
@@ -71,16 +64,6 @@ public class Execut implements CommandExecutor {
                     return false;
                 }
                 return true;
-            } else if (strArgs[0].equalsIgnoreCase("book")) {
-                if (Book.vetBook(Main.get().getConfigStr("nameof_main")) == false) {
-                    Main.get().doLogO(objSender, "failed to find the main book!");
-                    return false;
-                }
-                if (Book.getBook(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
-                    Main.get().doLogO(objSender, "failed to show the main book!");
-                    return false;
-                }
-                return true;
             } else if (strArgs[0].equalsIgnoreCase("debug")) {
                 Main.get().doLogO("debug command is called!");
                 objPlayer.sendMessage("you have just called debug command;");
@@ -118,16 +101,6 @@ public class Execut implements CommandExecutor {
                 }
                 if (Menu.getMenu(strArgs[1]).doShow(objPlayer) == false) {
                     Main.get().doLogO(objSender, "failed to show the \"%s\" menu!", strArgs[1]);
-                    return false;
-                }
-                return true;
-            } else if (strArgs[0].equalsIgnoreCase("book")) {
-                if (Book.vetBook(strArgs[1]) == false) {
-                    Main.get().doLogO(objSender, "failed to find the \"%s\" book!", strArgs[1]);
-                    return false;
-                }
-                if (Book.getBook(strArgs[1]).doShow(objPlayer) == false) {
-                    Main.get().doLogO(objSender, "failed to show the \"%s\" book!", strArgs[1]);
                     return false;
                 }
                 return true;

@@ -1,28 +1,21 @@
 /* package */
-package src.main.nikochir.execut;
+package src.main.nikochir.mineguis.execut;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.Menu;
-import src.main.nikochir.kernel.User;
-import src.main.nikochir.kernel.Book;
-import src.main.nikochir.execut.Execut;
-/** javkit **/
-import java.util.ArrayList;
+import src.main.nikochir.mineguis.Main;
+import src.main.nikochir.mineguis.kernel.Menu;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* ExecutorBack class
+/* ExecutorMain class
  * > Description:
  * -> ;
 */
-public class ExecutBack implements CommandExecutor {
+public class ExecutMain implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -37,19 +30,21 @@ public class ExecutBack implements CommandExecutor {
         }
         Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (User.vetUser(objPlayer) == false) {
-                Main.get().doLogO("failed to find the user!");
+            String strMain = null;
+            strMain = "§7Menue";
+            // strMain = Main.get().getConfigStr("nameof_main");
+            if (Menu.vetMenu(strMain) == false) {
+                Main.get().doLogO(objSender, "failed to find the main menu!");
                 return false;
             }
-            User objUser = User.getUser(objPlayer);
-            if (objUser.doMenuBack() == false) {
-                Main.get().doLogO(objSender, "back menu is not found!");
+            if (Menu.getMenu(strMain).doShow(objPlayer) == false) {
+                Main.get().doLogO(objSender, "failed to show the main menu!");
                 return false;
             }
             return true;
         } else {
             Main.get().doLogO(objSender, "invalid argument count: %d!", strArgs.length);
-            return false;
+            return true;
         }
     }
 }

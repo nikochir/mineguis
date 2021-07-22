@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"name": "menuguis",
+			"name": "mineguis",
 			"path": "../",
 		}
 	],
@@ -12,31 +12,14 @@
 			"**/.git": false,
 			"**/.target": false,
 			"**/.classpath": false,
+			"**/.settings": false,
+			"**/.project": false,
 		},
 		/** editor **/
-		"editor.fontSize": 16,
-		"editor.fontWeight": "400",
+		"editor.fontSize": 12,
+		"editor.fontWeight": 400,
 		"editor.fontLigatures":  true,
-		"editor.fontFamily":
-			//"Apercu Mono"
-			//"Fira Code"
-			//"Input Mono"
-			//"Dank Mono"
-			//"Gintronic"
-			//"Monoid"
-			//"Hack"
-			//"Victor Mono"
-			//"DejaVu Sans Mono"
-			//"MonoLisa"
-			//"Consolas, 'Courier New', monospace"
-			//"SourceCodePro-Regular"
-			"Source Code Pro, Mono Lisa, Victor Mono, Input Mono, Fira Code, Inconsolata, MonoId, Consolas, Courier New, monospace"
-			//"VT323, Mozart NBP, Mayfair NBP, Silverfinster"
-			//"Daedra, Dragon Script"
-			//"mason chronicles"
-			//"Manic Miner, Mayfair NBP, VT323 Regular"
-			//"Manic Maner Regular"
-		,
+		"editor.fontFamily": "Source Code Pro, MonoId, Inconsolata, Consolas, Courier New, monospace",
 		/** terminal **/
 		"terminal.explorerKind": "integrated",
 		"terminal.integrated.gpuAcceleration": "on",
@@ -59,7 +42,7 @@
 		"terminal.integrated.fontSize": 12,
 		"terminal.integrated.fontWeight": 400,
 		"terminal.integrated.fontWeightBold": 1000,
-		"terminal.integrated.fontFamily": "MonoId, Source Code Pro",
+		"terminal.integrated.fontFamily": "Source Code Pro, MonoId, Inconsolata, Consolas, Courier New, monospace",
 		"terminal.integrated.wordSeparators": " ()[]{}',\"`?",
 		/*** tabs ***/
 		"terminal.integrated.tabs.showActiveTerminal": "always",
@@ -75,7 +58,7 @@
 		"hediet.vscode-drawio.customFonts": [ "Consolas" ],
 		/** dashboard **/
 		"dashboard.openOnStartup": "empty workspace",
-		"dashboard.projectTileWidth": 350,
+		"dashboard.projectTileWidth": 300,
 		"dashboard.displayProjectPath": true,
 		"dashboard.showAddProjectButtonTile": false,
 		/** markdown **/
@@ -84,13 +67,15 @@
 		/** java **/
 		"java.home": "f:/cdev/jdk",
 		"java.trace.server": "off",
-		"java.server.launchMode": "Standard",
+		"java.server.launchMode": "Hybrid",
 		"java.contentProvider.preferred": "",
 		"java.settings.url": "${workspaceFolder}/mvn/settings.xml",
 		/*** project ***/
 		"java.project.outputPath": "bin/",
-		"java.project.exportJar.targetPath": "${workspaceFolder}/bin/${workspaceFolderBasename}.jar",
-		"java.project.sourcePaths": [ "" ],
+		"java.project.exportJar.targetPath": "${workspaceFolder}/bin/target/${workspaceFolderBasename}.jar",
+		"java.project.sourcePaths": [
+			""
+		],
 		"java.project.referencedLibraries": [ "lib/**/*.jar" ],
 		"java.project.resourceFilters": [ "node_modules", ".git" ],
 		/*** configuration ***/
@@ -136,13 +121,14 @@
 		"maven.view": "hierarchical",
 		"maven.showInExplorerContextMenu": true,
 		"maven.excludedFolders": [],
+		"maven.terminal.useJavaHome": true,
+		"maven.terminal.favorites": [],
 		"maven.terminal.customEnv": [
 			{ "environmentVariable": "USER", "value": "${workspaceFolder}/mvn/user" },
+			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder}/mvn/user" },
 			{ "environmentVariable": "TEMP", "value": "${workspaceFolder}/mvn/temp" },
 			{ "environmentVariable": "APPDATA", "value": "${workspaceFolder}/mvn/appdata" }
 		],
-		"maven.terminal.favorites": [],
-		"maven.terminal.useJavaHome": true,
 		"maven.executable.options": "",
 		"maven.executable.preferMavenWrapper": false,
 		/** vsintellicode **/

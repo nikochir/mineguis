@@ -2,52 +2,37 @@
     "version": "0.2.0",
     "inputs": [],
     "launch": {
-		"configurations": [],
-		"compounds": []
+		"configurations": [ "config:launch_test" ],
+		"compounds": [ "compon:launch_test" ]
 	},
     "configurations": [
         {
             "type": "java",
-            "name": "Attach",
-            "request": "attach",
-            "hostName": "localhost",
-            "port": "<debug port of the debuggee>"
-        },
-        {
-            "type": "java",
-            "name": "Attach to Remote Program",
-            "request": "attach",
-            "hostName": "<The host name or ip address of remote debuggee>",
-            "port": "<debug port of remote debuggee>"
-        },
-        {
-            "type": "java",
-            "name": "Launch Java Program",
+            "name": "Launch Main",
             "request": "launch",
-            "mainClass": ""
+            "mainClass": "src.test.nikochir.mineguis.Main",
+            "projectName": "mineguis_a87cba17"
         },
         {
+            "name": "config:launch_test",
+            "projectName": "mineguis_a87cba17",
             "type": "java",
-            "name": "Launch External Terminal",
             "request": "launch",
-            "console": "externalTerminal",
-            "mainClass": ""
+            "mainClass": "src.test.nikochir.mineguis.Main",
+            "classPaths": [ "$Auto" ]
         }
     ],
     "compounds": [
         {
-            "name": "comp",
+            "name": "compon:launch_test",
             "configurations": [
-                {
-                    "name": "play",
-                    "folder": "minecode",
-                }
+                { "name": "config:launch_test", "folder": "mineguis" }
             ],
             "preLaunchTask": "",
             "stopAll": false,
             "presentation": {
                 "hidden": false,
-                "group": "",
+                "group": "launch",
                 "order": 1
             }
         }

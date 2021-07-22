@@ -1,20 +1,11 @@
 /* package */
-package src.main.nikochir.execut;
+package src.main.nikochir.mineguis.execut;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.Menu;
-import src.main.nikochir.kernel.User;
-import src.main.nikochir.kernel.Book;
-import src.main.nikochir.execut.Execut;
-/** javkit **/
-import java.util.ArrayList;
+import src.main.nikochir.mineguis.Main;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */

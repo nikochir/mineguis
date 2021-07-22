@@ -1,60 +1,62 @@
 #main#
 name: mineguis
-main: src.main.nikochir.Main
+main: src.main.nikochir.mineguis.Main
 version: ${project.version}
 api-version: 1.16
 #work#
 load: STARTUP
 loadbefore: []
+depend: []
+softdepend: []
 database: false
 commands:
   #user#
   mineguis:
     alias: ["mgui"]
     usage: /<command> [type] [sign]
-    permission: minecode.user
+    permission: mineguis.user
     permission-message: you do not have /<permission>
     description:
       open any item or menu using the sign
   mguimain:
     alias: ["mgui_main", "e"]
     usage: /<command>
-    permission: minecode.user
+    permission: mineguis.user
     permission-message: you do not have /<permission>
     description:
       open main menu
   e:
     alias: ["mgui_main", "e"]
     usage: /<command>
-    permission: minecode.user
+    permission: mineguis.user
     permission-message: you do not have /<permission>
     description:
       open main menu
   mguivoid:
     alias: ["mgui_void"]
     usage: /<command>
-    permission: minecode.user
+    permission: mineguis.user
     permission-message: you do not have /<permission>
     description:
       just click on a dummy item
   mguiitem:
     alias: ["mgui_item"]
     usage: /<command> [name]
-    permission: minecode.user
+    permission: mineguis.user
     permission-message: you do not have /<permission>
     description:
       execute any mineguis item using its name
   mguimenu:
     alias: ["mgui_menu"]
     usage: /<command> [name]
-    permission: minecode.user
+    permission: mineguis.user
     permission-message: you do not have /<permission>
     description:
       open any menu panel using the name
   mguiback:
     alias: ["mgui_back"]
     usage: /<command>
-    permission: minecode.user
+    permission: mineguis.user
     permission-message: you do not have /<permission>
     description:
       open the last viewed menu
@@ -62,7 +64,7 @@ commands:
   mguiinfo:
     alias: ["mgui_info"]
     usage: /<command> [type]
-    permission: minecode.oper
+    permission: mineguis.oper
     permission-message: you do not have /<permission>
     description:
       show all gui objects of the same type, or display information about them
@@ -89,8 +91,8 @@ permissions:
       gives access to the strongest stuff
 #info#
 prefix: mguis
-author: nikodim_cheer
-authors: [ nikodim_cheer ]
+author: nickodim_cheer
+authors: [ nickodim_cheer ]
 website: "https://github.com/nikochir/mineguis"
 description:
   menu facilities, functionality via inventories and items;

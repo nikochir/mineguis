@@ -1,21 +1,16 @@
 /* package */
-package src.main.nikochir.execut;
+package src.main.nikochir.mineguis.execut;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.Menu;
-import src.main.nikochir.kernel.User;
-import src.main.nikochir.kernel.Book;
-import src.main.nikochir.kernel.Item;
-import src.main.nikochir.execut.Execut;
+import src.main.nikochir.mineguis.Main;
+import src.main.nikochir.mineguis.kernel.User;
+import src.main.nikochir.mineguis.kernel.Item;
+import src.main.nikochir.mineguis.kernel.Menu;
 /** javkit **/
 import java.util.HashMap;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
@@ -76,23 +71,6 @@ public class ExecutInfo implements CommandExecutor {
         }
         return true;
     }
-    private boolean doSendListofBook(CommandSender objSender) {
-        HashMap<String, Book> tab = Book.getBookTab();
-        if (tab == null) {
-            Main.get().doLogO(objSender, "there is no initialized book table!");
-            return false;
-        } else if (tab.isEmpty()) {
-            Main.get().doLogO(objSender, "there is no books in the table!");
-            return false;
-        }
-        Main.get().doLogO(objSender, "========<listof_book>========");
-        int numBook = 0;
-        for (HashMap.Entry<String, Book> objPair : tab.entrySet()) {
-            Book objBook = objPair.getValue();
-            Main.get().doLogO(objSender, "[%d]: sign: %s; size: [%d, %d];", numBook++, objBook.getSign(), objBook.getSizeInPages(), objBook.getSizeOfPages());
-        }
-        return true;
-    }
     /* handles */
     @Override
     public boolean onCommand(
@@ -101,28 +79,10 @@ public class ExecutInfo implements CommandExecutor {
         @NotNull String strLabel,
         @NotNull String[] strArgs
     ) {
-        /*if ((objSender instanceof Player) == false) {
-            Main.get().doLogO("this is not a player call!");
-            return false;
-        }*/
-        Player objPlayer = (Player) objSender;
         if (strArgs.length == 0) {
-            if (this.doSendListofUser(objSender) == false) {
-                Main.get().doLogO(objSender, "failed to show the list of users!");
-                return false;
-            }
-            if (this.doSendListofItem(objSender) == false) {
-                Main.get().doLogO(objSender, "failed to show the list of items!");
-                return false;
-            }
-            if (this.doSendListofMenu(objSender) == false) {
-                Main.get().doLogO(objSender, "failed to show the list of menus!");
-                return false;
-            }
-            if (this.doSendListofBook(objSender) == false) {
-                Main.get().doLogO(objSender, "failed to show the list of books!");
-                return false;
-            }
+            this.doSendListofUser(objSender);
+            this.doSendListofItem(objSender);
+            this.doSendListofMenu(objSender);
             return true;
         } else {
             Main.get().doLogO(objSender, "invalid argument count: %d!", strArgs.length);

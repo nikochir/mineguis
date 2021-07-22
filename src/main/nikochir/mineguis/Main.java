@@ -1,36 +1,19 @@
 /* package */
-package src.main.nikochir;
+package src.main.nikochir.mineguis;
 /* include */
-import src.main.nikochir.*;
-import src.main.nikochir.kernel.*;
-import src.main.nikochir.execut.*;
-import src.main.nikochir.listen.*;
-import src.main.nikochir.permit.*;
+import src.main.nikochir.mineguis.execut.*;
+import src.main.nikochir.mineguis.listen.*;
+import src.main.nikochir.mineguis.permit.*;
+import src.main.nikochir.mineguis.kernel.*;
 /** javkit - standard utilities **/
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.HashMap;
-import java.util.Iterator;
 /** bukkit - plugin, config, events **/
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.Configuration;
-import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.Material;
 /* Main class
  * > description:
  * -> initializer-terminator plugin singleton;
@@ -101,7 +84,7 @@ public class Main extends JavaPlugin {
         {
             Set<String> setKeys = this.getConfig().getKeys(true);
             this.doLogO( String.format("count: %d;", setKeys.size()) );
-            for (String itrStrKey : setKeys) { /* this.doLogO(itrStrKey); */ }
+            //for (String itrStrKey : setKeys) { this.doLogO(itrStrKey); }
         }
         return true;
     }

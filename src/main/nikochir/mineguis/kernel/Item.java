@@ -1,10 +1,7 @@
 /* package */
-package src.main.nikochir.kernel;
+package src.main.nikochir.mineguis.kernel;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.Item;
-import src.main.nikochir.kernel.Menu;
+import src.main.nikochir.mineguis.Main;
 /** javkit **/
 import java.util.Set;
 import java.util.HashMap;
@@ -12,15 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 /** bukkit **/
-import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.Material;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.Configuration;
-import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
 /** nkyori **/
 import net.kyori.adventure.text.Component;
@@ -41,7 +33,7 @@ public class Item extends Unit {
     private final String strExec;
     /* codetor */
     protected Item(String strName, String strIcon, List<String> arrStrLore, String strExec) {
-        super(ChatColor.translateAlternateColorCodes('@', strName));
+        super(strName);
         this.strExec = strExec;
         Integer numCustomModelData = null;
         if (strIcon.matches("\\w+:\\d+")) {
@@ -55,8 +47,7 @@ public class Item extends Unit {
         Component objName = Component.text(this.getSign());
         List<Component> arrObjLore = new ArrayList<Component>(arrStrLore.size());
         for (String itrStrLore : arrStrLore) {
-            //Component objLine = Component.text(itrStrLore);
-            Component objLine = Component.text(ChatColor.translateAlternateColorCodes('@', itrStrLore));
+            Component objLine = Component.text(itrStrLore);
             arrObjLore.add(objLine);
         }
         ItemMeta objMeta = this.objStack.getItemMeta();
@@ -90,11 +81,11 @@ public class Item extends Unit {
     public static Item getItem(ItemStack objStack) {
         return getItem(objStack.getItemMeta().getDisplayName());
     }
-    public String getExec()       { return this.strExec; }
-    public String getName()       { return this.objStack.getItemMeta().getDisplayName(); }
-    public String getIcon()       { return this.objStack.getType().toString(); }
-    public List<String> getLore() { return this.objStack.getItemMeta().getLore(); }
-    public ItemStack getStack()   { return this.objStack; }
+    public String getExec()          { return this.strExec; }
+    public String getName()          { return this.objStack.getItemMeta().getDisplayName(); }
+    public String getIcon()          { return this.objStack.getType().toString(); }
+    public List<Component> getLore() { return this.objStack.getItemMeta().lore(); }
+    public ItemStack getStack()      { return this.objStack; }
     /* setters */
     static public boolean setItem(String strName, String strIcon, List<String> arrStrLore, String strExec) {
         if (vetItem(strName)) {
@@ -211,7 +202,7 @@ public class Item extends Unit {
                     continue;
                     // return false;
                 }
-                Item objItem = Item.getItem(itrStrSign);
+                //Item objItem = Item.getItem(itrStrSign);
             }
         } else {
             Main.get().doLogO("the config section listof_item is not found!");
@@ -228,7 +219,7 @@ public class Item extends Unit {
         tab = null;
         return true;
     }
-    public Boolean doExec(Player objPlayer) {
+    public boolean doExec(Player objPlayer) {
         if (objPlayer == null) {
             Main.get().doLogO("null argument is passed! doExecute(objPlayer);");
             return false;

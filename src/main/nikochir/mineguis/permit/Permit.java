@@ -1,6 +1,7 @@
 /* package */
-package src.main.nikochir.permit;
+package src.main.nikochir.mineguis.permit;
 /* include */
+/** bukkit **/
 import org.bukkit.permissions.Permission;
 /* typedef */
 /* Permission class

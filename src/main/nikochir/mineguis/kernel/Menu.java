@@ -1,9 +1,7 @@
 /* package */
-package src.main.nikochir.kernel;
+package src.main.nikochir.mineguis.kernel;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.Item;
+import src.main.nikochir.mineguis.Main;
 /** javkit **/
 import java.util.List;
 import java.util.ArrayList;
@@ -12,16 +10,10 @@ import java.util.HashMap;
 /** bukkit **/
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.Configuration;
-import org.bukkit.configuration.ConfigurationOptions;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.ChatColor;
 /** nkyori **/
 import net.kyori.adventure.text.Component;
 /* typedef */
@@ -40,7 +32,7 @@ public class Menu extends Unit {
     private List<Item> tabItems;
     /* codetor */
     protected Menu(String strTitle, int numSizeInLines) {
-        super(ChatColor.translateAlternateColorCodes('@', strTitle));
+        super(strTitle);
         Integer numLinesMin = Main.get().getConfigInt("sizeof_minm");
         Integer numLinesMax = Main.get().getConfigInt("sizeof_maxm");
         if (numSizeInLines <= 0) {
@@ -53,20 +45,9 @@ public class Menu extends Unit {
             Main.get().doLogO("too many lines!");
             numSizeInLines = numLinesMax;
         }
-        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, Component.text(this.getSign()));
-        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, Component.text(ChatColor.MAGIC + this.getSign()));
-        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, ChatColor.AQUA + this.getSign());
-        //this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, ChatColor.translateAlternateColorCodes('&', this.getSign()));
-        //Component objTitle = Component.text(ChatColor.AQUA + this.getSign());
         Component objTitle = Component.text(this.getSign());
         this.objPack = Bukkit.createInventory(null, numSizeInLines * 9, objTitle);
         this.tabItems = new ArrayList<Item>(numSizeInLines * 9);
-        /*if (Item.vetItem("void")) {
-            for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
-                this.tabItems.add(Item.getItem("void"));
-                this.objPack.setItem(itr, this.tabItems.get(itr).getItem());
-            }
-        }*/
         for (int itr = 0; itr < this.getSizeInSlots(); itr++) {
             this.tabItems.add(null);
             this.objPack.setItem(itr, null);

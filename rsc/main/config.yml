@@ -79,7 +79,7 @@ listof_item:
       icon: "CHEST"
       lore: "Zum Onlineshop"
     data:
-      exec: "say @6Hier gehts zum Onlineshop: @3https://jacksa.de/minecraftshop/"
+      exec: "say §6Hier gehts zum Onlineshop: §3https://jacksa.de/minecraftshop/"
   item14:
     info:
       sign: "Welten,Teleporter&Karten"
@@ -438,7 +438,7 @@ listof_item:
 listof_menu:
   menu01:
     info:
-      sign: "@7Menue"
+      sign: "§7Menue"
       size: 4
     data:
       item11:

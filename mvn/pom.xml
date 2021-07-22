@@ -8,13 +8,31 @@
 >
   <!-- currently supported project object model version -->
   <modelVersion>4.0.0</modelVersion>
-  <!-- project -->
-  <groupId>nikocher</groupId>
-  <artifactId>mineguis</artifactId>
-  <version>1.0.4</version>
-  <packaging>jar</packaging>
+    <!-- information -->
   <name>mineguis</name>
+  <description>
+    minecraft server plugin for graphical representation
+    of commands and action using inventories and items
+    as a graphical user interface elements
+  </description>
+  <developers>
+    <developer>
+      <name>Nickodim</name>
+      <organization>Jacksa</organization>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>freedom</name>
+      <url>http://www.whatever</url>
+    </license>
+  </licenses>
   <url>http://github.com/nikochir/minecode</url>
+  <!-- project -->
+  <groupId>nikochir</groupId>
+  <artifactId>mineguis</artifactId>
+  <version>005</version>
+  <packaging>jar</packaging>
   <properties>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,7 +45,7 @@
       <id>nikochir</id>
       <url>https://github.com/nikochir/mineguis</url>
     </repository>
-    <!-- plugin -->
+    <!-- minecraft -->
     <!--repository>
       <id>bukkit-repo</id>
       <url>http://repo.bukkit.org/content/groups/public/</url>
@@ -35,6 +53,10 @@
     <repository>
       <id>papermc-repo</id>
       <url>https://papermc.io/repo/repository/maven-public/</url>
+    </repository>
+    <repository>
+      <id>bungeecord-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
   </repositories>
   <!-- what artifacts to use -->
@@ -60,6 +82,13 @@
       <scope>provided</scope>
       <optional>false</optional>
     </dependency>
+    <dependency>
+      <groupId>net.md-5</groupId>
+      <artifactId>bungeecord-api</artifactId>
+      <version>1.16-R0.5-SNAPSHOT</version>
+      <type>javadoc</type>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <!-- generated file support -->
   <distributionManagement>
@@ -76,8 +105,7 @@
   <!-- resulting target configuration -->
   <build>
     <!-- where to place and how to name the target -->
-    <!--directory>${project.basedir}/../bin</directory-->
-    <directory>${project.basedir}/../../server/local/plugins</directory>
+    <directory>${project.basedir}/../bin</directory>
     <finalName>${project.artifactId}</finalName>
     <sourceDirectory>${project.basedir}/../src/main</sourceDirectory>
     <outputDirectory>${project.basedir}/../bin/main</outputDirectory>

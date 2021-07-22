@@ -79,7 +79,7 @@ listof_item:
       icon: "CHEST"
       lore: "Zum Onlineshop"
     data:
-      exec: "say @6Hier gehts zum Onlineshop: @3https://jacksa.de/minecraftshop/"
+      exec: "say §6Hier gehts zum Onlineshop: §3https://jacksa.de/minecraftshop/"
   item14:
     info:
       sign: "Welten,Teleporter&Karten"
@@ -302,21 +302,21 @@ listof_item:
       exec: "say Coming soon"
   item40:
     info:
-      sign: "@3SkillTree"
+      sign: "SkillTree"
       icon: OAK_SAPLING
       lore: "Teleportiert dich nach Hause"
     data:
       exec: "say Coming soon"
   item41:
     info:
-      sign: "@2Gilden&Clans"
+      sign: "Gilden&Clans"
       icon: WHITE_BANNER
       lore: ""
     data:
       exec: "mguimenu Gilde"
   item42:
     info:
-      sign: "@1MeineGilde"
+      sign: "MeineGilde"
       icon: GREEN_BANNER
       lore: "Zur deiner Gilde"
     data:
@@ -330,7 +330,7 @@ listof_item:
       exec: "mineguis menu Welten,Maps&Karten"
   item44:
     info:
-      sign: "@6Support&Hilfe"
+      sign: "Support&Hilfe"
       icon: BELL
       lore:
         - "Meldet dich zur"
@@ -438,7 +438,7 @@ listof_item:
 listof_menu:
   menu01:
     info:
-      sign: "@7Menue"
+      sign: "§7Menue"
       size: 4
     data:
       item11:

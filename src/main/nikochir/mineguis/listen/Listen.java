@@ -1,13 +1,10 @@
 /* package */
-package src.main.nikochir.listen;
+package src.main.nikochir.mineguis.listen;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.User;
-import src.main.nikochir.kernel.Item;
-import src.main.nikochir.kernel.Menu;
-import src.main.nikochir.execut.Execut;
-import src.main.nikochir.permit.Permit;
+import src.main.nikochir.mineguis.Main;
+import src.main.nikochir.mineguis.kernel.User;
+import src.main.nikochir.mineguis.kernel.Item;
+import src.main.nikochir.mineguis.kernel.Menu;
 /** bukkit **/
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
@@ -18,14 +15,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.Sound;
-import org.bukkit.ChatColor;
 /** nkyori **/
-import net.kyori.adventure.text.Component;
 /* typedef */
 /* Listener class
  * > Description:
@@ -119,7 +111,7 @@ public class Listen implements Listener {
     }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent objEvent) {
-        User objUser = User.getUser(objEvent.getPlayer());
+        //User objUser = User.getUser(objEvent.getPlayer());
     }
     @EventHandler
     public void onPlayerWork(PlayerInteractEvent objEvent) {
@@ -127,7 +119,7 @@ public class Listen implements Listener {
             Main.get().doLogO("failed to find the user!");
             return;
         }
-        User objUser = User.getUser(objEvent.getPlayer());
+        //User objUser = User.getUser(objEvent.getPlayer());
     }
 }
 /* endfile */

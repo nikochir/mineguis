@@ -1,9 +1,9 @@
 /* package */
-package src.main.nikochir.kernel;
+package src.main.nikochir.mineguis.kernel;
 /* include */
-import src.main.nikochir.Main;
+//import src.main.nikochir.mineguis.Main; is not used here
 /** javkit **/
-import java.util.HashMap;
+//import java.util.HashMap; no need to store abstract refs
 /* typedef */
 /* Unit class
  * > Description:

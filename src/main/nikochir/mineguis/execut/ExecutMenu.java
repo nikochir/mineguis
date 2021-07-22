@@ -1,26 +1,22 @@
 /* package */
-package src.main.nikochir.execut;
+package src.main.nikochir.mineguis.execut;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.User;
-import src.main.nikochir.kernel.Item;
-import src.main.nikochir.kernel.Menu;
-import src.main.nikochir.execut.Execut;
+import src.main.nikochir.mineguis.Main;
+import src.main.nikochir.mineguis.kernel.User;
+import src.main.nikochir.mineguis.kernel.Menu;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 /** jbrains - NotNull annotation **/
 import org.jetbrains.annotations.NotNull;
 /* typedef */
-/* ExecutorItem class
+/* ExecutorMenu class
  * > Description:
  * -> ;
 */
-public class ExecutItem implements CommandExecutor {
+public class ExecutMenu implements CommandExecutor {
     /* handles */
     @Override
     public boolean onCommand(
@@ -44,22 +40,22 @@ public class ExecutItem implements CommandExecutor {
             return false;
         }
         if (strArgs.length == 0) {
-            if (Item.vetItem(Main.get().getConfigStr("nameof_main")) == false) {
-                Main.get().doLogO(objSender, "failed to find the main item!");
+            if (Menu.vetMenu(Main.get().getConfigStr("nameof_main")) == false) {
+                Main.get().doLogO(objSender, "failed to find the main menu!");
                 return false;
             }
-            if (Item.getItem(Main.get().getConfigStr("nameof_main")).doExec(objPlayer) == false) {
-                Main.get().doLogO(objSender, "failed to exec the main item!");
+            if (Menu.getMenu(Main.get().getConfigStr("nameof_main")).doShow(objPlayer) == false) {
+                Main.get().doLogO(objSender, "failed to show the main menu!");
                 return false;
             }
             return true;
         } else if (strArgs.length == 1) {
-            if (Item.vetItem(strArgs[0]) == false) {
-                Main.get().doLogO(objSender, "failed to find the \"%s\" item!", strArgs[0]);
+            if (Menu.vetMenu(strArgs[0]) == false) {
+                Main.get().doLogO(objSender, "failed to find the \"%s\" menu!", strArgs[0]);
                 return false;
             }
-            if (Item.getItem(strArgs[0]).doExec(objPlayer) == false) {
-                Main.get().doLogO(objSender, "failed to exec the \"%s\" item!", strArgs[0]);
+            if (Menu.getMenu(strArgs[0]).doShow(objPlayer) == false) {
+                Main.get().doLogO(objSender, "failed to show the \"%s\" menu!", strArgs[0]);
                 return false;
             }
             return true;

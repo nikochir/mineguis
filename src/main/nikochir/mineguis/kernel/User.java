@@ -1,21 +1,14 @@
 /* package */
-package src.main.nikochir.kernel;
+package src.main.nikochir.mineguis.kernel;
 /* include */
-import src.main.nikochir.Main;
-import src.main.nikochir.kernel.Unit;
-import src.main.nikochir.kernel.Item;
-import src.main.nikochir.kernel.Menu;
+import src.main.nikochir.mineguis.Main;
 /** javkit **/
-import java.util.Set;
 import java.util.HashMap;
 import java.util.Collection;
 /** bukkit **/
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.Server;
 /* typedef */
 /* User class
  * > Description:
