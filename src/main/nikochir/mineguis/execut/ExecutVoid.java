@@ -1,7 +1,7 @@
 /* package */
-package src.main.nikochir.mineguis.execut;
+package nikochir.mineguis.execut;
 /* include */
-import src.main.nikochir.mineguis.Main;
+import nikochir.mineguis.Main;
 /** bukkit - command interface **/
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

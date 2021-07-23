@@ -1,14 +1,15 @@
 /* package */
-package src.test.nikochir.mineguis;
+package nikochir.mineguis;
 /* include */
 /* typedef */
 /* endfile */
-/* Main class
+/** TestMain class
  * > Description:
  * -> ;
 */
-public class Main {
+public class TestMain {
     public static void main(String[] strArgs) {
+        System.out.println("HelloNativeWorld!");
         System.out.println(strArgs);
     }
 }

@@ -1,29 +1,62 @@
 /* package */
-package src.main.nikochir.mineguis.execut;
+
+package nikochir.mineguis.execut;
+
 /* include */
-import src.main.nikochir.mineguis.Main;
-import src.main.nikochir.mineguis.kernel.Item;
-import src.main.nikochir.mineguis.kernel.Menu;
+
+import nikochir.mineguis.Main;
+import nikochir.mineguis.kernel.Item;
+import nikochir.mineguis.kernel.Menu;
+
 /** bukkit - command interface **/
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
 import org.bukkit.entity.Player;
-/** jbrains - NotNull annotation **/
-import org.jetbrains.annotations.NotNull;
+
 /* typedef */
+
 /* Executor class
  * > Description:
  * -> ;
 */
 public class Execut implements CommandExecutor {
+    
+    /* actions */
+
+    public static boolean doInit() {
+        
+        Main.get().setExecut("mineguis", new Execut());
+        Main.get().setExecut("mguimain", new ExecutMain());
+        Main.get().setExecut("e", new ExecutMain());
+        Main.get().setExecut("mguivoid", new ExecutVoid());
+        Main.get().setExecut("mguimesg", new ExecutMesg());
+        Main.get().setExecut("mguiitem", new ExecutItem());
+        Main.get().setExecut("mguimenu", new ExecutMenu());
+        Main.get().setExecut("mguiback", new ExecutBack());
+
+        Main.get().setExecut("mguiinfo", new ExecutInfo());
+
+        return true;
+    
+    }
+
+    public static boolean doQuit() {
+        
+        return true;
+    
+    }
+    
     /* handles */
+   
     @Override
     public boolean onCommand(
-        @NotNull CommandSender objSender,
-        @NotNull Command objCommand,
-        @NotNull String strLabel,
-        @NotNull String[] strArgs
+        CommandSender objSender,
+        Command objCommand,
+        String strLabel,
+        String[] strArgs
     ) {
         if ((objSender instanceof Player) == false) {
             Main.get().doLogO("this is not a player call!");
@@ -63,11 +96,6 @@ public class Execut implements CommandExecutor {
                     Main.get().doLogO(objSender, "failed to show the main menu!");
                     return false;
                 }
-                return true;
-            } else if (strArgs[0].equalsIgnoreCase("debug")) {
-                Main.get().doLogO("debug command is called!");
-                objPlayer.sendMessage("you have just called debug command;");
-                objPlayer.sendMessage(Main.get().getConfigStr("mesg_dbug"));
                 return true;
             } else {
                 if (Menu.vetMenu(strArgs[0]) == false) {
@@ -120,5 +148,7 @@ public class Execut implements CommandExecutor {
             return false;
         }
     }
+
 }
+
 /* endfile */

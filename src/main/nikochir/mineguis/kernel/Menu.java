@@ -1,7 +1,7 @@
 /* package */
-package src.main.nikochir.mineguis.kernel;
+package nikochir.mineguis.kernel;
 /* include */
-import src.main.nikochir.mineguis.Main;
+import nikochir.mineguis.Main;
 /** javkit **/
 import java.util.List;
 import java.util.ArrayList;

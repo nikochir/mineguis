@@ -79,7 +79,7 @@ listof_item:
       icon: "CHEST"
       lore: "Zum Onlineshop"
     data:
-      exec: "say §6Hier gehts zum Onlineshop: §3https://jacksa.de/minecraftshop/"
+      exec: "mguimesg §6Hier gehts zum Onlineshop: §3https://jacksa.de/minecraftshop/"
   item14:
     info:
       sign: "Welten,Teleporter&Karten"
@@ -152,7 +152,7 @@ listof_item:
       lore: "Arenen&PvP"
       icon: "DIAMOND_SWORD"
     data:
-      exec: "say Coming soon"
+      exec: "mguimesg Coming soon"
   item22:
     info:
       sign: "Pets&Haustiere"
@@ -292,21 +292,21 @@ listof_item:
       icon: HOPPER
       lore: "Sprich mit anderen Spielern im Spiel"
     data:
-      exec: "say Coming soon"
+      exec: "mguimesg Coming soon"
   item39:
     info:
       sign: "Quests/Aufgaben"
       icon: BOOK
       lore: "Quests,Aufgaben&Belohnungen"
     data:
-      exec: "say Coming soon"
+      exec: "mguimesg Coming soon"
   item40:
     info:
       sign: "SkillTree"
       icon: OAK_SAPLING
       lore: "Teleportiert dich nach Hause"
     data:
-      exec: "say Coming soon"
+      exec: "mguimesg Coming soon"
   item41:
     info:
       sign: "Gilden&Clans"

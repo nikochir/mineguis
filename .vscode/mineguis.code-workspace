@@ -16,10 +16,10 @@
 			"**/.project": false,
 		},
 		/** editor **/
-		"editor.fontSize": 12,
+		"editor.fontSize": 14,
 		"editor.fontWeight": 400,
 		"editor.fontLigatures":  true,
-		"editor.fontFamily": "Source Code Pro, MonoId, Inconsolata, Consolas, Courier New, monospace",
+		"editor.fontFamily": "Inconsolata, Consolas, Courier New, monospace",
 		/** terminal **/
 		"terminal.explorerKind": "integrated",
 		"terminal.integrated.gpuAcceleration": "on",
@@ -39,10 +39,10 @@
 		"terminal.integrated.unicodeVersion": "6",
 		"terminal.integrated.letterSpacing": 0,
 		"terminal.integrated.lineHeight": 1,
-		"terminal.integrated.fontSize": 12,
+		"terminal.integrated.fontSize": 14,
 		"terminal.integrated.fontWeight": 400,
 		"terminal.integrated.fontWeightBold": 1000,
-		"terminal.integrated.fontFamily": "Source Code Pro, MonoId, Inconsolata, Consolas, Courier New, monospace",
+		"terminal.integrated.fontFamily": "Inconsolata, Consolas, Courier New, monospace",
 		"terminal.integrated.wordSeparators": " ()[]{}',\"`?",
 		/*** tabs ***/
 		"terminal.integrated.tabs.showActiveTerminal": "always",
@@ -62,7 +62,7 @@
 		"dashboard.displayProjectPath": true,
 		"dashboard.showAddProjectButtonTile": false,
 		/** markdown **/
-		"markdown.styles": [],
+		"markdown.styles": [ "./data/css/markdown.css" ],
 		"markdown.links.openLocation": "beside",
 		/** java **/
 		"java.home": "f:/cdev/jdk",
@@ -74,9 +74,10 @@
 		"java.project.outputPath": "bin/",
 		"java.project.exportJar.targetPath": "${workspaceFolder}/bin/target/${workspaceFolderBasename}.jar",
 		"java.project.sourcePaths": [
-			""
+			"./src/main/",
+			"./src/test/",
 		],
-		"java.project.referencedLibraries": [ "lib/**/*.jar" ],
+		"java.project.referencedLibraries": [ "**/dependency/*.jar", "**/lib/**/*.jar" ],
 		"java.project.resourceFilters": [ "node_modules", ".git" ],
 		/*** configuration ***/
 		"java.configuration.checkProjectSettingsExclusions": false,

@@ -1,6 +1,6 @@
 #main#
 name: mineguis
-main: src.main.nikochir.mineguis.Main
+main: nikochir.mineguis.Main
 version: ${project.version}
 api-version: 1.16
 #work#
@@ -9,6 +9,7 @@ loadbefore: []
 depend: []
 softdepend: []
 database: false
+##execut
 commands:
   #user#
   mineguis:
@@ -26,7 +27,7 @@ commands:
     description:
       open main menu
   e:
-    alias: ["mgui_main", "e"]
+    alias: ["mgui_main"]
     usage: /<command>
     permission: mineguis.user
     permission-message: you do not have /<permission>
@@ -39,6 +40,14 @@ commands:
     permission-message: you do not have /<permission>
     description:
       just click on a dummy item
+  mguimesg:
+    alias:
+    usage: /<command> [mesg] [name]
+    permission: mineguis.user
+    permission-message: you do not have /<permission>
+    description:
+      send an echo message to the user who wrote it;
+      this is used by the plugin as a proxi to msg "username"
   mguiitem:
     alias: ["mgui_item"]
     usage: /<command> [name]
@@ -69,6 +78,7 @@ commands:
     description:
       show all gui objects of the same type, or display information about them
   #over#
+##permit
 permissions:
   mineguis.user:
     default: true
