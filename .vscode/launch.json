@@ -2,27 +2,51 @@
     "version": "0.2.0",
     "inputs": [],
     "launch": {
-		"configurations": [ "config:launch_test" ],
-		"compounds": [ "compon:launch_test" ]
+		"configurations":
+        [
+            "config:attach_main",
+            "config:launch_test",
+        ],
+		"compounds": [
+            "compon:attach_main",
+            "compon:launch_test",
+        ]
 	},
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Main",
-            "request": "launch",
-            "mainClass": "src.test.nikochir.mineguis.Main",
-            "projectName": "mineguis_a87cba17"
+            "name": "config:attach_main",
+            "projectName": "mineguis",
+            "sourcePaths": [ "./src/main/", "./src/test/" ],
+            "internalConsoleOptions": "neverOpen",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 25565,
+            "timeout": 30000,
         },
         {
-            "name": "config:launch_test",
-            "projectName": "mineguis_a87cba17",
             "type": "java",
+            "name": "config:launch_test",
+            "projectName": "mineguis",
             "request": "launch",
-            "mainClass": "src.test.nikochir.mineguis.Main",
+            "mainClass": "main.mineguis.TestMain",
             "classPaths": [ "$Auto" ]
         }
     ],
     "compounds": [
+        {
+            "name": "compon:attach_main",
+            "configurations": [
+                { "name": "config:attach_main", "folder": "mineguis" }
+            ],
+            "preLaunchTask": "",
+            "stopAll": false,
+            "presentation": {
+                "hidden": false,
+                "group": "attach",
+                "order": 1
+            }
+        },
         {
             "name": "compon:launch_test",
             "configurations": [

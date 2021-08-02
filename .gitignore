@@ -4,8 +4,8 @@ lib/
 data/movi/
 *.settings/
 *.target/
-*/mvn/bin
-*/mvn/repo
+*/.mvn/bin
+*/.mvn/repo
 #temporary#
 minecord
 #extension#

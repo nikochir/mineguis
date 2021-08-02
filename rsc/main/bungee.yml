@@ -1,5 +1,5 @@
 #main#
 name: mineguis
-main: nikochir.Main
+main: main.Main
 version: ${project.version}
 #endfile#

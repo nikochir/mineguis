@@ -1,7 +1,12 @@
 {
     "recommendations": [
         "vscjava.vscode-java-pack",
-        "redhat.java"
+        "hediet.vscode-drawio",
+        "donjayamanne.githistory",
+        "wmanth.jar-viewer",
+        "vscjava.vscode-java-test",
+        "vscjava.vscode-maven",
+        "visualstudioexptteam.vscodeintellicode"
     ],
     "unwantedRecommendations": []
 }

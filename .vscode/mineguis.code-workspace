@@ -1,14 +1,29 @@
 {
 	"folders": [
+		//*/
 		{
 			"name": "mineguis",
 			"path": "../",
+		},
+		/*/
+		//*/
+		{
+			"name": "server",
+			"path": "../../server/local",
 		}
+		//*/
 	],
 	"settings": {
 		/* vscode */
+		/** window **/
+		"window.title": "${appName}",
+		/** workbench **/
+		"workbench.colorTheme": "Dark++",
+		"workbench.iconTheme": "material-icon-theme",
+		"workbench.productIconTheme": "Default",
 		/** files **/
-		"files.exclude": {
+		"files.exclude":
+		{
 			"**/.git": false,
 			"**/.target": false,
 			"**/.classpath": false,
@@ -69,21 +84,26 @@
 		"java.trace.server": "off",
 		"java.server.launchMode": "Hybrid",
 		"java.contentProvider.preferred": "",
-		"java.settings.url": "${workspaceFolder}/mvn/settings.xml",
+		"java.settings.url": "${workspaceFolder}/.mvn/settings.xml",
 		/*** project ***/
-		"java.project.outputPath": "bin/",
-		"java.project.exportJar.targetPath": "${workspaceFolder}/bin/target/${workspaceFolderBasename}.jar",
-		"java.project.sourcePaths": [
-			"./src/main/",
-			"./src/test/",
+		"java.project.exportJar.targetPath":
+		"${workspaceFolder}/bin/target/${workspaceFolderBasename}.jar",
+		"java.project.outputPath":
+		"./bin/jav/",
+		"java.project.sourcePaths":
+		[
+			"./src/jav/"
 		],
-		"java.project.referencedLibraries": [ "**/dependency/*.jar", "**/lib/**/*.jar" ],
+		"java.project.referencedLibraries":
+		[
+			"./lib/**/*.jar"
+		],
 		"java.project.resourceFilters": [ "node_modules", ".git" ],
 		/*** configuration ***/
 		"java.configuration.checkProjectSettingsExclusions": false,
 		"java.configuration.updateBuildConfiguration": "disabled",
-		"java.configuration.maven.userSettings": "${workspaceFolder}/mvn/settings.xml",
-		"java.configuration.maven.globalSettings": "${workspaceFolder}/mvn/settings.xml",
+		"java.configuration.maven.userSettings": "${workspaceFolder}/.mvn/settings.xml",
+		"java.configuration.maven.globalSettings": "${workspaceFolder}/.mvn/settings.xml",
 		/*** completion ***/
 		"java.completion.enabled": true,
 		"java.completion.overwrite": true,
@@ -125,10 +145,10 @@
 		"maven.terminal.useJavaHome": true,
 		"maven.terminal.favorites": [],
 		"maven.terminal.customEnv": [
-			{ "environmentVariable": "USER", "value": "${workspaceFolder}/mvn/user" },
-			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder}/mvn/user" },
-			{ "environmentVariable": "TEMP", "value": "${workspaceFolder}/mvn/temp" },
-			{ "environmentVariable": "APPDATA", "value": "${workspaceFolder}/mvn/appdata" }
+			{ "environmentVariable": "USER", "value": "${workspaceFolder}/.mvn/user" },
+			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder}/.mvn/user" },
+			{ "environmentVariable": "TEMP", "value": "${workspaceFolder}/.mvn/temp" },
+			{ "environmentVariable": "APPDATA", "value": "${workspaceFolder}/.mvn/appdata" }
 		],
 		"maven.executable.options": "",
 		"maven.executable.preferMavenWrapper": false,

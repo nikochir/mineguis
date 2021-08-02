@@ -1,21 +1,23 @@
 # mineguis #
-## description ##
 * minecraft graphical user interface via inventories and items;
 * provides an interface to create menu panels;
 * implements plugin for menu facilities;
 ## languages ##
-code | usefor
----- | ------
-java | source
-yml  | config
-xml  | config
-## environment ##
+-----------------
+| code | usefor |
+| ---- | ------ |
+| java | source |
+| yml  | config |
+| xml  | config |
+-----------------
+## interface ##
+## workspace ##
 * this is set up primarly for portable vscode;
     * java configuration in the workspace file needs to be changed
     because it uses local path of the machiene that developer used;
 * building system is targeted on maven;
 * theoretically, it can run with maven in the terminal;
-## features ##
+## info ##
 * since version 003 we have a plugin that manages unique gui elements and user data;
     * primary objects: items and menus;
     * every object is uniquely defined by it's signature;
@@ -32,3 +34,5 @@ xml  | config
     * any item has it's own command;
         * can specify as many commands as we want and bind items to them;
         * every item also handles arguments so it creates association between an action and an item;
+## name ##
+# endofile #
