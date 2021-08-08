@@ -1,8 +1,10 @@
+/* schemas */
 {
     /* main */
     "version": "2.0.0",
     /* exec */
-    "tasks": [
+    "tasks":
+    [
         {
             /* main */
             "label": "init",

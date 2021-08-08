@@ -1,19 +1,22 @@
+/* schemas */
 {
-	"folders": [
+	"folders":
+	[
 		//*/
 		{
 			"name": "mineguis",
-			"path": "../",
+			"path": "../../",
 		},
-		/*/
+		//*/
 		//*/
 		{
 			"name": "server",
-			"path": "../../server/local",
+			"path": "../../../server",
 		}
 		//*/
 	],
-	"settings": {
+	"settings":
+	{
 		/* vscode */
 		/** window **/
 		"window.title": "${appName}",
@@ -144,7 +147,8 @@
 		"maven.excludedFolders": [],
 		"maven.terminal.useJavaHome": true,
 		"maven.terminal.favorites": [],
-		"maven.terminal.customEnv": [
+		"maven.terminal.customEnv":
+		[
 			{ "environmentVariable": "USER", "value": "${workspaceFolder}/.mvn/user" },
 			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder}/.mvn/user" },
 			{ "environmentVariable": "TEMP", "value": "${workspaceFolder}/.mvn/temp" },

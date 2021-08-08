@@ -1,20 +1,24 @@
+/* schemas */
 {
     "version": "0.2.0",
     "inputs": [],
-    "launch": {
+    "launch":
+    {
 		"configurations":
         [
             "config:attach_main",
             "config:launch_test",
         ],
-		"compounds": [
+		"compounds":
+        [
             "compon:attach_main",
             "compon:launch_test",
         ]
 	},
-    "configurations": [
+    "configurations":
+    [
         {
-            "type": "java",
+            "type": "node",
             "name": "config:attach_main",
             "projectName": "mineguis",
             "sourcePaths": [ "./src/main/", "./src/test/" ],
@@ -25,7 +29,7 @@
             "timeout": 30000,
         },
         {
-            "type": "java",
+            "type": "node-terminal",
             "name": "config:launch_test",
             "projectName": "mineguis",
             "request": "launch",
@@ -33,15 +37,18 @@
             "classPaths": [ "$Auto" ]
         }
     ],
-    "compounds": [
+    "compounds":
+    [
         {
             "name": "compon:attach_main",
-            "configurations": [
+            "configurations":
+            [
                 { "name": "config:attach_main", "folder": "mineguis" }
             ],
             "preLaunchTask": "",
             "stopAll": false,
-            "presentation": {
+            "presentation":
+            {
                 "hidden": false,
                 "group": "attach",
                 "order": 1
@@ -49,12 +56,14 @@
         },
         {
             "name": "compon:launch_test",
-            "configurations": [
+            "configurations":
+            [
                 { "name": "config:launch_test", "folder": "mineguis" }
             ],
             "preLaunchTask": "",
             "stopAll": false,
-            "presentation": {
+            "presentation":
+            {
                 "hidden": false,
                 "group": "launch",
                 "order": 1
