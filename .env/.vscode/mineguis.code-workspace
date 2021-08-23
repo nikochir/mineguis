@@ -4,6 +4,12 @@
 	[
 		//*/
 		{
+			"name": "environ",
+			"path": "../",
+		},
+		//*/
+		//*/
+		{
 			"name": "mineguis",
 			"path": "../../",
 		},
@@ -41,7 +47,7 @@
 		/** terminal **/
 		"terminal.explorerKind": "integrated",
 		"terminal.integrated.gpuAcceleration": "on",
-		"terminal.integrated.cwd": "${workspaceFolder}",
+		"terminal.integrated.cwd": "${workspaceFolder:mineguis}",
 		"terminal.integrated.splitCwd": "workspaceRoot",
 		"terminal.integrated.confirmOnExit": true,
 		"terminal.integrated.scrollback": 1000,
@@ -87,15 +93,15 @@
 		"java.trace.server": "off",
 		"java.server.launchMode": "Hybrid",
 		"java.contentProvider.preferred": "",
-		"java.settings.url": "${workspaceFolder}/.maven/settings.xml",
+		"java.settings.url": "${workspaceFolder:mineguis/.maven/settings.xml",
 		/*** project ***/
 		"java.project.exportJar.targetPath":
-		"${workspaceFolder}/bin/target/${workspaceFolderBasename}.jar",
+		"${workspaceFolder:mineguis/bin/target/${workspaceFolder:mineguis}Basename}.jar",
 		"java.project.outputPath":
-		"./bin/jav/",
+		"./bin",
 		"java.project.sourcePaths":
 		[
-			"./src/jav/"
+			"./src/"
 		],
 		"java.project.referencedLibraries":
 		[
@@ -105,8 +111,8 @@
 		/*** configuration ***/
 		"java.configuration.checkProjectSettingsExclusions": false,
 		"java.configuration.updateBuildConfiguration": "disabled",
-		"java.configuration.maven.userSettings": "${workspaceFolder}/.maven/settings.xml",
-		"java.configuration.maven.globalSettings": "${workspaceFolder}/.maven/settings.xml",
+		"java.configuration.maven.userSettings": "${workspaceFolder:mineguis/.maven/settings.xml",
+		"java.configuration.maven.globalSettings": "${workspaceFolder:mineguis/.maven/settings.xml",
 		/*** completion ***/
 		"java.completion.enabled": true,
 		"java.completion.overwrite": true,
@@ -149,10 +155,10 @@
 		"maven.terminal.favorites": [],
 		"maven.terminal.customEnv":
 		[
-			{ "environmentVariable": "USER", "value": "${workspaceFolder}/.maven/user" },
-			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder}/.maven/user" },
-			{ "environmentVariable": "TEMP", "value": "${workspaceFolder}/.maven/temp" },
-			{ "environmentVariable": "APPDATA", "value": "${workspaceFolder}/.maven/appdata" }
+			{ "environmentVariable": "USER", "value": "${workspaceFolder:mineguis/.maven/user" },
+			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder:mineguis/.maven/user" },
+			{ "environmentVariable": "TEMP", "value": "${workspaceFolder:mineguis/.maven/temp" },
+			{ "environmentVariable": "APPDATA", "value": "${workspaceFolder:mineguis/.maven/appdata" }
 		],
 		"maven.executable.options": "",
 		"maven.executable.preferMavenWrapper": false,
