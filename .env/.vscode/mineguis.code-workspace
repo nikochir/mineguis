@@ -87,7 +87,7 @@
 		"java.trace.server": "off",
 		"java.server.launchMode": "Hybrid",
 		"java.contentProvider.preferred": "",
-		"java.settings.url": "${workspaceFolder}/.mvn/settings.xml",
+		"java.settings.url": "${workspaceFolder}/.maven/settings.xml",
 		/*** project ***/
 		"java.project.exportJar.targetPath":
 		"${workspaceFolder}/bin/target/${workspaceFolderBasename}.jar",
@@ -105,8 +105,8 @@
 		/*** configuration ***/
 		"java.configuration.checkProjectSettingsExclusions": false,
 		"java.configuration.updateBuildConfiguration": "disabled",
-		"java.configuration.maven.userSettings": "${workspaceFolder}/.mvn/settings.xml",
-		"java.configuration.maven.globalSettings": "${workspaceFolder}/.mvn/settings.xml",
+		"java.configuration.maven.userSettings": "${workspaceFolder}/.maven/settings.xml",
+		"java.configuration.maven.globalSettings": "${workspaceFolder}/.maven/settings.xml",
 		/*** completion ***/
 		"java.completion.enabled": true,
 		"java.completion.overwrite": true,
@@ -149,10 +149,10 @@
 		"maven.terminal.favorites": [],
 		"maven.terminal.customEnv":
 		[
-			{ "environmentVariable": "USER", "value": "${workspaceFolder}/.mvn/user" },
-			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder}/.mvn/user" },
-			{ "environmentVariable": "TEMP", "value": "${workspaceFolder}/.mvn/temp" },
-			{ "environmentVariable": "APPDATA", "value": "${workspaceFolder}/.mvn/appdata" }
+			{ "environmentVariable": "USER", "value": "${workspaceFolder}/.maven/user" },
+			{ "environmentVariable": "USERHOME", "value": "${workspaceFolder}/.maven/user" },
+			{ "environmentVariable": "TEMP", "value": "${workspaceFolder}/.maven/temp" },
+			{ "environmentVariable": "APPDATA", "value": "${workspaceFolder}/.maven/appdata" }
 		],
 		"maven.executable.options": "",
 		"maven.executable.preferMavenWrapper": false,
